@@ -8,6 +8,6 @@ package paradinhas.siscoimp;
  *
  * @author gab
  */
-public class MedicalContact {
+public class Doctor {
     
 }
