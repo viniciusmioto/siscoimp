@@ -11,10 +11,10 @@ package paradinhas.siscoimp;
 public abstract class Person {
     private String name;
     private String address;
-    private long phone;
+    private String phone;
     private String imagePath;
 
-    public Person(String name, String adress, long phone, String imagePath) {
+    public Person(String name, String adress, String phone, String imagePath) {
         this.name = name;
         this.address = adress;
         this.phone = phone;
@@ -45,11 +45,11 @@ public abstract class Person {
         this.address = address;
     }
 
-    public long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 }

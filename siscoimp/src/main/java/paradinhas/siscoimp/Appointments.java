@@ -12,7 +12,10 @@ import java.util.Date;
  */
 
 public class Appointments {
-    char type;
+    public enum ConsultType {
+        Exam,Consult
+    }
+    ConsultType type;
 
 //    public static final char ap = 'e'; /* exam */
 //    public static final char ap = 'c'; /* consultation */
@@ -20,17 +23,17 @@ public class Appointments {
     Date date;
     Doctor doctor;
 
-    public Appointments(char type, Date date, Doctor doctor) {
+    public Appointments(ConsultType type, Date date, Doctor doctor) {
         this.type = type;
         this.date = date;
         this.doctor = doctor;
     }
 
-    public char getType() {
+    public ConsultType getType() {
         return type;
     }
 
-    public void setExam(char type) {
+    public void setExam(ConsultType type) {
         this.type = type;
     }
 

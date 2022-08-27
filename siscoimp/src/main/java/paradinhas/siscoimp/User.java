@@ -9,5 +9,9 @@ package paradinhas.siscoimp;
  * @author gab
  */
 public class User extends Person {
+
+    public User() {
+        super(null, null, null, null);
+    }
     
 }
