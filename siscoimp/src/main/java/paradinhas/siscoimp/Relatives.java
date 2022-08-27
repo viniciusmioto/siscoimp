@@ -8,6 +8,6 @@ package paradinhas.siscoimp;
  *
  * @author gab
  */
-public class User extends Person {
+public class Relatives extends Person {
     
 }
