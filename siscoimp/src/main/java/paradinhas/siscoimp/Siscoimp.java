@@ -5,6 +5,8 @@
 
 package paradinhas.siscoimp;
 
+import paradinhas.siscoimp.view.MainFrame;
+
 /**
  *
  * @author gab
@@ -12,7 +14,8 @@ package paradinhas.siscoimp;
 public class Siscoimp {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        MainFrame frame = new MainFrame();
+        frame.initPublic();
     }
 }
 
