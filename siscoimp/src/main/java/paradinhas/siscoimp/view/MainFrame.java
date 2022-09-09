@@ -27,61 +27,96 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         desktopPaneCtrl = new javax.swing.JDesktopPane();
-        profileBtn = new javax.swing.JButton();
         appointmentBtn = new javax.swing.JButton();
+        profileBtn = new javax.swing.JButton();
         doctorsBtn = new javax.swing.JButton();
+        doctorsBtn1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SISCOIMP");
+        setBackground(new java.awt.Color(10, 10, 10));
 
-        javax.swing.GroupLayout desktopPaneCtrlLayout = new javax.swing.GroupLayout(desktopPaneCtrl);
-        desktopPaneCtrl.setLayout(desktopPaneCtrlLayout);
-        desktopPaneCtrlLayout.setHorizontalGroup(
-            desktopPaneCtrlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        desktopPaneCtrlLayout.setVerticalGroup(
-            desktopPaneCtrlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 580, Short.MAX_VALUE)
-        );
+        desktopPaneCtrl.setBackground(new java.awt.Color(0, 0, 0));
 
+        appointmentBtn.setBackground(new java.awt.Color(204, 255, 204));
+        appointmentBtn.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
+        appointmentBtn.setForeground(new java.awt.Color(0, 0, 0));
+        appointmentBtn.setText("Agendamentos");
+        appointmentBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        appointmentBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        appointmentBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                appointmentBtnActionPerformed(evt);
+            }
+        });
+
+        profileBtn.setBackground(new java.awt.Color(204, 255, 204));
+        profileBtn.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
+        profileBtn.setForeground(new java.awt.Color(0, 0, 0));
         profileBtn.setText("Perfil");
+        profileBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        profileBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         profileBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 profileBtnActionPerformed(evt);
             }
         });
 
-        appointmentBtn.setText("Agendamentos");
-
+        doctorsBtn.setBackground(new java.awt.Color(204, 255, 204));
+        doctorsBtn.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
+        doctorsBtn.setForeground(new java.awt.Color(0, 0, 0));
         doctorsBtn.setText("Médicos");
+        doctorsBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        doctorsBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        doctorsBtn1.setBackground(new java.awt.Color(204, 255, 204));
+        doctorsBtn1.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
+        doctorsBtn1.setForeground(new java.awt.Color(0, 0, 0));
+        doctorsBtn1.setText("Familiares");
+        doctorsBtn1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        doctorsBtn1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        desktopPaneCtrl.setLayer(appointmentBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopPaneCtrl.setLayer(profileBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopPaneCtrl.setLayer(doctorsBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopPaneCtrl.setLayer(doctorsBtn1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout desktopPaneCtrlLayout = new javax.swing.GroupLayout(desktopPaneCtrl);
+        desktopPaneCtrl.setLayout(desktopPaneCtrlLayout);
+        desktopPaneCtrlLayout.setHorizontalGroup(
+            desktopPaneCtrlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(desktopPaneCtrlLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(profileBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(appointmentBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(doctorsBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(doctorsBtn1)
+                .addContainerGap(843, Short.MAX_VALUE))
+        );
+        desktopPaneCtrlLayout.setVerticalGroup(
+            desktopPaneCtrlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(desktopPaneCtrlLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(desktopPaneCtrlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(profileBtn)
+                    .addComponent(appointmentBtn)
+                    .addComponent(doctorsBtn)
+                    .addComponent(doctorsBtn1))
+                .addContainerGap(681, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(profileBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(appointmentBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(doctorsBtn)
-                        .addContainerGap(757, Short.MAX_VALUE))
-                    .addComponent(desktopPaneCtrl, javax.swing.GroupLayout.Alignment.TRAILING)))
+            .addComponent(desktopPaneCtrl)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(profileBtn)
-                    .addComponent(appointmentBtn)
-                    .addComponent(doctorsBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(desktopPaneCtrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(desktopPaneCtrl)
         );
 
         pack();
@@ -89,10 +124,16 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void profileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileBtnActionPerformed
-        desktopPaneCtrl.removeAll();
+        //desktopPaneCtrl.removeAll();
         Profile profile = new Profile();
         desktopPaneCtrl.add(profile).setVisible(true);
     }//GEN-LAST:event_profileBtnActionPerformed
+
+    private void appointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentBtnActionPerformed
+
+        AppointmentsList apptList = new AppointmentsList();
+        desktopPaneCtrl.add(apptList).setVisible(true);
+    }//GEN-LAST:event_appointmentBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,6 +174,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton appointmentBtn;
     private javax.swing.JDesktopPane desktopPaneCtrl;
     private javax.swing.JButton doctorsBtn;
+    private javax.swing.JButton doctorsBtn1;
     private javax.swing.JButton profileBtn;
     // End of variables declaration//GEN-END:variables
 }
