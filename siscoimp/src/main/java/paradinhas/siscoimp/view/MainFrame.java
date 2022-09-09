@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package paradinhas.siscoimp.view;
 
@@ -8,7 +8,7 @@ package paradinhas.siscoimp.view;
  *
  * @author gab
  */
-public class MainFrame extends javax.swing.JPanel {
+public class MainFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form MainFrame
@@ -28,16 +28,11 @@ public class MainFrame extends javax.swing.JPanel {
 
         desktopPaneCtrl = new javax.swing.JDesktopPane();
         profileBtn = new javax.swing.JButton();
+        appointmentBtn = new javax.swing.JButton();
         doctorsBtn = new javax.swing.JButton();
-        appointmentsBtn = new javax.swing.JButton();
 
-        setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        setToolTipText("");
-        setName("SISCOIMP"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1000, 500));
-
-        desktopPaneCtrl.setBackground(new java.awt.Color(0, 0, 0));
-        desktopPaneCtrl.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.gray, java.awt.Color.lightGray, java.awt.Color.black, java.awt.Color.black));
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SISCOIMP");
 
         javax.swing.GroupLayout desktopPaneCtrlLayout = new javax.swing.GroupLayout(desktopPaneCtrl);
         desktopPaneCtrl.setLayout(desktopPaneCtrlLayout);
@@ -47,7 +42,7 @@ public class MainFrame extends javax.swing.JPanel {
         );
         desktopPaneCtrlLayout.setVerticalGroup(
             desktopPaneCtrlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 582, Short.MAX_VALUE)
+            .addGap(0, 580, Short.MAX_VALUE)
         );
 
         profileBtn.setText("Perfil");
@@ -57,33 +52,40 @@ public class MainFrame extends javax.swing.JPanel {
             }
         });
 
-        doctorsBtn.setText("Contatos");
+        appointmentBtn.setText("Agendamentos");
 
-        appointmentsBtn.setText("Agendamentos");
+        doctorsBtn.setText("Médicos");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(profileBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(doctorsBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(appointmentsBtn)
-                .addGap(796, 796, 796))
-            .addComponent(desktopPaneCtrl)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(profileBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(appointmentBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(doctorsBtn)
+                        .addContainerGap(757, Short.MAX_VALUE))
+                    .addComponent(desktopPaneCtrl, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(profileBtn)
-                    .addComponent(doctorsBtn)
-                    .addComponent(appointmentsBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(desktopPaneCtrl))
+                    .addComponent(appointmentBtn)
+                    .addComponent(doctorsBtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(desktopPaneCtrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void profileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileBtnActionPerformed
@@ -92,9 +94,43 @@ public class MainFrame extends javax.swing.JPanel {
         desktopPaneCtrl.add(profile).setVisible(true);
     }//GEN-LAST:event_profileBtnActionPerformed
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MainFrame().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton appointmentsBtn;
+    private javax.swing.JButton appointmentBtn;
     private javax.swing.JDesktopPane desktopPaneCtrl;
     private javax.swing.JButton doctorsBtn;
     private javax.swing.JButton profileBtn;

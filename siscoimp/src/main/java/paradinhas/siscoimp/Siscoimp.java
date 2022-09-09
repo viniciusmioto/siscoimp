@@ -18,7 +18,7 @@ public class Siscoimp {
         MainFrame frame = new MainFrame();
         frame.setVisible(true);
 
-        Screen screen = new Screen();
+        //Screen screen = new Screen();
     }
 }
 
