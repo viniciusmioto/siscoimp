@@ -6,7 +6,6 @@
 package paradinhas.siscoimp;
 
 import paradinhas.siscoimp.view.MainFrame;
-import paradinhas.siscoimp.view.Screen;
 
 /**
  *
