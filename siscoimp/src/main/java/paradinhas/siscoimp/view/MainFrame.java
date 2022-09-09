@@ -26,16 +26,21 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         desktopPaneCtrl = new javax.swing.JDesktopPane();
         profileBtn = new javax.swing.JButton();
         appointmentBtn = new javax.swing.JButton();
         doctorsBtn = new javax.swing.JButton();
-        doctorsBtn1 = new javax.swing.JButton();
+        relativesBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SISCOIMP");
         setBackground(new java.awt.Color(0, 0, 0));
         setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1231, 35));
 
         desktopPaneCtrl.setBackground(new java.awt.Color(0, 0, 0));
         desktopPaneCtrl.setForeground(new java.awt.Color(0, 0, 0));
@@ -45,11 +50,11 @@ public class MainFrame extends javax.swing.JFrame {
         desktopPaneCtrl.setLayout(desktopPaneCtrlLayout);
         desktopPaneCtrlLayout.setHorizontalGroup(
             desktopPaneCtrlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1225, Short.MAX_VALUE)
+            .addGap(0, 1231, Short.MAX_VALUE)
         );
         desktopPaneCtrlLayout.setVerticalGroup(
             desktopPaneCtrlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 674, Short.MAX_VALUE)
+            .addGap(0, 693, Short.MAX_VALUE)
         );
 
         profileBtn.setBackground(new java.awt.Color(204, 255, 204));
@@ -83,18 +88,18 @@ public class MainFrame extends javax.swing.JFrame {
         doctorsBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         doctorsBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        doctorsBtn1.setBackground(new java.awt.Color(204, 255, 204));
-        doctorsBtn1.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
-        doctorsBtn1.setForeground(new java.awt.Color(0, 0, 0));
-        doctorsBtn1.setText("Familiares");
-        doctorsBtn1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        doctorsBtn1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        relativesBtn.setBackground(new java.awt.Color(204, 255, 204));
+        relativesBtn.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
+        relativesBtn.setForeground(new java.awt.Color(0, 0, 0));
+        relativesBtn.setText("Familiares");
+        relativesBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        relativesBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(profileBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -102,21 +107,32 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(doctorsBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(doctorsBtn1)
+                .addComponent(relativesBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(desktopPaneCtrl)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(7, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(profileBtn)
                     .addComponent(appointmentBtn)
                     .addComponent(doctorsBtn)
-                    .addComponent(doctorsBtn1))
+                    .addComponent(relativesBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(desktopPaneCtrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(desktopPaneCtrl))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
         );
 
         pack();
@@ -130,7 +146,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_profileBtnActionPerformed
 
     private void appointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentBtnActionPerformed
-
+        
         AppointmentsList apptList = new AppointmentsList();
         desktopPaneCtrl.add(apptList).setVisible(true);
     }//GEN-LAST:event_appointmentBtnActionPerformed
@@ -174,7 +190,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton appointmentBtn;
     private javax.swing.JDesktopPane desktopPaneCtrl;
     private javax.swing.JButton doctorsBtn;
-    private javax.swing.JButton doctorsBtn1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton profileBtn;
+    private javax.swing.JButton relativesBtn;
     // End of variables declaration//GEN-END:variables
 }
