@@ -6,6 +6,7 @@
 package paradinhas.siscoimp;
 
 import paradinhas.siscoimp.view.MainFrame;
+import paradinhas.siscoimp.view.Screen;
 
 /**
  *
@@ -16,6 +17,8 @@ public class Siscoimp {
     public static void main(String[] args) {
         MainFrame frame = new MainFrame();
         frame.setVisible(true);
+
+        Screen screen = new Screen();
     }
 }
 
