@@ -13,6 +13,7 @@ import org.json.JSONObject;
 public class User extends Person {
     private String email;
     
+    
     public User() {
         super(null, null, null, null);
     }
@@ -32,11 +33,23 @@ public class User extends Person {
     
     public JSONObject getJson(){
         JSONObject json = new JSONObject();
-        json.put("nome", name);
+        json.put("name", name);
         json.put("address", address);
         json.put("email", email);
         json.put("phone", phone);
+        json.put("imagePath", imagePath);
         
         return json;
+    }
+    
+    public void setJson(JSONObject json){
+        try {   
+        name = json.optString("name");
+        address = json.optString("address");
+        email = json.optString("email");
+        phone = json.optString("phone");
+        imagePath = json.optString("imagePath");
+        } catch (Exception e) {
+        }
     }
 }

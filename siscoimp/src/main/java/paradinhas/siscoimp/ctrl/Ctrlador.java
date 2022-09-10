@@ -17,7 +17,7 @@ public class Ctrlador {
     private User user = new User();
 
     private Ctrlador() {
-        Jsonfy.readJsonFile();
+        user.setJson(Jsonfy.readJsonFile());
     }
 
     static public Ctrlador instance() {

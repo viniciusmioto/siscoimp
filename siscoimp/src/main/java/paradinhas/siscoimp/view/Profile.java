@@ -4,6 +4,20 @@
  */
 package paradinhas.siscoimp.view;
 
+import java.awt.FlowLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.awt.Graphics2D;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import paradinhas.siscoimp.ctrl.Ctrlador;
 import paradinhas.siscoimp.models.User;
 
@@ -12,7 +26,10 @@ import paradinhas.siscoimp.models.User;
  * @author gab
  */
 public class Profile extends javax.swing.JInternalFrame {
+
     User user;
+    File profileFile;
+
     /**
      * Creates new form Profile
      */
@@ -23,6 +40,14 @@ public class Profile extends javax.swing.JInternalFrame {
         addrField.setText(user.getAddress());
         emailField.setText(user.getEmail());
         phoneField.setText(user.getPhone());
+        try {
+            if(user.getImagePath() != null){
+            profileFile = new File(user.getImagePath());
+            loadProfileImageFromPath(profileFile);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -69,6 +94,8 @@ public class Profile extends javax.swing.JInternalFrame {
         jLabel1.setText("Nome");
 
         profilePicture.setBackground(new java.awt.Color(204, 255, 204));
+        profilePicture.setMaximumSize(new java.awt.Dimension(150, 150));
+        profilePicture.setName(""); // NOI18N
         profilePicture.setPreferredSize(new java.awt.Dimension(150, 150));
         profilePicture.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -147,10 +174,9 @@ public class Profile extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
                         .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
@@ -179,13 +205,41 @@ public class Profile extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_cancelBtnActionPerformed
 
+    private BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) throws IOException {
+        BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
+        Graphics2D graphics2D = resizedImage.createGraphics();
+        graphics2D.drawImage(originalImage, 0, 0, targetWidth, targetHeight, null);
+        graphics2D.dispose();
+        return resizedImage;
+    }
+
+    private void loadProfileImageFromPath(File file) throws IOException {
+        BufferedImage img = ImageIO.read(file);
+        img = resizeImage(img, 150, 150);
+        ImageIcon icon = new ImageIcon(img);
+        JLabel lbl = new JLabel();
+        lbl.setIcon(icon);
+        profilePicture.setLayout(new FlowLayout());
+        profilePicture.add(lbl);
+    }
+
     private void profilePictureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePictureMouseClicked
-        // TODO add your handling code here:
-        // upload image
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Image", "png"));
+        int response = fileChooser.showOpenDialog(this);
+        if (response == JFileChooser.APPROVE_OPTION) {
+            profileFile = fileChooser.getSelectedFile().getAbsoluteFile();
+            try {
+                loadProfileImageFromPath(profileFile);
+            } catch (IOException ex) {
+                Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_profilePictureMouseClicked
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        Ctrlador.instance().updateUser(nameField.getText(), addrField.getText(), emailField.getText(), phoneField.getText(), title);
+        Ctrlador.instance().updateUser(nameField.getText(), addrField.getText(), emailField.getText(), phoneField.getText(), profileFile.getAbsolutePath());
         dispose();
     }//GEN-LAST:event_saveBtnActionPerformed
 
