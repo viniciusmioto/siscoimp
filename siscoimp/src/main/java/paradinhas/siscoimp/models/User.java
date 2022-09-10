@@ -4,12 +4,14 @@
  */
 package paradinhas.siscoimp.models;
 
+import org.json.JSONObject;
+
 /**
  *
  * @author gab
  */
 public class User extends Person {
-    String email;
+    private String email;
     
     public User() {
         super(null, null, null, null);
@@ -28,5 +30,13 @@ public class User extends Person {
         this.email = email;
     }
     
-
+    public JSONObject getJson(){
+        JSONObject json = new JSONObject();
+        json.put("nome", name);
+        json.put("address", address);
+        json.put("email", email);
+        json.put("phone", phone);
+        
+        return json;
+    }
 }

@@ -9,10 +9,10 @@ package paradinhas.siscoimp.models;
  * @author gab
  */
 public abstract class Person {
-    private String name;
-    private String address;
-    private String phone;
-    private String imagePath;
+    protected String name;
+    protected String address;
+    protected String phone;
+    protected String imagePath;
 
     public Person(String name, String adress, String phone, String imagePath) {
         this.name = name;

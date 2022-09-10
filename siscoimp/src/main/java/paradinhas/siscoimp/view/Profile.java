@@ -176,7 +176,7 @@ public class Profile extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void profilePictureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePictureMouseClicked
@@ -186,6 +186,7 @@ public class Profile extends javax.swing.JInternalFrame {
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         Ctrlador.instance().updateUser(nameField.getText(), addrField.getText(), emailField.getText(), phoneField.getText(), title);
+        dispose();
     }//GEN-LAST:event_saveBtnActionPerformed
 
 

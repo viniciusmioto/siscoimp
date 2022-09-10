@@ -4,6 +4,7 @@
  */
 package paradinhas.siscoimp.ctrl;
 
+import paradinhas.siscoimp.json.Jsonfy;
 import paradinhas.siscoimp.models.User;
 
 /**
@@ -16,6 +17,7 @@ public class Ctrlador {
     private User user = new User();
 
     private Ctrlador() {
+        Jsonfy.readJsonFile();
     }
 
     static public Ctrlador instance() {
@@ -31,6 +33,8 @@ public class Ctrlador {
         this.user.setEmail(email);
         this.user.setPhone(phone);
         this.user.setImagePath(imagePath);
+        
+        Jsonfy.saveJsonFile(user.getJson());
     }
 
     public User getUser() {
