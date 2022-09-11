@@ -87,12 +87,10 @@ public class DoctorsList extends javax.swing.JInternalFrame {
 
         jButton1.setBackground(new java.awt.Color(255, 51, 51));
         jButton1.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(204, 204, 204));
         jButton1.setText("Cancelar");
 
         jButton2.setBackground(new java.awt.Color(204, 255, 204));
         jButton2.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(204, 204, 204));
         jButton2.setText("Salvar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
