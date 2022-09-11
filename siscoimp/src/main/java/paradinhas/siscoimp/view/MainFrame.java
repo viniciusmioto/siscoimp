@@ -12,6 +12,7 @@ public class MainFrame extends javax.swing.JFrame {
     AppointmentsList apptList;
     Profile profile;
     DoctorsList docList;
+    RelativesCad relatives;
     
     /**
      * Creates new form MainFrame
@@ -42,7 +43,6 @@ public class MainFrame extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.setPreferredSize(new java.awt.Dimension(1231, 35));
 
         desktopPaneCtrl.setBackground(new java.awt.Color(0, 0, 0));
@@ -62,7 +62,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         profileBtn.setBackground(new java.awt.Color(204, 255, 204));
         profileBtn.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
-        profileBtn.setForeground(new java.awt.Color(0, 0, 0));
         profileBtn.setText("Perfil");
         profileBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         profileBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -74,7 +73,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         appointmentBtn.setBackground(new java.awt.Color(204, 255, 204));
         appointmentBtn.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
-        appointmentBtn.setForeground(new java.awt.Color(0, 0, 0));
         appointmentBtn.setText("Agendamentos");
         appointmentBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         appointmentBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -86,7 +84,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         doctorsBtn.setBackground(new java.awt.Color(204, 255, 204));
         doctorsBtn.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
-        doctorsBtn.setForeground(new java.awt.Color(0, 0, 0));
         doctorsBtn.setText("Médicos");
         doctorsBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         doctorsBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -98,10 +95,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         relativesBtn.setBackground(new java.awt.Color(204, 255, 204));
         relativesBtn.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
-        relativesBtn.setForeground(new java.awt.Color(0, 0, 0));
         relativesBtn.setText("Familiares");
         relativesBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         relativesBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        relativesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                relativesBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -170,6 +171,15 @@ public class MainFrame extends javax.swing.JFrame {
         }
         docList.setVisible(true);
     }//GEN-LAST:event_doctorsBtnActionPerformed
+
+    private void relativesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relativesBtnActionPerformed
+        // TODO add your handling code here:
+        if(relatives == null || relatives.isClosed()){
+            relatives = new RelativesCad();
+            desktopPaneCtrl.add(relatives);
+        }
+        relatives.setVisible(true);
+    }//GEN-LAST:event_relativesBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton appointmentBtn;
