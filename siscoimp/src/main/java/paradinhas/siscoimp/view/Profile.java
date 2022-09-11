@@ -64,6 +64,7 @@ public class Profile extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         profilePicture = new javax.swing.JPanel();
+        imgLabel = new javax.swing.JLabel();
         cancelBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
         nameField = new javax.swing.JTextField();
@@ -103,15 +104,17 @@ public class Profile extends javax.swing.JInternalFrame {
             }
         });
 
+        imgLabel.setText("jLabel5");
+
         javax.swing.GroupLayout profilePictureLayout = new javax.swing.GroupLayout(profilePicture);
         profilePicture.setLayout(profilePictureLayout);
         profilePictureLayout.setHorizontalGroup(
             profilePictureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addComponent(imgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
         );
         profilePictureLayout.setVerticalGroup(
             profilePictureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addComponent(imgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
         );
 
         cancelBtn.setBackground(new java.awt.Color(255, 51, 51));
@@ -217,16 +220,13 @@ public class Profile extends javax.swing.JInternalFrame {
         BufferedImage img = ImageIO.read(file);
         img = resizeImage(img, 150, 150);
         ImageIcon icon = new ImageIcon(img);
-        JLabel lbl = new JLabel();
-        lbl.setIcon(icon);
-        profilePicture.setLayout(new FlowLayout());
-        profilePicture.add(lbl);
+        imgLabel.setIcon(icon);
     }
 
     private void profilePictureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePictureMouseClicked
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setAcceptAllFileFilterUsed(false);
-        fileChooser.setFileFilter(new FileNameExtensionFilter("Image", "png"));
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Image", "png", "jpg", "jpeg"));
         int response = fileChooser.showOpenDialog(this);
         if (response == JFileChooser.APPROVE_OPTION) {
             profileFile = fileChooser.getSelectedFile().getAbsoluteFile();
@@ -248,6 +248,7 @@ public class Profile extends javax.swing.JInternalFrame {
     private javax.swing.JTextField addrField;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JTextField emailField;
+    private javax.swing.JLabel imgLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
