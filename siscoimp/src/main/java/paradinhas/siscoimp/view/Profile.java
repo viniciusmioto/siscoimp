@@ -4,19 +4,15 @@
  */
 package paradinhas.siscoimp.view;
 
-import java.awt.FlowLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.awt.Graphics2D;
-import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import paradinhas.siscoimp.ctrl.Ctrlador;
 import paradinhas.siscoimp.models.User;
@@ -41,9 +37,11 @@ public class Profile extends javax.swing.JInternalFrame {
         emailField.setText(user.getEmail());
         phoneField.setText(user.getPhone());
         try {
-            if(user.getImagePath() != null){
-            profileFile = new File(user.getImagePath());
-            loadProfileImageFromPath(profileFile);
+            if (user.getImagePath() != null) {
+                profileFile = new File(user.getImagePath());
+                if (!"".equals(user.getImagePath())) {
+                    loadProfileImageFromPath(profileFile);
+                }
             }
         } catch (IOException ex) {
             Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
