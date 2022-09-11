@@ -6,12 +6,8 @@ package paradinhas.siscoimp.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -29,51 +25,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
     public AppointmentsList() {
         initComponents();
     }
-    
-    public class TestPane extends JPanel {
-
-        private JPanel mainList;
-
-        public TestPane() {
-            setLayout(new BorderLayout());
-
-            mainList = new JPanel(new GridBagLayout());
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.gridwidth = GridBagConstraints.REMAINDER;
-            gbc.weightx = 1;
-            gbc.weighty = 1;
-            mainList.add(new JPanel(), gbc);
-
-            add(new JScrollPane(mainList));
-
-            JButton add = new JButton("Add");
-            add.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JPanel panel = new JPanel();
-                    panel.add(new JLabel("Hello"));
-                    panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
-                    GridBagConstraints gbc = new GridBagConstraints();
-                    gbc.gridwidth = GridBagConstraints.REMAINDER;
-                    gbc.weightx = 1;
-                    gbc.fill = GridBagConstraints.HORIZONTAL;
-                    mainList.add(panel, gbc, 0);
-
-                    validate();
-                    repaint();
-                }
-            });
-
-            add(add, BorderLayout.SOUTH);
-
-        }
-
-        @Override
-        public Dimension getPreferredSize() {
-            return new Dimension(200, 200);
-        }
-    }
-    
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -88,12 +40,22 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         addListElementBtn = new javax.swing.JButton();
-        listContainer = new javax.swing.JScrollPane();
+        mainList = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
+
+        setLayout(new BorderLayout());
+        mainList = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        mainList.add(new JPanel(), gbc);
+        JScrollPane scrollListContainer = new JScrollPane(mainList);
+        scrollListContainer.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jTextField1.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
@@ -126,6 +88,22 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
         jTextField6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         addListElementBtn.setText("Add");
+        addListElementBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addListElementBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout mainListLayout = new javax.swing.GroupLayout(mainList);
+        mainList.setLayout(mainListLayout);
+        mainListLayout.setHorizontalGroup(
+            mainListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        mainListLayout.setVerticalGroup(
+            mainListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 406, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -138,7 +116,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(listContainer)
+                    .addComponent(scrollListContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(71, 71, 71)
@@ -147,7 +125,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
                         .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 12, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -159,8 +137,8 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(listContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(scrollListContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addListElementBtn)
                 .addContainerGap(9, Short.MAX_VALUE))
@@ -169,6 +147,20 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addListElementBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addListElementBtnActionPerformed
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("Hello"));
+        panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.weightx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        mainList.add(panel, gbc, 0);
+
+        validate();
+        repaint();
+    }//GEN-LAST:event_addListElementBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addListElementBtn;
@@ -176,7 +168,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JScrollPane listContainer;
+    private javax.swing.JPanel mainList;
     // End of variables declaration//GEN-END:variables
 
 }

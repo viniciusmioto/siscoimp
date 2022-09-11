@@ -9,7 +9,7 @@ package paradinhas.siscoimp.view;
  * @author gab
  */
 public class MainFrame extends javax.swing.JFrame {
-    AppointmentsList apptList;
+    AppointmentsScrollList apptList;
     Profile profile;
     DoctorsList docList;
     
@@ -157,7 +157,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void appointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentBtnActionPerformed
         if(apptList == null || apptList.isClosed()) {   
-            apptList = new AppointmentsList();
+            apptList = new AppointmentsScrollList();
             desktopPaneCtrl.add(apptList);
         }
         apptList.setVisible(true);
