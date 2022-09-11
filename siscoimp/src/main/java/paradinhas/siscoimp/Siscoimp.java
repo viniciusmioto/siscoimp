@@ -6,7 +6,7 @@
 package paradinhas.siscoimp;
 
 import paradinhas.siscoimp.json.Jsonfy;
-import paradinhas.siscoimp.view.HomeFrame;
+import paradinhas.siscoimp.view.MainFrame;
 
 /**
  *
@@ -15,7 +15,7 @@ import paradinhas.siscoimp.view.HomeFrame;
 public class Siscoimp {
 
     public static void main(String[] args) {
-        HomeFrame frame = new HomeFrame();
+        MainFrame frame = new MainFrame();
         frame.setVisible(true);
         //Screen screen = new Screen();
     }
