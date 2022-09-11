@@ -39,8 +39,8 @@ public class DoctorsList extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         addrField = new javax.swing.JTextField();
         doctorPic = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
+        saveBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
@@ -89,18 +89,18 @@ public class DoctorsList extends javax.swing.JInternalFrame {
             .addGap(0, 150, Short.MAX_VALUE)
         );
 
-        jButton1.setBackground(new java.awt.Color(255, 51, 51));
-        jButton1.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jButton1.setText("Cancelar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cancelBtn.setBackground(new java.awt.Color(255, 51, 51));
+        cancelBtn.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
+        cancelBtn.setText("Cancelar");
+        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cancelBtnActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(204, 255, 204));
-        jButton2.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jButton2.setText("Salvar");
+        saveBtn.setBackground(new java.awt.Color(204, 255, 204));
+        saveBtn.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
+        saveBtn.setText("Salvar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,9 +123,9 @@ public class DoctorsList extends javax.swing.JInternalFrame {
                 .addGap(49, 49, 49))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(saveBtn)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(cancelBtn)
                 .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
@@ -148,8 +148,8 @@ public class DoctorsList extends javax.swing.JInternalFrame {
                 .addComponent(addrField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(cancelBtn)
+                    .addComponent(saveBtn))
                 .addGap(25, 25, 25))
         );
 
@@ -164,21 +164,21 @@ public class DoctorsList extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_doctorPicMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         // TODO add your handling code here:
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_cancelBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField addrField;
+    private javax.swing.JButton cancelBtn;
     private javax.swing.JPanel doctorPic;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField nameField;
     private javax.swing.JTextField phoneField;
+    private javax.swing.JButton saveBtn;
     // End of variables declaration//GEN-END:variables
 }
