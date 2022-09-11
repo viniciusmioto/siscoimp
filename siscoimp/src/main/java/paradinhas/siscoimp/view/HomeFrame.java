@@ -4,16 +4,19 @@
  */
 package paradinhas.siscoimp.view;
 
+import javax.swing.JInternalFrame;
+
 /**
  *
  * @author gab
  */
-public class MainFrame extends javax.swing.JFrame {
-
+public class HomeFrame extends javax.swing.JFrame {
+    AppointmentsList apptList;
+    Profile profile;
     /**
      * Creates new form MainFrame
      */
-    public MainFrame() {
+    public HomeFrame() {
         initComponents();
     }
 
@@ -39,7 +42,6 @@ public class MainFrame extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.setPreferredSize(new java.awt.Dimension(1231, 35));
 
         desktopPaneCtrl.setBackground(new java.awt.Color(0, 0, 0));
@@ -59,7 +61,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         profileBtn.setBackground(new java.awt.Color(204, 255, 204));
         profileBtn.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
-        profileBtn.setForeground(new java.awt.Color(0, 0, 0));
         profileBtn.setText("Perfil");
         profileBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         profileBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -71,7 +72,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         appointmentBtn.setBackground(new java.awt.Color(204, 255, 204));
         appointmentBtn.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
-        appointmentBtn.setForeground(new java.awt.Color(0, 0, 0));
         appointmentBtn.setText("Agendamentos");
         appointmentBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         appointmentBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -83,14 +83,12 @@ public class MainFrame extends javax.swing.JFrame {
 
         doctorsBtn.setBackground(new java.awt.Color(204, 255, 204));
         doctorsBtn.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
-        doctorsBtn.setForeground(new java.awt.Color(0, 0, 0));
         doctorsBtn.setText("Médicos");
         doctorsBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         doctorsBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         relativesBtn.setBackground(new java.awt.Color(204, 255, 204));
         relativesBtn.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
-        relativesBtn.setForeground(new java.awt.Color(0, 0, 0));
         relativesBtn.setText("Familiares");
         relativesBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         relativesBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -138,53 +136,26 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+   
     private void profileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileBtnActionPerformed
-        //desktopPaneCtrl.removeAll();
-        Profile profile = new Profile();
-        desktopPaneCtrl.add(profile).setVisible(true);
+        if(profile == null || profile.isClosed()){
+            profile = new Profile();
+            desktopPaneCtrl.add(profile);
+        }
+        profile.setVisible(true);
     }//GEN-LAST:event_profileBtnActionPerformed
 
     private void appointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentBtnActionPerformed
-        
-        AppointmentsList apptList = new AppointmentsList();
-        desktopPaneCtrl.add(apptList).setVisible(true);
+        if(apptList == null || apptList.isClosed()) {   
+            apptList = new AppointmentsList();
+            desktopPaneCtrl.add(apptList);
+        }
+        apptList.setVisible(true);
     }//GEN-LAST:event_appointmentBtnActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton appointmentBtn;
