@@ -4,6 +4,17 @@
  */
 package paradinhas.siscoimp.view;
 
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author gab
@@ -16,7 +27,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
     public AppointmentsList() {
         initComponents();
     }
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,7 +41,8 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        addListElementBtn = new javax.swing.JButton();
+        listContainer = new javax.swing.JScrollPane();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
@@ -67,14 +79,25 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
         jTextField6.setText("Concluído");
         jTextField6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        addListElementBtn.setText("Add");
+        addListElementBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addListElementBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(addListElementBtn)
+                .addGap(361, 361, 361))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(listContainer)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(71, 71, 71)
@@ -95,20 +118,38 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(listContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addListElementBtn)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addListElementBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addListElementBtnActionPerformed
+        final JPanel newPanel = new JPanel();
+        newPanel.add(new JLabel("Label " + listSize++));
+        listContainer.add(newPanel);
+        listContainer.revalidate();
+        // Scroll down to last added panel
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                newPanel.scrollRectToVisible(newPanel.getBounds());
+            }
+        });
+    }//GEN-LAST:event_addListElementBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton addListElementBtn;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JScrollPane listContainer;
     // End of variables declaration//GEN-END:variables
+    private int listSize = 0;
 }

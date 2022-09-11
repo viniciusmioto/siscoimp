@@ -104,8 +104,6 @@ public class Profile extends javax.swing.JInternalFrame {
             }
         });
 
-        imgLabel.setText("jLabel5");
-
         javax.swing.GroupLayout profilePictureLayout = new javax.swing.GroupLayout(profilePicture);
         profilePicture.setLayout(profilePictureLayout);
         profilePictureLayout.setHorizontalGroup(
