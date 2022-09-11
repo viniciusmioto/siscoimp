@@ -44,6 +44,9 @@ public class DoctorsList extends javax.swing.JInternalFrame {
 
         setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setTitle("Doutores");
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
