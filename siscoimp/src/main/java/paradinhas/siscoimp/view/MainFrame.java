@@ -87,6 +87,11 @@ public class MainFrame extends javax.swing.JFrame {
         doctorsBtn.setText("Médicos");
         doctorsBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         doctorsBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        doctorsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doctorsBtnActionPerformed(evt);
+            }
+        });
 
         relativesBtn.setBackground(new java.awt.Color(204, 255, 204));
         relativesBtn.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
@@ -150,6 +155,12 @@ public class MainFrame extends javax.swing.JFrame {
         AppointmentsList apptList = new AppointmentsList();
         desktopPaneCtrl.add(apptList).setVisible(true);
     }//GEN-LAST:event_appointmentBtnActionPerformed
+
+    private void doctorsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorsBtnActionPerformed
+        // TODO add your handling code here:
+        DoctorsList doctorsList = new DoctorsList();
+        desktopPaneCtrl.add(doctorsList).setVisible(true);
+    }//GEN-LAST:event_doctorsBtnActionPerformed
 
     /**
      * @param args the command line arguments
