@@ -10,7 +10,7 @@ import org.json.JSONObject;
  *
  * @author gab
  */
-public class User extends Person {
+public class User extends Person implements Jsonfison{
     private String email;
     
     
