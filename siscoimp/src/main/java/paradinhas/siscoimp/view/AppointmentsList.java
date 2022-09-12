@@ -4,6 +4,7 @@
  */
 package paradinhas.siscoimp.view;
 
+import paradinhas.siscoimp.view.templates.ScrollListTemplate;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
@@ -21,7 +22,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
         @Override
         public void addListElementBtnActionPerformed(ActionEvent evt) {
             JPanel panel = new JPanel();
-            panel.add(new AppointmentTemplate(AppointmentTemplate.FINISHED, "Exame", "01/28/2004", "Exame de vista"));
+            panel.add(new AppointmentElement(AppointmentElement.FINISHED, "Exame", "01/28/2004", "Exame de vista"));
             panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridwidth = GridBagConstraints.REMAINDER;

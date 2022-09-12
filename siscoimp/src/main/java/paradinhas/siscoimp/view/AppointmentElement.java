@@ -8,7 +8,7 @@ package paradinhas.siscoimp.view;
  *
  * @author gab
  */
-public class AppointmentTemplate extends javax.swing.JPanel {
+public class AppointmentElement extends javax.swing.JPanel {
 
     static final int FINISHED = 1;
     static final int IN_PROGRESS = 2;
@@ -17,7 +17,7 @@ public class AppointmentTemplate extends javax.swing.JPanel {
     /**
      * Creates new form AppointmentTemplateD
      */
-    public AppointmentTemplate(int status, String type, String date, String title) {
+    public AppointmentElement(int status, String type, String date, String title) {
         initComponents();
         dataField.setText(date);
         titleField.setText(title);
