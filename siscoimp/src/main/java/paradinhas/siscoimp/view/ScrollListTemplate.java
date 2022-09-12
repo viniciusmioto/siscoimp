@@ -52,6 +52,10 @@ public abstract class ScrollListTemplate extends JPanel {
         add(addElementBtn, BorderLayout.SOUTH);
     }  
     
+    public JPanel getMainList(){
+        return this.mainList;            
+    }    
+    
     public void addListElementBtnActionPerformed(ActionEvent evt) {
         JPanel panel = new JPanel();
         panel.add(new JLabel("template"));
@@ -64,9 +68,5 @@ public abstract class ScrollListTemplate extends JPanel {
 
         validate();
         repaint();
-    }
-    
-    public JPanel getMainList(){
-        return this.mainList;            
-    }        
+    }    
 }

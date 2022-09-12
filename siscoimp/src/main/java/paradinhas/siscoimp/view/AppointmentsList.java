@@ -17,9 +17,6 @@ import javax.swing.border.MatteBorder;
 public class AppointmentsList extends javax.swing.JInternalFrame {
 
     private class ScrollListAppt extends ScrollListTemplate {
-//        public ScrollListAppt(){
-//            super();
-//        }
         
         @Override
         public void addListElementBtnActionPerformed(ActionEvent evt) {
