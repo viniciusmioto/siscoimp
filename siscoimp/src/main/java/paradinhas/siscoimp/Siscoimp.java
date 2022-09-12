@@ -8,10 +8,6 @@ package paradinhas.siscoimp;
 import paradinhas.siscoimp.json.Jsonfy;
 import paradinhas.siscoimp.view.MainFrame;
 
-/**
- *
- * @author gab
- */
 public class Siscoimp {
 
     public static void main(String[] args) {

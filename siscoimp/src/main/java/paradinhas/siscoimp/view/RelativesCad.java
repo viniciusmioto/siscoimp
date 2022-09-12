@@ -45,15 +45,18 @@ public class RelativesCad extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nome");
 
-        nameField.setForeground(new java.awt.Color(255, 255, 255));
+        nameField.setBackground(new java.awt.Color(255, 255, 255));
+        nameField.setForeground(new java.awt.Color(0, 0, 0));
 
-        addrField.setForeground(new java.awt.Color(255, 255, 255));
+        addrField.setBackground(new java.awt.Color(255, 255, 255));
+        addrField.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel2.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Endereço");
 
-        phoneField.setForeground(new java.awt.Color(255, 255, 255));
+        phoneField.setBackground(new java.awt.Color(255, 255, 255));
+        phoneField.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel3.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));

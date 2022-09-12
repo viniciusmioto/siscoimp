@@ -53,11 +53,14 @@ public class DoctorsList extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nome do Profissional");
 
+        nameField.setForeground(new java.awt.Color(0, 0, 0));
+
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Telefone");
 
+        phoneField.setForeground(new java.awt.Color(0, 0, 0));
         phoneField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 phoneFieldActionPerformed(evt);
@@ -69,6 +72,7 @@ public class DoctorsList extends javax.swing.JInternalFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Endereço");
 
+        addrField.setForeground(new java.awt.Color(0, 0, 0));
         addrField.setToolTipText("");
 
         doctorPic.setBackground(new java.awt.Color(204, 255, 204));

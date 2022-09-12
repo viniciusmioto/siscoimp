@@ -37,6 +37,7 @@ public class AppointmentsScrollList extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
+        setTitle("Agendamentos");
         
         setLayout(new BorderLayout());
 

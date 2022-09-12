@@ -13,6 +13,7 @@ public class MainFrame extends javax.swing.JFrame {
     Profile profile;
     DoctorsList docList;
     RelativesCad relatives;
+    AppointmentCad apptCad;
     
     /**
      * Creates new form MainFrame
@@ -36,6 +37,7 @@ public class MainFrame extends javax.swing.JFrame {
         appointmentBtn = new javax.swing.JButton();
         doctorsBtn = new javax.swing.JButton();
         relativesBtn = new javax.swing.JButton();
+        setApptBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SISCOIMP");
@@ -104,6 +106,17 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        setApptBtn.setBackground(new java.awt.Color(204, 255, 204));
+        setApptBtn.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
+        setApptBtn.setText("Agendar");
+        setApptBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        setApptBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        setApptBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setApptBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -117,6 +130,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(doctorsBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(relativesBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(setApptBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(desktopPaneCtrl)
         );
@@ -128,7 +143,8 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(profileBtn)
                     .addComponent(appointmentBtn)
                     .addComponent(doctorsBtn)
-                    .addComponent(relativesBtn))
+                    .addComponent(relativesBtn)
+                    .addComponent(setApptBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(desktopPaneCtrl))
         );
@@ -181,6 +197,15 @@ public class MainFrame extends javax.swing.JFrame {
         relatives.setVisible(true);
     }//GEN-LAST:event_relativesBtnActionPerformed
 
+    private void setApptBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setApptBtnActionPerformed
+        // TODO add your handling code here:
+        if(apptCad == null || apptCad.isClosed()) {   
+            apptCad = new AppointmentCad();
+            desktopPaneCtrl.add(apptCad);
+        }
+        apptCad.setVisible(true);
+    }//GEN-LAST:event_setApptBtnActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton appointmentBtn;
     private javax.swing.JDesktopPane desktopPaneCtrl;
@@ -188,5 +213,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton profileBtn;
     private javax.swing.JButton relativesBtn;
+    private javax.swing.JButton setApptBtn;
     // End of variables declaration//GEN-END:variables
 }
