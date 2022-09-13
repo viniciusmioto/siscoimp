@@ -29,7 +29,7 @@ public class Ctrlador {
         }
         
         for (int i = 0; i < 10; i++){
-            docList.add(new Doctor("FIlho do Andrey " + i, "Casa do Andrey", "(69) 96969-6969", "/home/andrey/Images/filho" + i));
+            docList.add(new Doctor("FIlho do Andrey " + i, "Casa do Andrey", "(69) 96969-6969", "Psicólogo", "/home/andrey/Images/filho" + i));
         }
     }
 
@@ -54,8 +54,8 @@ public class Ctrlador {
         this.apptList.add(new Appointment(type, status, title, date, doctor));
     }
     
-    public void addDoctor(String name, String address, String phone, String imagePath){
-        this.docList.add(new Doctor(name, address, phone, imagePath));
+    public void addDoctor(String name, String address, String phone, String spec,  String imagePath){
+        this.docList.add(new Doctor(name, address, phone, spec, imagePath));
     }
     
     public User getUser() {

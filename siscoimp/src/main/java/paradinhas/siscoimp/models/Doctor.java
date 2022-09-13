@@ -12,12 +12,23 @@ import org.json.JSONObject;
  */
 public class Doctor extends Person implements Jsonfison {
 
+    private String spec;
+    
     public Doctor() {
         super(null, null, null, null);
     }
 
-    public Doctor(String name, String address, String phone, String imagePath) {
+    public Doctor(String name, String address, String phone, String spec, String imagePath) {
         super(name, address, phone, imagePath);
+        this.spec = spec;
+    }
+    
+    public String getSpec() {
+        return spec;
+    }
+
+    public void setSpec(String spec) {
+        this.spec = spec;
     }
     
     public JSONObject getJson() {

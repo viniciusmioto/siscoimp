@@ -28,7 +28,7 @@ public class DoctorsList extends javax.swing.JInternalFrame {
                 for (Doctor doc : docs)
                 {
                     JPanel panel = new JPanel();
-                    panel.add(new JLabel(doc.getName()));
+                    panel.add(new DoctorElement(doc));
                     panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
                     GridBagConstraints gbc = new GridBagConstraints();
                     gbc.gridwidth = GridBagConstraints.REMAINDER;
