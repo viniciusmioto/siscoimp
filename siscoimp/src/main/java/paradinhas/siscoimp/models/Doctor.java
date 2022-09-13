@@ -16,8 +16,8 @@ public class Doctor extends Person implements Jsonfison {
         super(null, null, null, null);
     }
 
-    public Doctor(String name, String adress, String phone, String imagePath) {
-        super(name, adress, phone, imagePath);
+    public Doctor(String name, String address, String phone, String imagePath) {
+        super(name, address, phone, imagePath);
     }
     
     public JSONObject getJson() {

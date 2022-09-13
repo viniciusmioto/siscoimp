@@ -4,23 +4,57 @@
  */
 package paradinhas.siscoimp.view;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.MatteBorder;
+import paradinhas.siscoimp.ctrl.Ctrlador;
+import paradinhas.siscoimp.models.Doctor;
+import paradinhas.siscoimp.view.templates.ScrollListTemplate;
 
 /**
  *
- * @author vinicius
+ * @author gab
  */
 public class DoctorsList extends javax.swing.JInternalFrame {
 
+    private class ScrollListDoc extends ScrollListTemplate {
+        
+        public void loadList(ArrayList<Doctor> docs) {
+            if ((docs != null) && (!docs.isEmpty()))
+            {
+                for (Doctor doc : docs)
+                {
+                    JPanel panel = new JPanel();
+                    panel.add(new JLabel(doc.getName()));
+                    panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
+                    GridBagConstraints gbc = new GridBagConstraints();
+                    gbc.gridwidth = GridBagConstraints.REMAINDER;
+                    gbc.weightx = 1;
+                    gbc.fill = GridBagConstraints.HORIZONTAL;
+                    getMainList().add(panel, gbc, 0);
+
+                    validate();
+                    repaint();
+                }
+            }
+        }
+    }
+    
+    private final ArrayList<Doctor> docList;
+    
     /**
      * Creates new form DoctorsList
      */
     public DoctorsList() {
         initComponents();
+        docList = Ctrlador.getInstance().getDoctorsList();
+        ScrollListDoc scrollList = new ScrollListDoc();
+        scrollList.loadList(docList);
+        
+        mainListFrame.add(scrollList);
     }
 
     /**
@@ -32,157 +66,59 @@ public class DoctorsList extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        nameField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        phoneField = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        addrField = new javax.swing.JTextField();
-        doctorPic = new javax.swing.JPanel();
-        cancelBtn = new javax.swing.JButton();
-        saveBtn = new javax.swing.JButton();
+        mainListFrame = new javax.swing.JPanel();
+        registerBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("Doutores");
+        setTitle("Contatos Médicos");
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Nome do Profissional");
+        mainListFrame.setLayout(new javax.swing.BoxLayout(mainListFrame, javax.swing.BoxLayout.LINE_AXIS));
 
-        nameField.setForeground(new java.awt.Color(0, 0, 0));
-
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Telefone");
-
-        phoneField.setForeground(new java.awt.Color(0, 0, 0));
-        phoneField.addActionListener(new java.awt.event.ActionListener() {
+        registerBtn.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
+        registerBtn.setText("Cadastrar");
+        registerBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        registerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                phoneFieldActionPerformed(evt);
+                registerBtnActionPerformed(evt);
             }
         });
-
-        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Endereço");
-
-        addrField.setForeground(new java.awt.Color(0, 0, 0));
-        addrField.setToolTipText("");
-
-        doctorPic.setBackground(new java.awt.Color(204, 255, 204));
-        doctorPic.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                doctorPicMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout doctorPicLayout = new javax.swing.GroupLayout(doctorPic);
-        doctorPic.setLayout(doctorPicLayout);
-        doctorPicLayout.setHorizontalGroup(
-            doctorPicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
-        );
-        doctorPicLayout.setVerticalGroup(
-            doctorPicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
-        );
-
-        cancelBtn.setBackground(new java.awt.Color(255, 51, 51));
-        cancelBtn.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        cancelBtn.setText("Cancelar");
-        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelBtnActionPerformed(evt);
-            }
-        });
-
-        saveBtn.setBackground(new java.awt.Color(204, 255, 204));
-        saveBtn.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        saveBtn.setText("Salvar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(nameField))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(addrField, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
-                .addComponent(doctorPic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
+                .addContainerGap()
+                .addComponent(mainListFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(saveBtn)
-                .addGap(18, 18, 18)
-                .addComponent(cancelBtn)
-                .addGap(29, 29, 29))
+                .addContainerGap(353, Short.MAX_VALUE)
+                .addComponent(registerBtn)
+                .addGap(329, 329, 329))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3))
-                    .addComponent(doctorPic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(addrField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelBtn)
-                    .addComponent(saveBtn))
-                .addGap(25, 25, 25))
+                .addContainerGap()
+                .addComponent(mainListFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(registerBtn)
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void phoneFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_phoneFieldActionPerformed
-
-    private void doctorPicMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorPicMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_doctorPicMouseClicked
-
-    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
-        // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_cancelBtnActionPerformed
+    private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
+        MainFrame.getInstance().showDoctorCad();
+    }//GEN-LAST:event_registerBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField addrField;
-    private javax.swing.JButton cancelBtn;
-    private javax.swing.JPanel doctorPic;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField nameField;
-    private javax.swing.JTextField phoneField;
-    private javax.swing.JButton saveBtn;
+    private javax.swing.JPanel mainListFrame;
+    private javax.swing.JButton registerBtn;
     // End of variables declaration//GEN-END:variables
 }

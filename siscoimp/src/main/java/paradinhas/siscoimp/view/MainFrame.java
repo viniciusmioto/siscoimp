@@ -11,8 +11,9 @@ package paradinhas.siscoimp.view;
 public class MainFrame extends javax.swing.JFrame {
     static private MainFrame mainFrame;
     private AppointmentsList apptList;
-    private Profile profile;
     private DoctorsList docList;
+    private Profile profile;
+    private DoctorCad docCad;
     private RelativesCad relatives;
     private AppointmentCad apptCad;
     
@@ -36,6 +37,14 @@ public class MainFrame extends javax.swing.JFrame {
             desktopPaneCtrl.add(apptCad);
         }
         apptCad.setVisible(true);
+    }
+    
+    public void showDoctorCad(){
+        if(docCad == null || docCad.isClosed()) {   
+            docCad = new DoctorCad();
+            desktopPaneCtrl.add(docCad);
+        }
+        docCad.setVisible(true);
     }
 
     /**

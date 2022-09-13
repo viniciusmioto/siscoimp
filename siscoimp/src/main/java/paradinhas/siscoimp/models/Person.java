@@ -14,9 +14,9 @@ public abstract class Person {
     protected String phone;
     protected String imagePath;
 
-    public Person(String name, String adress, String phone, String imagePath) {
+    public Person(String name, String address, String phone, String imagePath) {
         this.name = name;
-        this.address = adress;
+        this.address = address;
         this.phone = phone;
         this.imagePath = imagePath;
     }

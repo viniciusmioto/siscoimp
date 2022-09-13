@@ -20,11 +20,16 @@ public class Ctrlador {
     static public Ctrlador ctrl;
     private User user = new User();
     private ArrayList<Appointment> apptList = new ArrayList<>();
+    private ArrayList<Doctor> docList = new ArrayList<>();
 
     private Ctrlador() {
         user.setJson(Jsonfy.readJsonFile());
         for (int i = 0; i < 10; i++){
             apptList.add(new Appointment(Appointment.AppointmentType.Exam, Appointment.AppointmentStatus.InProgress, "Exame de vista " + i, new GregorianCalendar(2022, 9, 13), new Doctor()));
+        }
+        
+        for (int i = 0; i < 10; i++){
+            docList.add(new Doctor("FIlho do Andrey " + i, "Casa do Andrey", "(69) 96969-6969", "/home/andrey/Images/filho" + i));
         }
     }
 
@@ -49,12 +54,20 @@ public class Ctrlador {
         this.apptList.add(new Appointment(type, status, title, date, doctor));
     }
     
+    public void addDoctor(String name, String address, String phone, String imagePath){
+        this.docList.add(new Doctor(name, address, phone, imagePath));
+    }
+    
     public User getUser() {
         return this.user;
     }
 
     public ArrayList<Appointment> getApptList() {
         return apptList;
+    }
+
+    public ArrayList<Doctor> getDoctorsList() {
+        return docList;
     }
    
 }

@@ -18,7 +18,6 @@ import paradinhas.siscoimp.models.Appointment;
  * @author gab
  */
 public class AppointmentsList extends javax.swing.JInternalFrame {
-    AppointmentCad apptCad;
 
     private class ScrollListAppt extends ScrollListTemplate {
         
