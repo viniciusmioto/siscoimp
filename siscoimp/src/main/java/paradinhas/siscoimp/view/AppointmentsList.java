@@ -7,9 +7,11 @@ package paradinhas.siscoimp.view;
 import paradinhas.siscoimp.view.templates.ScrollListTemplate;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
-import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
+import paradinhas.siscoimp.ctrl.Ctrlador;
+import paradinhas.siscoimp.models.Appointment;
 
 /**
  *
@@ -19,28 +21,39 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
 
     private class ScrollListAppt extends ScrollListTemplate {
         
-        @Override
-        public void addListElementBtnActionPerformed(ActionEvent evt) {
-            JPanel panel = new JPanel();
-            panel.add(new AppointmentElement(AppointmentElement.FINISHED, "Exame", "01/28/2004", "Exame de vista"));
-            panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.gridwidth = GridBagConstraints.REMAINDER;
-            gbc.weightx = 1;
-            gbc.fill = GridBagConstraints.HORIZONTAL;
-            getMainList().add(panel, gbc, 0);
+        public void loadList(ArrayList<Appointment> appts) {
+            if ((appts != null) && (!appts.isEmpty()))
+            {
+                for (Appointment appt : appts)
+                {
+                    JPanel panel = new JPanel();
+                    panel.add(new AppointmentElement(appt));
+                    panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
+                    GridBagConstraints gbc = new GridBagConstraints();
+                    gbc.gridwidth = GridBagConstraints.REMAINDER;
+                    gbc.weightx = 1;
+                    gbc.fill = GridBagConstraints.HORIZONTAL;
+                    getMainList().add(panel, gbc, 0);
 
-            validate();
-            repaint();
+                    validate();
+                    repaint();
+                }
+            }
         }
     }
+    
+    private final ArrayList<Appointment> apptList;
     
     /**
      * Creates new form AppointmentsList
      */
     public AppointmentsList() {
         initComponents();
-        mainListFrame.add(new ScrollListAppt());
+        apptList = Ctrlador.instance().getApptList();
+        ScrollListAppt scrollList = new ScrollListAppt();
+        scrollList.loadList(apptList);
+        
+        mainListFrame.add(scrollList);
     }
 
     /**
@@ -57,6 +70,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         mainListFrame = new javax.swing.JPanel();
+        registerAppt = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
@@ -95,6 +109,15 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
 
         mainListFrame.setLayout(new javax.swing.BoxLayout(mainListFrame, javax.swing.BoxLayout.LINE_AXIS));
 
+        registerAppt.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
+        registerAppt.setText("Cadastrar");
+        registerAppt.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        registerAppt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerApptActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,6 +136,10 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
                         .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(registerAppt)
+                .addGap(342, 342, 342))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,12 +151,18 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mainListFrame, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+                .addComponent(mainListFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(registerAppt)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void registerApptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerApptActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_registerApptActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -138,5 +171,6 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JPanel mainListFrame;
+    private javax.swing.JButton registerAppt;
     // End of variables declaration//GEN-END:variables
 }

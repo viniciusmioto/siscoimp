@@ -8,9 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
+import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -22,13 +20,15 @@ import javax.swing.border.MatteBorder;
  */
 public abstract class ScrollListTemplate extends JPanel {
 
-    private final JPanel mainList;
-    private final JButton addElementBtn;
+    private JPanel mainList;
 
     public ScrollListTemplate() {
+        initComponents();
+    }  
+    
+    private void initComponents(){
         setLayout(new BorderLayout());
 
-        addElementBtn = new JButton();
         mainList = new JPanel(new GridBagLayout());
         
         GridBagConstraints gbc = new GridBagConstraints();
@@ -40,32 +40,24 @@ public abstract class ScrollListTemplate extends JPanel {
         JScrollPane mainListScroll = new JScrollPane(mainList);
         mainListScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         add(mainListScroll);
-
-        addElementBtn.setText("Add");
-        addElementBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                addListElementBtnActionPerformed(evt);
-            }
-        });
-
-        add(addElementBtn, BorderLayout.SOUTH);
-    }  
+        
+    }
     
     public JPanel getMainList(){
         return this.mainList;            
     }    
     
-    public void addListElementBtnActionPerformed(ActionEvent evt) {
-        JPanel panel = new JPanel();
-        panel.add(new JLabel("template"));
-        panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.weightx = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        mainList.add(panel, gbc, 0);
-
+    public void postInit() {
+        for (int i = 0; i < 10; i++){
+            JPanel panel = new JPanel();
+            panel.add(new JLabel("template"));
+            panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridwidth = GridBagConstraints.REMAINDER;
+            gbc.weightx = 1;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            mainList.add(panel, gbc, 0);
+        }
         validate();
         repaint();
     }    

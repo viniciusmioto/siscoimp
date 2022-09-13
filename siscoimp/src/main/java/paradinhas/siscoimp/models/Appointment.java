@@ -4,7 +4,7 @@
  */
 package paradinhas.siscoimp.models;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -14,15 +14,24 @@ import java.util.Date;
 public class Appointment {
     
     public enum ConsultType {
-        Exam,Consult
+        Exam,Consult;
     }
-    ConsultType type;
+    private ConsultType type;
     
-    Date date;
-    Doctor doctor;
+    public enum ConsultStatus {
+        Concluded, InProgress, Canceled
+    }
+    private ConsultStatus status;
 
-    public Appointment(ConsultType type, Date date, Doctor doctor) {
+    private String title;
+    private GregorianCalendar date;
+    private Doctor doctor;
+    
+
+    public Appointment(ConsultType type, ConsultStatus status, String title, GregorianCalendar date, Doctor doctor) {
+        this.title = title;
         this.type = type;
+        this.status = status;
         this.date = date;
         this.doctor = doctor;
     }
@@ -34,12 +43,20 @@ public class Appointment {
     public void setType(ConsultType type) {
         this.type = type;
     }
+    
+    public ConsultStatus getStatus() {
+        return status;
+    }
 
-    public Date getDate() {
+    public void setStatus(ConsultStatus status) {
+        this.status = status;
+    }
+    
+    public GregorianCalendar getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(GregorianCalendar date) {
         this.date = date;
     }
 
@@ -49,5 +66,13 @@ public class Appointment {
 
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

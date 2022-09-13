@@ -4,35 +4,50 @@
  */
 package paradinhas.siscoimp.view;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import paradinhas.siscoimp.models.Appointment;
+
 /**
  *
  * @author gab
  */
 public class AppointmentElement extends javax.swing.JPanel {
 
-    static final int FINISHED = 1;
-    static final int IN_PROGRESS = 2;
-    static final int CANCELED = 3;
+
     
     /**
      * Creates new form AppointmentTemplateD
      */
-    public AppointmentElement(int status, String type, String date, String title) {
+    public AppointmentElement(Appointment appt) {
         initComponents();
-        dataField.setText(date);
-        titleField.setText(title);
-        typeField.setText(type);
         
-        switch (status){
-            case FINISHED:
+        GregorianCalendar date = appt.getDate();
+        dataField.setText(date.get(Calendar.DATE) + "/" + date.get(Calendar.MONTH) + "/" + date.get(Calendar.YEAR));
+        titleField.setText(appt.getTitle());
+        
+        switch(appt.getType()){
+            case Exam:
+                typeField.setText("Exame");
+                break;
+            case Consult:
+                typeField.setText("Consulta");
+                break;
+            default:
+                typeField.setText("Nenhum");
+                break;
+        }   
+        
+        switch (appt.getStatus()){
+            case Concluded:
                 statusField.setText("Concluído");
                 statusField.setBackground(new java.awt.Color(102, 255, 102));
                 break;
-            case IN_PROGRESS:
+            case InProgress:
                 statusField.setText("Em andamento");
                 statusField.setBackground(new java.awt.Color(255, 153, 51));
                 break;
-            case CANCELED:
+            case Canceled:
                 statusField.setText("Cancelado");
                 statusField.setBackground(new java.awt.Color(255, 102, 102));
                 break;
