@@ -31,7 +31,7 @@ public class Profile extends javax.swing.JInternalFrame {
      */
     public Profile() {
         initComponents();
-        user = Ctrlador.instance().getUser();
+        user = Ctrlador.getInstance().getUser();
         nameField.setText(user.getName());
         addrField.setText(user.getAddress());
         emailField.setText(user.getEmail());
@@ -235,7 +235,7 @@ public class Profile extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_profilePictureMouseClicked
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        Ctrlador.instance().updateUser(nameField.getText(), addrField.getText(), emailField.getText(), phoneField.getText(), profileFile.getAbsolutePath());
+        Ctrlador.getInstance().updateUser(nameField.getText(), addrField.getText(), emailField.getText(), phoneField.getText(), profileFile.getAbsolutePath());
         dispose();
     }//GEN-LAST:event_saveBtnActionPerformed
 

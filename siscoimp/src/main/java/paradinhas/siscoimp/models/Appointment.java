@@ -13,22 +13,22 @@ import java.util.GregorianCalendar;
 
 public class Appointment {
     
-    public enum ConsultType {
+    public enum AppointmentType {
         Exam,Consult;
     }
-    private ConsultType type;
+    private AppointmentType type;
     
-    public enum ConsultStatus {
+    public enum AppointmentStatus {
         Concluded, InProgress, Canceled
     }
-    private ConsultStatus status;
+    private AppointmentStatus status;
 
     private String title;
     private GregorianCalendar date;
     private Doctor doctor;
     
 
-    public Appointment(ConsultType type, ConsultStatus status, String title, GregorianCalendar date, Doctor doctor) {
+    public Appointment(AppointmentType type, AppointmentStatus status, String title, GregorianCalendar date, Doctor doctor) {
         this.title = title;
         this.type = type;
         this.status = status;
@@ -36,19 +36,19 @@ public class Appointment {
         this.doctor = doctor;
     }
 
-    public ConsultType getType() {
+    public AppointmentType getType() {
         return type;
     }
 
-    public void setType(ConsultType type) {
+    public void setType(AppointmentType type) {
         this.type = type;
     }
     
-    public ConsultStatus getStatus() {
+    public AppointmentStatus getStatus() {
         return status;
     }
 
-    public void setStatus(ConsultStatus status) {
+    public void setStatus(AppointmentStatus status) {
         this.status = status;
     }
     

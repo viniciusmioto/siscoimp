@@ -11,7 +11,7 @@ import paradinhas.siscoimp.view.MainFrame;
 public class Siscoimp {
 
     public static void main(String[] args) {
-        MainFrame frame = new MainFrame();
+        MainFrame frame = MainFrame.getInstance();
         frame.setVisible(true);
         //Screen screen = new Screen();
     }

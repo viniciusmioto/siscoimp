@@ -18,6 +18,7 @@ import paradinhas.siscoimp.models.Appointment;
  * @author gab
  */
 public class AppointmentsList extends javax.swing.JInternalFrame {
+    AppointmentCad apptCad;
 
     private class ScrollListAppt extends ScrollListTemplate {
         
@@ -49,7 +50,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
      */
     public AppointmentsList() {
         initComponents();
-        apptList = Ctrlador.instance().getApptList();
+        apptList = Ctrlador.getInstance().getApptList();
         ScrollListAppt scrollList = new ScrollListAppt();
         scrollList.loadList(apptList);
         
@@ -76,6 +77,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
+        setTitle("Compromissos");
 
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jTextField1.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
@@ -161,7 +163,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerApptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerApptActionPerformed
-        // TODO add your handling code here:
+        MainFrame.getInstance().showAppointmentCad();
     }//GEN-LAST:event_registerApptActionPerformed
 
 

@@ -38,6 +38,9 @@ public class AppointmentCad extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 0, 0));
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
         setTitle("Agendamento");
 
         jLabel1.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N

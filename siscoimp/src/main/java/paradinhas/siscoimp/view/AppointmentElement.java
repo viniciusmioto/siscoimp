@@ -4,7 +4,6 @@
  */
 package paradinhas.siscoimp.view;
 
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import paradinhas.siscoimp.models.Appointment;
 
@@ -23,7 +22,7 @@ public class AppointmentElement extends javax.swing.JPanel {
         initComponents();
         
         GregorianCalendar date = appt.getDate();
-        dataField.setText(date.get(Calendar.DATE) + "/" + date.get(Calendar.MONTH) + "/" + date.get(Calendar.YEAR));
+        dataField.setText(date.get(GregorianCalendar.DATE) + "/" + date.get(GregorianCalendar.MONTH) + "/" + date.get(GregorianCalendar.YEAR));
         titleField.setText(appt.getTitle());
         
         switch(appt.getType()){

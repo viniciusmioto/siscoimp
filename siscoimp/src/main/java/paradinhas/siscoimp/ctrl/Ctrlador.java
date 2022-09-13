@@ -24,11 +24,11 @@ public class Ctrlador {
     private Ctrlador() {
         user.setJson(Jsonfy.readJsonFile());
         for (int i = 0; i < 10; i++){
-            apptList.add(new Appointment(Appointment.ConsultType.Exam, Appointment.ConsultStatus.InProgress, "Exame de vista " + i, new GregorianCalendar(2022, 9, 13), new Doctor()));
+            apptList.add(new Appointment(Appointment.AppointmentType.Exam, Appointment.AppointmentStatus.InProgress, "Exame de vista " + i, new GregorianCalendar(2022, 9, 13), new Doctor()));
         }
     }
 
-    static public Ctrlador instance() {
+    static public Ctrlador getInstance() {
         if (ctrl == null) {
             ctrl = new Ctrlador();
         }
@@ -45,7 +45,7 @@ public class Ctrlador {
         Jsonfy.saveJsonFile(user.getJson());
     }
     
-    public void addAppointment(String title, Appointment.ConsultType type,  Appointment.ConsultStatus status, GregorianCalendar date, Doctor doctor){
+    public void addAppointment(String title, Appointment.AppointmentType type,  Appointment.AppointmentStatus status, GregorianCalendar date, Doctor doctor){
         this.apptList.add(new Appointment(type, status, title, date, doctor));
     }
     
