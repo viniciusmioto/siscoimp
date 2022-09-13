@@ -12,15 +12,17 @@ import org.json.JSONObject;
  */
 public class User extends Person implements Jsonfison{
     private String email;
+    private String imagePath;
     
     
     public User() {
-        super(null, null, null, null);
+        super(null, null, null);
     }
 
     public User(String email, String name, String adress, String phone, String imagePath) {
-        super(name, adress, phone, imagePath);
+        super(name, adress, phone);
         this.email = email;
+        this.imagePath = imagePath;
     }
 
     public String getEmail() {
@@ -29,6 +31,14 @@ public class User extends Person implements Jsonfison{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
     
     public JSONObject getJson(){

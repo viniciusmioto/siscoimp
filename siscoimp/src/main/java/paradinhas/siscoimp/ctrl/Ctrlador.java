@@ -9,6 +9,7 @@ import java.util.GregorianCalendar;
 import paradinhas.siscoimp.json.Jsonfy;
 import paradinhas.siscoimp.models.Appointment;
 import paradinhas.siscoimp.models.Doctor;
+import paradinhas.siscoimp.models.Relative;
 import paradinhas.siscoimp.models.User;
 
 /**
@@ -21,6 +22,7 @@ public class Ctrlador {
     private User user = new User();
     private ArrayList<Appointment> apptList = new ArrayList<>();
     private ArrayList<Doctor> docList = new ArrayList<>();
+    private ArrayList<Relative> relList = new ArrayList<>();
 
     private Ctrlador() {
         user.setJson(Jsonfy.readJsonFile());
@@ -29,7 +31,7 @@ public class Ctrlador {
         }
         
         for (int i = 0; i < 10; i++){
-            docList.add(new Doctor("FIlho do Andrey " + i, "Casa do Andrey", "(69) 96969-6969", "Psicólogo", "/home/andrey/Images/filho" + i));
+            relList.add(new Relative("Filho do Andrey " + i, "Casa do Andrey", "(69) 96969-6969", "Filho"));
         }
     }
 
@@ -54,8 +56,12 @@ public class Ctrlador {
         this.apptList.add(new Appointment(type, status, title, date, doctor));
     }
     
-    public void addDoctor(String name, String address, String phone, String spec,  String imagePath){
+    public void addDoctor(String name, String address, String phone, String spec, String imagePath){
         this.docList.add(new Doctor(name, address, phone, spec, imagePath));
+    }
+    
+    public void addRelative(String name, String address, String phone, String kinship){
+        this.relList.add(new Relative(name, address, phone, kinship));
     }
     
     public User getUser() {
@@ -68,6 +74,10 @@ public class Ctrlador {
 
     public ArrayList<Doctor> getDoctorsList() {
         return docList;
+    }
+
+    public ArrayList<Relative> getRelativesList() {
+        return relList;
     }
    
 }

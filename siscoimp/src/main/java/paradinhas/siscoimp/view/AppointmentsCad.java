@@ -8,12 +8,12 @@ package paradinhas.siscoimp.view;
  *
  * @author vinicius
  */
-public class AppointmentCad extends javax.swing.JInternalFrame {
+public class AppointmentsCad extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form AppointmentCad
      */
-    public AppointmentCad() {
+    public AppointmentsCad() {
         initComponents();
     }
 

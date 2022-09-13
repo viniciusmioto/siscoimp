@@ -13,14 +13,24 @@ import org.json.JSONObject;
 public class Doctor extends Person implements Jsonfison {
 
     private String spec;
+    private String imagePath;
     
     public Doctor() {
-        super(null, null, null, null);
+        super(null, null, null);
     }
 
     public Doctor(String name, String address, String phone, String spec, String imagePath) {
-        super(name, address, phone, imagePath);
+        super(name, address, phone);
         this.spec = spec;
+        this.imagePath = imagePath;
+    }
+    
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
     
     public String getSpec() {

@@ -10,24 +10,24 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 import paradinhas.siscoimp.ctrl.Ctrlador;
-import paradinhas.siscoimp.models.Doctor;
+import paradinhas.siscoimp.models.Relative;
 import paradinhas.siscoimp.view.templates.ScrollListTemplate;
 
 /**
  *
  * @author gab
  */
-public class DoctorsList extends javax.swing.JInternalFrame {
+public class RelativesList extends javax.swing.JInternalFrame {
 
     private class ScrollListDoc extends ScrollListTemplate {
         
-        public void loadList(ArrayList<Doctor> docs) {
-            if ((docs != null) && (!docs.isEmpty()))
+        public void loadList(ArrayList<Relative> members) {
+            if ((members != null) && (!members.isEmpty()))
             {
-                for (Doctor doc : docs)
+                for (Relative member : members)
                 {
                     JPanel panel = new JPanel();
-                    panel.add(new DoctorElement(doc));
+                    panel.add(new RelativeElement(member));
                     panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
                     GridBagConstraints gbc = new GridBagConstraints();
                     gbc.gridwidth = GridBagConstraints.REMAINDER;
@@ -42,16 +42,16 @@ public class DoctorsList extends javax.swing.JInternalFrame {
         }
     }
     
-    private final ArrayList<Doctor> docList;
+    private final ArrayList<Relative> relList;
     
     /**
      * Creates new form DoctorsList
      */
-    public DoctorsList() {
+    public RelativesList() {
         initComponents();
-        docList = Ctrlador.getInstance().getDoctorsList();
+        relList = Ctrlador.getInstance().getRelativesList();
         ScrollListDoc scrollList = new ScrollListDoc();
-        scrollList.loadList(docList);
+        scrollList.loadList(relList);
         
         mainListFrame.add(scrollList);
     }
@@ -72,7 +72,7 @@ public class DoctorsList extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("Contatos Médicos");
+        setTitle("Familiares");
 
         mainListFrame.setLayout(new javax.swing.BoxLayout(mainListFrame, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -112,7 +112,7 @@ public class DoctorsList extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
-        MainFrame.getInstance().showDoctorCad();
+        MainFrame.getInstance().showRelativeCad();
     }//GEN-LAST:event_registerBtnActionPerformed
 
 

@@ -12,21 +12,11 @@ public abstract class Person {
     protected String name;
     protected String address;
     protected String phone;
-    protected String imagePath;
 
-    public Person(String name, String address, String phone, String imagePath) {
+    public Person(String name, String address, String phone) {
         this.name = name;
         this.address = address;
         this.phone = phone;
-        this.imagePath = imagePath;
-    }
-    
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
     }
     
     public String getName() {

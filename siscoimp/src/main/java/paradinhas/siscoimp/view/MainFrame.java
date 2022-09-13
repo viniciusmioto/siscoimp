@@ -14,8 +14,9 @@ public class MainFrame extends javax.swing.JFrame {
     private DoctorsList docList;
     private Profile profile;
     private DoctorCad docCad;
-    private RelativesCad relatives;
-    private AppointmentCad apptCad;
+    private RelativesList relatives;
+    private AppointmentsCad apptCad;
+    private RelativesCad relCad;
     
     /**
      * Creates new form MainFrame
@@ -33,7 +34,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     public void showAppointmentCad(){
         if(apptCad == null || apptCad.isClosed()) {   
-            apptCad = new AppointmentCad();
+            apptCad = new AppointmentsCad();
             desktopPaneCtrl.add(apptCad);
         }
         apptCad.setVisible(true);
@@ -45,6 +46,14 @@ public class MainFrame extends javax.swing.JFrame {
             desktopPaneCtrl.add(docCad);
         }
         docCad.setVisible(true);
+    }
+    
+    public void showRelativeCad(){
+        if(relCad == null || relCad.isClosed()) {   
+            relCad = new RelativesCad();
+            desktopPaneCtrl.add(relCad);
+        }
+        relCad.setVisible(true);
     }
 
     /**
@@ -201,7 +210,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void relativesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relativesBtnActionPerformed
         // TODO add your handling code here:
         if(relatives == null || relatives.isClosed()){
-            relatives = new RelativesCad();
+            relatives = new RelativesList();
             desktopPaneCtrl.add(relatives);
         }
         relatives.setVisible(true);
