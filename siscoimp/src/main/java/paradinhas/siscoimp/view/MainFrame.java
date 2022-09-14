@@ -71,6 +71,7 @@ public class MainFrame extends javax.swing.JFrame {
         appointmentBtn = new javax.swing.JButton();
         doctorsBtn = new javax.swing.JButton();
         relativesBtn = new javax.swing.JButton();
+        emgInfoBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SISCOIMP");
@@ -139,6 +140,17 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        emgInfoBtn.setBackground(new java.awt.Color(204, 255, 204));
+        emgInfoBtn.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
+        emgInfoBtn.setText("Informações de Emergência");
+        emgInfoBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        emgInfoBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        emgInfoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emgInfoBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -152,6 +164,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(doctorsBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(relativesBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(emgInfoBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(desktopPaneCtrl)
         );
@@ -163,7 +177,8 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(profileBtn)
                     .addComponent(appointmentBtn)
                     .addComponent(doctorsBtn)
-                    .addComponent(relativesBtn))
+                    .addComponent(relativesBtn)
+                    .addComponent(emgInfoBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(desktopPaneCtrl))
         );
@@ -216,10 +231,15 @@ public class MainFrame extends javax.swing.JFrame {
         relatives.setVisible(true);
     }//GEN-LAST:event_relativesBtnActionPerformed
 
+    private void emgInfoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emgInfoBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emgInfoBtnActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton appointmentBtn;
     private javax.swing.JDesktopPane desktopPaneCtrl;
     private javax.swing.JButton doctorsBtn;
+    private javax.swing.JButton emgInfoBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton profileBtn;
     private javax.swing.JButton relativesBtn;

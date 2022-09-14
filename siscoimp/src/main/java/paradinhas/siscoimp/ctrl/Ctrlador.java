@@ -33,6 +33,10 @@ public class Ctrlador {
         for (int i = 0; i < 10; i++){
             relList.add(new Relative("Filho do Andrey " + i, "Casa do Andrey", "(69) 96969-6969", "Filho"));
         }
+        
+        for (int i = 0; i < 10; i++){
+            docList.add(new Doctor("Filho do Andrey " + i, "Casa do Andrey", "(69) 96969-6969", "Psicólogo", "/home/andrey/Images/filho" + i));
+        }
     }
 
     static public Ctrlador getInstance() {

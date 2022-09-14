@@ -8,8 +8,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.util.ArrayList;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.MatteBorder;
@@ -18,7 +16,7 @@ import javax.swing.border.MatteBorder;
  *
  * @author gab
  */
-public abstract class ScrollListTemplate extends JPanel {
+public class ScrollListTemplate extends JPanel {
 
     private JPanel mainList;
 
@@ -47,17 +45,15 @@ public abstract class ScrollListTemplate extends JPanel {
         return this.mainList;            
     }    
     
-    public void postInit() {
-        for (int i = 0; i < 10; i++){
-            JPanel panel = new JPanel();
-            panel.add(new JLabel("template"));
-            panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.gridwidth = GridBagConstraints.REMAINDER;
-            gbc.weightx = 1;
-            gbc.fill = GridBagConstraints.HORIZONTAL;
-            mainList.add(panel, gbc, 0);
-        }
+    public void addToList(JPanel element) {
+        JPanel panel = new JPanel();
+        panel.add(element);
+        panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.weightx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        mainList.add(panel, gbc, 0);
         validate();
         repaint();
     }    

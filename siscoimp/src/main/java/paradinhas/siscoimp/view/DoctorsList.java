@@ -4,11 +4,7 @@
  */
 package paradinhas.siscoimp.view;
 
-import java.awt.Color;
-import java.awt.GridBagConstraints;
 import java.util.ArrayList;
-import javax.swing.JPanel;
-import javax.swing.border.MatteBorder;
 import paradinhas.siscoimp.ctrl.Ctrlador;
 import paradinhas.siscoimp.models.Doctor;
 import paradinhas.siscoimp.view.templates.ScrollListTemplate;
@@ -18,40 +14,19 @@ import paradinhas.siscoimp.view.templates.ScrollListTemplate;
  * @author gab
  */
 public class DoctorsList extends javax.swing.JInternalFrame {
-
-    private class ScrollListDoc extends ScrollListTemplate {
-        
-        public void loadList(ArrayList<Doctor> docs) {
-            if ((docs != null) && (!docs.isEmpty()))
-            {
-                for (Doctor doc : docs)
-                {
-                    JPanel panel = new JPanel();
-                    panel.add(new DoctorElement(doc));
-                    panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
-                    GridBagConstraints gbc = new GridBagConstraints();
-                    gbc.gridwidth = GridBagConstraints.REMAINDER;
-                    gbc.weightx = 1;
-                    gbc.fill = GridBagConstraints.HORIZONTAL;
-                    getMainList().add(panel, gbc, 0);
-
-                    validate();
-                    repaint();
-                }
-            }
-        }
-    }
     
-    private final ArrayList<Doctor> docList;
+    private final ArrayList<Doctor> docs;
     
     /**
      * Creates new form DoctorsList
      */
     public DoctorsList() {
         initComponents();
-        docList = Ctrlador.getInstance().getDoctorsList();
-        ScrollListDoc scrollList = new ScrollListDoc();
-        scrollList.loadList(docList);
+        docs = Ctrlador.getInstance().getDoctorsList();
+        ScrollListTemplate scrollList = new ScrollListTemplate();
+        for (Doctor doc : docs){
+            scrollList.addToList(new DoctorElement(doc));
+        }
         
         mainListFrame.add(scrollList);
     }
@@ -67,6 +42,7 @@ public class DoctorsList extends javax.swing.JInternalFrame {
 
         mainListFrame = new javax.swing.JPanel();
         registerBtn = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
@@ -85,24 +61,36 @@ public class DoctorsList extends javax.swing.JInternalFrame {
             }
         });
 
+        jTextField1.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField1.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
+        jTextField1.setText("Filtro");
+        jTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mainListFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(353, Short.MAX_VALUE)
                 .addComponent(registerBtn)
                 .addGap(329, 329, 329))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(mainListFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mainListFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mainListFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(registerBtn)
                 .addContainerGap(8, Short.MAX_VALUE))
@@ -117,6 +105,7 @@ public class DoctorsList extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel mainListFrame;
     private javax.swing.JButton registerBtn;
     // End of variables declaration//GEN-END:variables

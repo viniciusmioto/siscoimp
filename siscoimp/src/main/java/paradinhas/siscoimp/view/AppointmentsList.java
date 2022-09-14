@@ -18,40 +18,19 @@ import paradinhas.siscoimp.models.Appointment;
  * @author gab
  */
 public class AppointmentsList extends javax.swing.JInternalFrame {
-
-    private class ScrollListAppt extends ScrollListTemplate {
-        
-        public void loadList(ArrayList<Appointment> appts) {
-            if ((appts != null) && (!appts.isEmpty()))
-            {
-                for (Appointment appt : appts)
-                {
-                    JPanel panel = new JPanel();
-                    panel.add(new AppointmentElement(appt));
-                    panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
-                    GridBagConstraints gbc = new GridBagConstraints();
-                    gbc.gridwidth = GridBagConstraints.REMAINDER;
-                    gbc.weightx = 1;
-                    gbc.fill = GridBagConstraints.HORIZONTAL;
-                    getMainList().add(panel, gbc, 0);
-
-                    validate();
-                    repaint();
-                }
-            }
-        }
-    }
     
-    private final ArrayList<Appointment> apptList;
+    private final ArrayList<Appointment> appts;
     
     /**
      * Creates new form AppointmentsList
      */
     public AppointmentsList() {
         initComponents();
-        apptList = Ctrlador.getInstance().getApptList();
-        ScrollListAppt scrollList = new ScrollListAppt();
-        scrollList.loadList(apptList);
+        appts = Ctrlador.getInstance().getApptList();
+        ScrollListTemplate scrollList = new ScrollListTemplate();
+        for (Appointment appt : appts){
+            scrollList.addToList(new AppointmentElement(appt));
+        }   
         
         mainListFrame.add(scrollList);
     }
