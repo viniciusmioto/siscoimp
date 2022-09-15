@@ -9,6 +9,7 @@ import java.util.GregorianCalendar;
 import paradinhas.siscoimp.json.Jsonfy;
 import paradinhas.siscoimp.models.Appointment;
 import paradinhas.siscoimp.models.Doctor;
+import paradinhas.siscoimp.models.EmergencyInfo;
 import paradinhas.siscoimp.models.Relative;
 import paradinhas.siscoimp.models.User;
 
@@ -23,11 +24,12 @@ public class Ctrlador {
     private ArrayList<Appointment> apptList = new ArrayList<>();
     private ArrayList<Doctor> docList = new ArrayList<>();
     private ArrayList<Relative> relList = new ArrayList<>();
+    private ArrayList<EmergencyInfo> emgList = new ArrayList<>();
 
     private Ctrlador() {
         user.setJson(Jsonfy.readJsonFile());
         for (int i = 0; i < 10; i++){
-            apptList.add(new Appointment(Appointment.AppointmentType.Exam, Appointment.AppointmentStatus.InProgress, "Exame de vista " + i, new GregorianCalendar(2022, 9, 13), new Doctor()));
+            apptList.add(new Appointment(Appointment.AppointmentType.EXAM, Appointment.AppointmentStatus.IN_PROGRESS, "Exame de vista " + i, new GregorianCalendar(2022, 9, 13), new Doctor()));
         }
         
         for (int i = 0; i < 10; i++){
@@ -36,6 +38,10 @@ public class Ctrlador {
         
         for (int i = 0; i < 10; i++){
             docList.add(new Doctor("Filho do Andrey " + i, "Casa do Andrey", "(69) 96969-6969", "Psicólogo", "/home/andrey/Images/filho" + i));
+        }
+        
+        for (int i = 0; i < 10; i++){
+            emgList.add(new EmergencyInfo(EmergencyInfo.Urgency.EMERGENCY, "Alergia a " + i, "Tenho alergia mt forte ao numero " + i + ", favor tomar cuidado."));
         }
     }
 
@@ -68,6 +74,10 @@ public class Ctrlador {
         this.relList.add(new Relative(name, address, phone, kinship));
     }
     
+    public void addEmgInfo(String title, String desc, EmergencyInfo.Urgency urg){
+        this.emgList.add(new EmergencyInfo(urg, title, desc));
+    }
+    
     public User getUser() {
         return this.user;
     }
@@ -82,6 +92,10 @@ public class Ctrlador {
 
     public ArrayList<Relative> getRelativesList() {
         return relList;
+    }
+
+    public ArrayList<EmergencyInfo> getEmgList() {
+        return emgList;
     }
    
 }

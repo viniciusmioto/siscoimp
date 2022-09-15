@@ -17,6 +17,8 @@ public class MainFrame extends javax.swing.JFrame {
     private RelativesList relatives;
     private AppointmentsCad apptCad;
     private RelativesCad relCad;
+    private EmergencyInfoList emgInfos;
+    private EmergencyInfoCad emgInfoCad;
     
     /**
      * Creates new form MainFrame
@@ -54,6 +56,14 @@ public class MainFrame extends javax.swing.JFrame {
             desktopPaneCtrl.add(relCad);
         }
         relCad.setVisible(true);
+    }
+    
+    public void showEmgInfoCad(){
+        if(emgInfoCad == null || emgInfoCad.isClosed()) {   
+            emgInfoCad = new EmergencyInfoCad();
+            desktopPaneCtrl.add(emgInfoCad);
+        }
+        emgInfoCad.setVisible(true);
     }
 
     /**
@@ -233,6 +243,11 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void emgInfoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emgInfoBtnActionPerformed
         // TODO add your handling code here:
+        if(emgInfos == null || emgInfos.isClosed()) {   
+            emgInfos = new EmergencyInfoList();
+            desktopPaneCtrl.add(emgInfos);
+        }
+        emgInfos.setVisible(true);
     }//GEN-LAST:event_emgInfoBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

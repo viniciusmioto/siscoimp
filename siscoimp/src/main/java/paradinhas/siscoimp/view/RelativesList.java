@@ -27,12 +27,14 @@ public class RelativesList extends javax.swing.JInternalFrame {
     public RelativesList() {
         initComponents();
         relatives = Ctrlador.getInstance().getRelativesList();
-        ScrollListTemplate scrollList = new ScrollListTemplate();
-        for (Relative rel : relatives){
-            scrollList.addToList(new RelativeElement(rel));
+        if ((relatives != null) && !(relatives.isEmpty())){
+            ScrollListTemplate scrollList = new ScrollListTemplate();
+            for (Relative rel : relatives){
+                scrollList.addToList(new RelativeElement(rel));
+            }
+
+            mainListFrame.add(scrollList);
         }
-        
-        mainListFrame.add(scrollList);
     }
 
     /**

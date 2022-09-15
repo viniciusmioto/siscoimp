@@ -23,12 +23,13 @@ public class DoctorsList extends javax.swing.JInternalFrame {
     public DoctorsList() {
         initComponents();
         docs = Ctrlador.getInstance().getDoctorsList();
-        ScrollListTemplate scrollList = new ScrollListTemplate();
-        for (Doctor doc : docs){
-            scrollList.addToList(new DoctorElement(doc));
+        if ((docs != null) && !(docs.isEmpty())){
+            ScrollListTemplate scrollList = new ScrollListTemplate();
+            for (Doctor doc : docs){
+                scrollList.addToList(new DoctorElement(doc));
+            }
+            mainListFrame.add(scrollList);
         }
-        
-        mainListFrame.add(scrollList);
     }
 
     /**

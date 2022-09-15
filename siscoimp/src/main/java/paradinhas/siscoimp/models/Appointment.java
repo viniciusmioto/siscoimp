@@ -14,12 +14,12 @@ import java.util.GregorianCalendar;
 public class Appointment {
     
     public enum AppointmentType {
-        Exam,Consult;
+        EXAM,CONSULT;
     }
     private AppointmentType type;
     
     public enum AppointmentStatus {
-        Concluded, InProgress, Canceled
+        CONCLUDED, IN_PROGRESS, CANCELED
     }
     private AppointmentStatus status;
 

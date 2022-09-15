@@ -26,10 +26,10 @@ public class AppointmentElement extends javax.swing.JPanel {
         titleField.setText(appt.getTitle());
         
         switch(appt.getType()){
-            case Exam:
+            case EXAM:
                 typeField.setText("Exame");
                 break;
-            case Consult:
+            case CONSULT:
                 typeField.setText("Consulta");
                 break;
             default:
@@ -38,15 +38,19 @@ public class AppointmentElement extends javax.swing.JPanel {
         }   
         
         switch (appt.getStatus()){
-            case Concluded:
+            case CONCLUDED:
                 statusField.setText("Concluído");
                 statusField.setBackground(new java.awt.Color(102, 255, 102));
                 break;
-            case InProgress:
+            case IN_PROGRESS:
                 statusField.setText("Em andamento");
                 statusField.setBackground(new java.awt.Color(255, 153, 51));
                 break;
-            case Canceled:
+            case CANCELED:
+                statusField.setText("Cancelado");
+                statusField.setBackground(new java.awt.Color(255, 102, 102));
+                break;
+            default:
                 statusField.setText("Cancelado");
                 statusField.setBackground(new java.awt.Color(255, 102, 102));
                 break;

@@ -5,35 +5,31 @@
 package paradinhas.siscoimp.view;
 
 import paradinhas.siscoimp.view.templates.ScrollListTemplate;
-import java.awt.Color;
-import java.awt.GridBagConstraints;
 import java.util.ArrayList;
-import javax.swing.JPanel;
-import javax.swing.border.MatteBorder;
 import paradinhas.siscoimp.ctrl.Ctrlador;
-import paradinhas.siscoimp.models.Appointment;
+import paradinhas.siscoimp.models.EmergencyInfo;
 
 /**
  *
  * @author gab
  */
-public class AppointmentsList extends javax.swing.JInternalFrame {
+public class EmergencyInfoList extends javax.swing.JInternalFrame {
     
-    private final ArrayList<Appointment> appts;
+    private final ArrayList<EmergencyInfo> emgInfos;
     
     /**
      * Creates new form AppointmentsList
      */
-    public AppointmentsList() {
+    public EmergencyInfoList() {
         initComponents();
-        appts = Ctrlador.getInstance().getApptList();
-        if ((appts != null) && !(appts.isEmpty())){
-            ScrollListTemplate scrollList = new ScrollListTemplate();
-            for (Appointment appt : appts){
-                scrollList.addToList(new AppointmentElement(appt));
-            }  
-            mainListFrame.add(scrollList);
-        } 
+        emgInfos = Ctrlador.getInstance().getEmgList();
+        if ((emgInfos != null) && !(emgInfos.isEmpty())){
+        ScrollListTemplate scrollList = new ScrollListTemplate();
+        for (EmergencyInfo emgInfo : emgInfos){
+            scrollList.addToList(new EmergencyInfoElement(emgInfo));
+        }         
+        mainListFrame.add(scrollList);
+        }
     }
 
     /**
@@ -51,12 +47,14 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
         jTextField6 = new javax.swing.JTextField();
         mainListFrame = new javax.swing.JPanel();
         registerAppt = new javax.swing.JButton();
+        jTextField7 = new javax.swing.JTextField();
+        jTextField8 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("Compromissos");
+        setTitle("Informações de Emergência");
 
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jTextField1.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
@@ -69,7 +67,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
         jTextField4.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         jTextField4.setForeground(new java.awt.Color(0, 0, 0));
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField4.setText("Cancelado");
+        jTextField4.setText("Emergência");
         jTextField4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jTextField5.setEditable(false);
@@ -77,15 +75,15 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
         jTextField5.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         jTextField5.setForeground(new java.awt.Color(0, 0, 0));
         jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField5.setText("Em andamento");
+        jTextField5.setText("Muito Urgente");
         jTextField5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jTextField6.setEditable(false);
-        jTextField6.setBackground(new java.awt.Color(102, 255, 102));
+        jTextField6.setBackground(new java.awt.Color(255, 255, 51));
         jTextField6.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         jTextField6.setForeground(new java.awt.Color(0, 0, 0));
         jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField6.setText("Concluído");
+        jTextField6.setText("Urgente");
         jTextField6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         mainListFrame.setLayout(new javax.swing.BoxLayout(mainListFrame, javax.swing.BoxLayout.LINE_AXIS));
@@ -99,6 +97,22 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
             }
         });
 
+        jTextField7.setEditable(false);
+        jTextField7.setBackground(new java.awt.Color(102, 255, 102));
+        jTextField7.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
+        jTextField7.setForeground(new java.awt.Color(0, 0, 0));
+        jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField7.setText("Pouco Urgente");
+        jTextField7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jTextField8.setEditable(false);
+        jTextField8.setBackground(new java.awt.Color(51, 153, 255));
+        jTextField8.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
+        jTextField8.setForeground(new java.awt.Color(0, 0, 0));
+        jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField8.setText("Não Urgente");
+        jTextField8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,19 +122,23 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(mainListFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(registerAppt)
-                .addGap(342, 342, 342))
+                .addGap(410, 410, 410))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +148,9 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(mainListFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -142,7 +162,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerApptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerApptActionPerformed
-        MainFrame.getInstance().showAppointmentCad();
+        MainFrame.getInstance().showEmgInfoCad();
     }//GEN-LAST:event_registerApptActionPerformed
 
 
@@ -151,6 +171,8 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
     private javax.swing.JPanel mainListFrame;
     private javax.swing.JButton registerAppt;
     // End of variables declaration//GEN-END:variables
