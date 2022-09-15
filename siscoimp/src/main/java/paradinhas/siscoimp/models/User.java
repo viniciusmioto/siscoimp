@@ -41,7 +41,7 @@ public class User extends Person implements Jsonfison{
         this.imagePath = imagePath;
     }
     
-    public JSONObject getJson(){
+    public JSONObject toJson(){
         JSONObject json = new JSONObject();
         json.put("name", name);
         json.put("address", address);
@@ -52,7 +52,7 @@ public class User extends Person implements Jsonfison{
         return json;
     }
     
-    public void setJson(JSONObject json){
+    public void fromJson(JSONObject json){
         try {   
         name = json.optString("name");
         address = json.optString("address");

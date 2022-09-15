@@ -6,6 +6,7 @@ package paradinhas.siscoimp.ctrl;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import org.json.JSONObject;
 import paradinhas.siscoimp.json.Jsonfy;
 import paradinhas.siscoimp.models.Appointment;
 import paradinhas.siscoimp.models.Doctor;
@@ -20,6 +21,7 @@ import paradinhas.siscoimp.models.User;
 public class Ctrlador {
 
     static public Ctrlador ctrl;
+    private JSONObject jsonData;
     private User user = new User();
     private ArrayList<Appointment> apptList = new ArrayList<>();
     private ArrayList<Doctor> docList = new ArrayList<>();
@@ -27,22 +29,11 @@ public class Ctrlador {
     private ArrayList<EmergencyInfo> emgList = new ArrayList<>();
 
     private Ctrlador() {
-        user.setJson(Jsonfy.readJsonFile());
-        for (int i = 0; i < 10; i++){
-            apptList.add(new Appointment(Appointment.AppointmentType.EXAM, Appointment.AppointmentStatus.IN_PROGRESS, "Exame de vista " + i, new GregorianCalendar(2022, 9, 13), new Doctor()));
-        }
+        jsonData = new JSONObject(Jsonfy.readJsonFile());
+        System.out.println(jsonData);
+        System.out.println(jsonData.getString("empty"));
+        user.fromJson(jsonData.optJSONObject("profile"));
         
-        for (int i = 0; i < 10; i++){
-            relList.add(new Relative("Filho do Andrey " + i, "Casa do Andrey", "(69) 96969-6969", "Filho"));
-        }
-        
-        for (int i = 0; i < 10; i++){
-            docList.add(new Doctor("Filho do Andrey " + i, "Casa do Andrey", "(69) 96969-6969", "Psicólogo", "/home/andrey/Images/filho" + i));
-        }
-        
-        for (int i = 0; i < 10; i++){
-            emgList.add(new EmergencyInfo(EmergencyInfo.Urgency.EMERGENCY, "Alergia a " + i, "Tenho alergia mt forte ao numero " + i + ", favor tomar cuidado."));
-        }
     }
 
     static public Ctrlador getInstance() {
@@ -58,8 +49,9 @@ public class Ctrlador {
         this.user.setEmail(email);
         this.user.setPhone(phone);
         this.user.setImagePath(imagePath);
+        jsonData.put("profile", user.toJson());
         
-        Jsonfy.saveJsonFile(user.getJson());
+        Jsonfy.saveJsonFile(jsonData);
     }
     
     public void addAppointment(String title, Appointment.AppointmentType type,  Appointment.AppointmentStatus status, GregorianCalendar date, Doctor doctor){

@@ -11,6 +11,6 @@ import org.json.JSONObject;
  * @author rodri
  */
 public interface Jsonfison {
-    public JSONObject getJson();
-    public void setJson(JSONObject json);
+    public JSONObject toJson();
+    public void fromJson(JSONObject json);
 }
