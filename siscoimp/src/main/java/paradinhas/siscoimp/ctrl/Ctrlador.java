@@ -85,8 +85,8 @@ public class Ctrlador implements PropertyChangeListener {
         saveChanges();
     }
 
-    public void addAppointment(String title, Appointment.AppointmentType type, Appointment.AppointmentStatus status, GregorianCalendar date, Doctor doctor) {
-        this.apptList.add(new Appointment(type, status, title, date, doctor));
+    public void addAppointment(String title, Appointment.AppointmentType type, Appointment.AppointmentStatus status, GregorianCalendar date, Doctor doctor, String filePath) {
+        this.apptList.add(new Appointment(type, status, title, date, doctor, filePath));
     }
 
 //    public void addDoctor(String name, String address, String phone, String spec, String imagePath) {

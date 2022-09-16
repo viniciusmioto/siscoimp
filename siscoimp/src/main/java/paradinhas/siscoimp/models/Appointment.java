@@ -26,14 +26,16 @@ public class Appointment {
     private String title;
     private GregorianCalendar date;
     private Doctor doctor;
+    private String filePath;
     
 
-    public Appointment(AppointmentType type, AppointmentStatus status, String title, GregorianCalendar date, Doctor doctor) {
+    public Appointment(AppointmentType type, AppointmentStatus status, String title, GregorianCalendar date, Doctor doctor, String filePath) {
         this.title = title;
         this.type = type;
         this.status = status;
         this.date = date;
         this.doctor = doctor;
+        this.filePath = filePath;
     }
 
     public AppointmentType getType() {
@@ -74,5 +76,13 @@ public class Appointment {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 }

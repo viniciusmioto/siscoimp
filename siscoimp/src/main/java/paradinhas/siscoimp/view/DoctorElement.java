@@ -37,6 +37,12 @@ public class DoctorElement extends javax.swing.JPanel {
         specField = new javax.swing.JLabel();
         phoneField = new javax.swing.JLabel();
 
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
+
         nameField.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
         nameField.setText("nome");
 
@@ -72,6 +78,11 @@ public class DoctorElement extends javax.swing.JPanel {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+        System.out.println("Professor");
+    }//GEN-LAST:event_formMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
