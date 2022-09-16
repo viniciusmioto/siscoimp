@@ -189,7 +189,6 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
 
         uploadBtn.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         uploadBtn.setText("Selecionar");
-        uploadBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         uploadBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 uploadBtnActionPerformed(evt);
@@ -199,7 +198,7 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
         fileLabel.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         fileLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         fileLabel.setText("Selecione um arquivo");
-        fileLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        fileLabel.setBorder(javax.swing.BorderFactory.createLineBorder(null));
         fileLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 fileLabelMouseClicked(evt);
@@ -221,6 +220,7 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
 
         descriptionField.setColumns(20);
         descriptionField.setFont(new java.awt.Font("FreeSans", 0, 13)); // NOI18N
+        descriptionField.setLineWrap(true);
         descriptionField.setRows(5);
         jScrollPane1.setViewportView(descriptionField);
 

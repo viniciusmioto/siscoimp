@@ -109,6 +109,7 @@ public class EmergencyInfoCad extends javax.swing.JInternalFrame {
 
         descField.setColumns(20);
         descField.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
+        descField.setLineWrap(true);
         descField.setRows(5);
         jScrollPane1.setViewportView(descField);
 
