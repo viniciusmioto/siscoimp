@@ -131,7 +131,7 @@ public class MainFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SISCOIMP");
         setBackground(new java.awt.Color(0, 0, 0));
-        setResizable(false);
+        setMinimumSize(new java.awt.Dimension(1231, 732));
 
         jPanel1.setForeground(new java.awt.Color(242, 242, 242));
         jPanel1.setPreferredSize(new java.awt.Dimension(1231, 35));
