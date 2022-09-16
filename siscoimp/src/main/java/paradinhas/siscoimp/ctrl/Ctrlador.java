@@ -10,10 +10,10 @@ import java.beans.PropertyChangeSupport;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import paradinhas.siscoimp.json.Jsonfy;
-import paradinhas.siscoimp.models.Doctor;
-import paradinhas.siscoimp.models.Relative;
-import paradinhas.siscoimp.models.EmergencyInfo;
 import paradinhas.siscoimp.models.Appointment;
+import paradinhas.siscoimp.models.Doctor;
+import paradinhas.siscoimp.models.EmergencyInfo;
+import paradinhas.siscoimp.models.Relative;
 import paradinhas.siscoimp.models.User;
 
 /**
