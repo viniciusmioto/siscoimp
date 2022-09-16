@@ -50,6 +50,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame implements Prop
             }
             mainListFrame.add(scrollList);
         }
+        revalidate();
         repaint();
     }
 
