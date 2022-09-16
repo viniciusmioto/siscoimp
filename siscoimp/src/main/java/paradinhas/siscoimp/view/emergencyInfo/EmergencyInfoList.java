@@ -19,6 +19,7 @@ import paradinhas.siscoimp.view.MainFrame;
  */
 public class EmergencyInfoList extends javax.swing.JInternalFrame implements PropertyChangeListener {
 
+    private String textFilter = "";
     private JSONArray emgInfos;
 
     /**
@@ -34,11 +35,17 @@ public class EmergencyInfoList extends javax.swing.JInternalFrame implements Pro
                 JSONObject docJson = new JSONObject(t.toString());
                 EmergencyInfo emg = new EmergencyInfo();
                 emg.fromJson(docJson);
-                scrollList.addToList(new EmergencyInfoElement(emg, i));
+                
+                if (textFilter.equals("") || emg.getTitle().toLowerCase().startsWith(textFilter.toLowerCase())) {
+                    scrollList.addToList(new EmergencyInfoElement(emg, i));
+                }
+                
                 i++;
             }
             mainListFrame.add(scrollList);
         }
+        revalidate();
+        repaint();
     }
 
     public EmergencyInfoList() {
@@ -72,35 +79,40 @@ public class EmergencyInfoList extends javax.swing.JInternalFrame implements Pro
 
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jTextField1.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        jTextField1.setText("Filtro");
         jTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
 
         jTextField4.setEditable(false);
         jTextField4.setBackground(new java.awt.Color(255, 102, 102));
         jTextField4.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField4.setText("Emergência");
-        jTextField4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jTextField5.setEditable(false);
         jTextField5.setBackground(new java.awt.Color(255, 153, 51));
         jTextField5.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField5.setText("Muito Urgente");
-        jTextField5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jTextField6.setEditable(false);
         jTextField6.setBackground(new java.awt.Color(255, 255, 51));
         jTextField6.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField6.setText("Urgente");
-        jTextField6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         mainListFrame.setLayout(new javax.swing.BoxLayout(mainListFrame, javax.swing.BoxLayout.LINE_AXIS));
 
         registerAppt.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
         registerAppt.setText("Cadastrar");
-        registerAppt.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         registerAppt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerApptActionPerformed(evt);
@@ -112,14 +124,12 @@ public class EmergencyInfoList extends javax.swing.JInternalFrame implements Pro
         jTextField7.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField7.setText("Pouco Urgente");
-        jTextField7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jTextField8.setEditable(false);
         jTextField8.setBackground(new java.awt.Color(51, 153, 255));
         jTextField8.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField8.setText("Não Urgente");
-        jTextField8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -172,6 +182,17 @@ public class EmergencyInfoList extends javax.swing.JInternalFrame implements Pro
     private void registerApptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerApptActionPerformed
         MainFrame.getInstance().showEmgInfoCad();
     }//GEN-LAST:event_registerApptActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+        textFilter = jTextField1.getText();
+        System.out.println(textFilter);
+        populateList();
+    }//GEN-LAST:event_jTextField1KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

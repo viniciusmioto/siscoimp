@@ -19,6 +19,7 @@ import paradinhas.siscoimp.view.templates.ScrollListTemplate;
  */
 public class RelativesList extends javax.swing.JInternalFrame implements PropertyChangeListener {
 
+    private String textFilter = "";
     private JSONArray relatives;
 
     /**
@@ -34,12 +35,18 @@ public class RelativesList extends javax.swing.JInternalFrame implements Propert
                 JSONObject relJson = new JSONObject(t.toString());
                 Relative rel = new Relative();
                 rel.fromJson(relJson);
-                scrollList.addToList(new RelativeElement(rel, i));
+                
+                if (textFilter.equals("") || rel.getName().toLowerCase().startsWith(textFilter.toLowerCase())) {
+                    scrollList.addToList(new RelativeElement(rel, i));
+                }
+                
                 i++;
             }
 
             mainListFrame.add(scrollList);
         }
+        revalidate();
+        repaint();
     }
 
     public RelativesList() {
@@ -87,7 +94,6 @@ public class RelativesList extends javax.swing.JInternalFrame implements Propert
 
         registerBtn.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
         registerBtn.setText("Cadastrar");
-        registerBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         registerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerBtnActionPerformed(evt);
@@ -96,8 +102,12 @@ public class RelativesList extends javax.swing.JInternalFrame implements Propert
 
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jTextField1.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        jTextField1.setText("Filtro");
         jTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -138,6 +148,13 @@ public class RelativesList extends javax.swing.JInternalFrame implements Propert
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
         Ctrlador.getInstance().removePropertyChangeListener(this);
     }//GEN-LAST:event_formInternalFrameClosing
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+        textFilter = jTextField1.getText();
+        System.out.println(textFilter);
+        populateList();
+    }//GEN-LAST:event_jTextField1KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -20,6 +20,7 @@ import paradinhas.siscoimp.view.templates.ScrollListTemplate;
 public class DoctorsList extends javax.swing.JInternalFrame implements PropertyChangeListener {
 
     private JSONArray docs;
+    String textFilter = "";
 
     /**
      * Creates new form DoctorsList
@@ -34,11 +35,16 @@ public class DoctorsList extends javax.swing.JInternalFrame implements PropertyC
                 JSONObject docJson = new JSONObject(t.toString());
                 Doctor doc = new Doctor();
                 doc.fromJson(docJson);
-                scrollList.addToList(new DoctorElement(doc, i));
+
+                if (textFilter.equals("") || doc.getName().toLowerCase().startsWith(textFilter.toLowerCase())) {
+                    scrollList.addToList(new DoctorElement(doc, i));
+                }
+                
                 i++;
             }
             mainListFrame.add(scrollList);
         }
+        revalidate();
         repaint();
     }
 
@@ -87,7 +93,6 @@ public class DoctorsList extends javax.swing.JInternalFrame implements PropertyC
 
         registerBtn.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
         registerBtn.setText("Cadastrar");
-        registerBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         registerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerBtnActionPerformed(evt);
@@ -96,8 +101,17 @@ public class DoctorsList extends javax.swing.JInternalFrame implements PropertyC
 
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jTextField1.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        jTextField1.setText("Filtro");
         jTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -138,6 +152,17 @@ public class DoctorsList extends javax.swing.JInternalFrame implements PropertyC
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
         Ctrlador.getInstance().removePropertyChangeListener(this);
     }//GEN-LAST:event_formInternalFrameClosing
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+        textFilter = jTextField1.getText();
+        System.out.println(textFilter);
+        populateList();
+    }//GEN-LAST:event_jTextField1KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
