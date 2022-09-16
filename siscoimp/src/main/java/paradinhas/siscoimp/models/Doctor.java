@@ -27,8 +27,7 @@ public class Doctor extends Person implements Jsonfison {
         this.imagePath = imagePath;
     }
     
-    @Override
-    public String toString(){
+    public String toStringFilter(){
         return this.name + "; " + this.address + "; " + this.phone + "; " + this.spec;
     }
     
@@ -78,5 +77,8 @@ public class Doctor extends Person implements Jsonfison {
         }
     }
     
-    
+    @Override
+    public String toString(){
+        return this.name;
+    }
 }
