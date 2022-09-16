@@ -28,9 +28,17 @@ public class DoctorCad extends javax.swing.JInternalFrame {
     /**
      * Creates new form DoctorsList
      */
-    public DoctorCad() {
+    public DoctorCad(Doctor doc) {
         initComponents();
-        
+        if (doc != null){
+            nameField.setText(doc.getName());
+            phoneField.setText(doc.getPhone());
+            addrField.setText(doc.getAddress());
+            specField.setText(doc.getSpec());
+        }
+        else {
+            deleteBtn.setVisible(false);
+        }
 
 //        try {
 //            if (doc.getImagePath() != null) {
@@ -65,6 +73,7 @@ public class DoctorCad extends javax.swing.JInternalFrame {
         saveBtn = new javax.swing.JButton();
         specField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        deleteBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
@@ -138,6 +147,15 @@ public class DoctorCad extends javax.swing.JInternalFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Especialidade");
 
+        deleteBtn.setBackground(new java.awt.Color(255, 51, 51));
+        deleteBtn.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
+        deleteBtn.setText("Excluir");
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,17 +163,11 @@ public class DoctorCad extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(specField, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(316, 316, 316))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(saveBtn)
-                            .addGap(18, 18, 18)
-                            .addComponent(cancelBtn)
-                            .addGap(26, 26, 26)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(specField, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(316, 316, 316))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,7 +181,14 @@ public class DoctorCad extends javax.swing.JInternalFrame {
                                 .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(doctorPic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(81, 81, 81))))
+                        .addGap(81, 81, 81))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(deleteBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(saveBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(cancelBtn)
+                        .addGap(25, 25, 25))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,14 +211,16 @@ public class DoctorCad extends javax.swing.JInternalFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(specField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(67, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(deleteBtn)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(saveBtn)
+                                .addComponent(cancelBtn)))
+                        .addContainerGap(13, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(doctorPic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(saveBtn)
-                            .addComponent(cancelBtn))
-                        .addGap(30, 30, 30))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -253,10 +274,15 @@ public class DoctorCad extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_saveBtnActionPerformed
 
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField addrField;
     private javax.swing.JButton cancelBtn;
+    private javax.swing.JButton deleteBtn;
     private javax.swing.JPanel doctorPic;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -130,7 +130,7 @@ public class DoctorsList extends javax.swing.JInternalFrame implements PropertyC
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
-        MainFrame.getInstance().showDoctorCad();
+        MainFrame.getInstance().showDoctorCad(null);
     }//GEN-LAST:event_registerBtnActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing

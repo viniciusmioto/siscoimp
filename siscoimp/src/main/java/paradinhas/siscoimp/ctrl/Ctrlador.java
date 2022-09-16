@@ -51,7 +51,7 @@ public class Ctrlador implements PropertyChangeListener {
         System.out.println(jsonData);
     }
 
-    static public Ctrlador getInstance() {
+    static public synchronized Ctrlador getInstance() {
         if (ctrl == null) {
             ctrl = new Ctrlador();
         }

@@ -4,6 +4,8 @@
  */
 package paradinhas.siscoimp.view;
 
+import paradinhas.siscoimp.models.Doctor;
+
 /**
  *
  * @author gab
@@ -27,7 +29,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
     }
     
-    static public MainFrame getInstance() {
+    static public synchronized MainFrame getInstance() {
         if (mainFrame == null) {
             mainFrame = new MainFrame();
         }
@@ -42,9 +44,9 @@ public class MainFrame extends javax.swing.JFrame {
         apptCad.setVisible(true);
     }
     
-    public void showDoctorCad(){
+    public void showDoctorCad(Doctor doc){
         if(docCad == null || docCad.isClosed()) {   
-            docCad = new DoctorCad();
+            docCad = new DoctorCad(doc);
             desktopPaneCtrl.add(docCad);
         }
         docCad.setVisible(true);

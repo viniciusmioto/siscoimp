@@ -12,14 +12,15 @@ import paradinhas.siscoimp.view.templates.ElementTemplate;
  * @author gab
  */
 public class DoctorElement extends ElementTemplate {
-
-
+    
+    private Doctor doc;
     
     /**
      * Creates new form AppointmentTemplateD
      */
     public DoctorElement(Doctor doc) {
         initComponents();
+        this.doc = doc;
         nameField.setText(doc.getName());
         phoneField.setText(doc.getPhone());
         specField.setText(doc.getSpec());
@@ -82,7 +83,7 @@ public class DoctorElement extends ElementTemplate {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-        System.out.println("Professor");
+        MainFrame.getInstance().showDoctorCad(doc);
     }//GEN-LAST:event_formMouseClicked
 
 
