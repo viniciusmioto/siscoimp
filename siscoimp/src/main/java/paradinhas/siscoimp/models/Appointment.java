@@ -46,7 +46,19 @@ public class Appointment implements Jsonfison {
     
     @Override
     public String toString(){
-        return this.title + "; " + this.desc + "; " + (new SimpleDateFormat("dd/MM/yyyy").format(this.getDate())) + "; " + this.doctor.getName();
+        String type;
+        switch (this.getType()){
+            case EXAM:
+                type = "Exame";
+                break;
+            case CONSULT:;
+                type = "Consulta";
+                break;
+            default:
+                type = "Exame";
+                break;
+        }
+        return this.title + "; " + this.desc + "; " + (new SimpleDateFormat("dd/MM/yyyy").format(this.getDate())) + "; " + this.doctor.getName() + "; " + type;
     }
    
 
