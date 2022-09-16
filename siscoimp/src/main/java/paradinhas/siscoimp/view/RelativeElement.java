@@ -5,12 +5,13 @@
 package paradinhas.siscoimp.view;
 
 import paradinhas.siscoimp.models.Relative;
+import paradinhas.siscoimp.view.templates.ElementTemplate;
 
 /**
  *
  * @author gab
  */
-public class RelativeElement extends javax.swing.JPanel {
+public class RelativeElement extends ElementTemplate {
 
 
     

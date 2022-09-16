@@ -6,12 +6,13 @@ package paradinhas.siscoimp.view;
 
 import java.util.GregorianCalendar;
 import paradinhas.siscoimp.models.Appointment;
+import paradinhas.siscoimp.view.templates.ElementTemplate;
 
 /**
  *
  * @author gab
  */
-public class AppointmentElement extends javax.swing.JPanel {
+public class AppointmentElement extends ElementTemplate {
 
 
     

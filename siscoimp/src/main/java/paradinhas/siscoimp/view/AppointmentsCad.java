@@ -128,7 +128,7 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
         });
 
         uploadBtn.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        uploadBtn.setForeground(new java.awt.Color(255, 255, 255));
+        uploadBtn.setForeground(new java.awt.Color(0, 0, 0));
         uploadBtn.setText("Selecionar");
         uploadBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         uploadBtn.addActionListener(new java.awt.event.ActionListener() {

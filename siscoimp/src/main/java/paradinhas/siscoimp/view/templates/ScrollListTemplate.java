@@ -45,7 +45,7 @@ public class ScrollListTemplate extends JPanel {
         return this.mainList;            
     }    
     
-    public void addToList(JPanel element) {
+    public void addToList(ElementTemplate element) {
         JPanel panel = new JPanel();
         panel.add(element);
         panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));

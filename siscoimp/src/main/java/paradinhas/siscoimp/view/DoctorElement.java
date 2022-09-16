@@ -5,12 +5,13 @@
 package paradinhas.siscoimp.view;
 
 import paradinhas.siscoimp.models.Doctor;
+import paradinhas.siscoimp.view.templates.ElementTemplate;
 
 /**
  *
  * @author gab
  */
-public class DoctorElement extends javax.swing.JPanel {
+public class DoctorElement extends ElementTemplate {
 
 
     

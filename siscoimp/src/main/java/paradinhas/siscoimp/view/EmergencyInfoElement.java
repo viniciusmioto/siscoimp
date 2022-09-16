@@ -5,12 +5,13 @@
 package paradinhas.siscoimp.view;
 
 import paradinhas.siscoimp.models.EmergencyInfo;
+import paradinhas.siscoimp.view.templates.ElementTemplate;
 
 /**
  *
  * @author gab
  */
-public class EmergencyInfoElement extends javax.swing.JPanel {
+public class EmergencyInfoElement extends ElementTemplate {
 
 
     
