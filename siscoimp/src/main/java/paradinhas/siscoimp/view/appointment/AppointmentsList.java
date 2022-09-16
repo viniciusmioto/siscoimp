@@ -22,6 +22,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame implements Prop
 
     private JSONArray appts;
     AppointmentStatus filter;
+    String textFilter = "";
 
     /**
      * Creates new form AppointmentsList
@@ -41,8 +42,9 @@ public class AppointmentsList extends javax.swing.JInternalFrame implements Prop
                 appt.fromJson(docJson);
                 System.out.println(appt.getStatus().name());
                 if (filter == null || filter.equals(appt.getStatus())) {
-                    System.out.println("hey");
-                    scrollList.addToList(new AppointmentElement(appt, i));
+                    if (textFilter.equals("") || appt.getTitle().toLowerCase().startsWith(textFilter.toLowerCase())) {
+                        scrollList.addToList(new AppointmentElement(appt, i));
+                    }
                 }
                 i++;
             }
@@ -97,14 +99,22 @@ public class AppointmentsList extends javax.swing.JInternalFrame implements Prop
 
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jTextField1.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        jTextField1.setText("Filtro");
+        jTextField1.setToolTipText("Filtro");
         jTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
 
         canceladoButton.setEditable(false);
         canceladoButton.setBackground(new java.awt.Color(255, 102, 102));
         canceladoButton.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         canceladoButton.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        canceladoButton.setText("Cancelado");
+        canceladoButton.setText("Expirado");
         canceladoButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         canceladoButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -161,18 +171,19 @@ public class AppointmentsList extends javax.swing.JInternalFrame implements Prop
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)
+                        .addGap(77, 77, 77)
                         .addComponent(canceladoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
                         .addComponent(andamentoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(concluidoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(mainListFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(337, 337, 337)
                 .addComponent(registerAppt)
-                .addGap(368, 368, 368))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,7 +217,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame implements Prop
     }//GEN-LAST:event_andamentoButtonActionPerformed
 
     private void canceladoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_canceladoButtonMouseClicked
-        filter = AppointmentStatus.CANCELED;
+        filter = AppointmentStatus.EXPIRED;
         populateList();
     }//GEN-LAST:event_canceladoButtonMouseClicked
 
@@ -219,6 +230,16 @@ public class AppointmentsList extends javax.swing.JInternalFrame implements Prop
         filter = AppointmentStatus.CONCLUDED;
         populateList();
     }//GEN-LAST:event_concluidoButtonMouseClicked
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+
+    }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        textFilter = jTextField1.getText();
+        System.out.println(textFilter);
+        populateList();
+    }//GEN-LAST:event_jTextField1KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
