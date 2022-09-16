@@ -4,16 +4,13 @@
  */
 package paradinhas.siscoimp.view;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.awt.Graphics2D;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import paradinhas.siscoimp.common.ImageManipulation;
 import paradinhas.siscoimp.ctrl.Ctrlador;
 import paradinhas.siscoimp.models.User;
 
@@ -40,7 +37,7 @@ public class Profile extends javax.swing.JInternalFrame {
             if (user.getImagePath() != null) {
                 profileFile = new File(user.getImagePath());
                 if (!"".equals(user.getImagePath())) {
-                    loadProfileImageFromPath(profileFile);
+                    imgLabel.setIcon(ImageManipulation.createIconFromPath(profileFile, 150, 150));
                 }
             }
         } catch (IOException ex) {
@@ -70,26 +67,25 @@ public class Profile extends javax.swing.JInternalFrame {
         emailField = new javax.swing.JTextField();
         phoneField = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Perfil");
 
+        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
         jLabel4.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Telefone");
 
+        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
         jLabel3.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("E-mail");
 
+        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Endereço");
 
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nome");
 
         profilePicture.setBackground(new java.awt.Color(204, 255, 204));
@@ -196,21 +192,6 @@ public class Profile extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_cancelBtnActionPerformed
 
-    private BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) throws IOException {
-        BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
-        Graphics2D graphics2D = resizedImage.createGraphics();
-        graphics2D.drawImage(originalImage, 0, 0, targetWidth, targetHeight, null);
-        graphics2D.dispose();
-        return resizedImage;
-    }
-
-    private void loadProfileImageFromPath(File file) throws IOException {
-        BufferedImage img = ImageIO.read(file);
-        img = resizeImage(img, 150, 150);
-        ImageIcon icon = new ImageIcon(img);
-        imgLabel.setIcon(icon);
-    }
-
     private void profilePictureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePictureMouseClicked
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setAcceptAllFileFilterUsed(false);
@@ -219,7 +200,7 @@ public class Profile extends javax.swing.JInternalFrame {
         if (response == JFileChooser.APPROVE_OPTION) {
             profileFile = fileChooser.getSelectedFile().getAbsoluteFile();
             try {
-                loadProfileImageFromPath(profileFile);
+                imgLabel.setIcon(ImageManipulation.createIconFromPath(profileFile, 150, 150));
             } catch (IOException ex) {
                 Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -231,7 +212,7 @@ public class Profile extends javax.swing.JInternalFrame {
         if(profileFile != null){
             filePath = profileFile.getAbsolutePath();
         }
-        Ctrlador.getInstance().updateUser(nameField.getText(), addrField.getText(), emailField.getText(), phoneField.getText(), filePath);
+        Ctrlador.getInstance().update(new User(nameField.getText(), addrField.getText(), emailField.getText(), phoneField.getText(), filePath));
         dispose();
     }//GEN-LAST:event_saveBtnActionPerformed
 

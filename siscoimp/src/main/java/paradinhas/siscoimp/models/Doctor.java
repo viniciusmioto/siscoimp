@@ -62,4 +62,11 @@ public class Doctor extends Person implements Jsonfison {
         } catch (Exception e) {
         }
     }
+
+    @Override
+    public String toString() {
+        return name;// Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+    
+    
 }

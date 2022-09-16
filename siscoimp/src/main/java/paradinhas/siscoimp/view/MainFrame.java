@@ -4,7 +4,18 @@
  */
 package paradinhas.siscoimp.view;
 
+import paradinhas.siscoimp.view.doctor.DoctorCad;
+import paradinhas.siscoimp.view.doctor.DoctorsList;
+import paradinhas.siscoimp.view.emergencyInfo.EmergencyInfoCad;
+import paradinhas.siscoimp.view.emergencyInfo.EmergencyInfoList;
+import paradinhas.siscoimp.view.relatives.RelativesCad;
+import paradinhas.siscoimp.view.relatives.RelativesList;
+import paradinhas.siscoimp.view.appointment.AppointmentsCad;
+import paradinhas.siscoimp.view.appointment.AppointmentsList;
 import paradinhas.siscoimp.models.Doctor;
+import paradinhas.siscoimp.models.Relative;
+import paradinhas.siscoimp.models.EmergencyInfo;
+import paradinhas.siscoimp.models.Appointment;
 
 /**
  *
@@ -36,20 +47,28 @@ public class MainFrame extends javax.swing.JFrame {
         return mainFrame;
     }
     
-    public void showAppointmentCad(){
-        if(apptCad == null || apptCad.isClosed()) {   
-            apptCad = new AppointmentsCad();
-            desktopPaneCtrl.add(apptCad);
-        }
-        apptCad.setVisible(true);
-    }
-    
-    public void showDoctorCad(Doctor doc){
+    public void showDoctorCad(Doctor doc, int i){
         if(docCad == null || docCad.isClosed()) {   
-            docCad = new DoctorCad(doc);
+            docCad = new DoctorCad(doc, i);
             desktopPaneCtrl.add(docCad);
         }
         docCad.setVisible(true);
+    }
+    
+    public void showDoctorCad(){
+        if(docCad == null || docCad.isClosed()) {   
+            docCad = new DoctorCad();
+            desktopPaneCtrl.add(docCad);
+        }
+        docCad.setVisible(true);
+    }
+    
+    public void showRelativeCad(Relative rel, int i){
+        if(relCad == null || relCad.isClosed()) {   
+            relCad = new RelativesCad(rel, i);
+            desktopPaneCtrl.add(relCad);
+        }
+        relCad.setVisible(true);
     }
     
     public void showRelativeCad(){
@@ -60,6 +79,14 @@ public class MainFrame extends javax.swing.JFrame {
         relCad.setVisible(true);
     }
     
+    public void showEmgInfoCad(EmergencyInfo emg, int i){
+        if(emgInfoCad == null || emgInfoCad.isClosed()) {   
+            emgInfoCad = new EmergencyInfoCad(emg, i);
+            desktopPaneCtrl.add(emgInfoCad);
+        }
+        emgInfoCad.setVisible(true);
+    }
+    
     public void showEmgInfoCad(){
         if(emgInfoCad == null || emgInfoCad.isClosed()) {   
             emgInfoCad = new EmergencyInfoCad();
@@ -67,7 +94,23 @@ public class MainFrame extends javax.swing.JFrame {
         }
         emgInfoCad.setVisible(true);
     }
-
+    
+    public void showAppointmentCad(Appointment appt, int i){
+        if(apptCad == null || apptCad.isClosed()) {   
+            apptCad = new AppointmentsCad(appt, i);
+            desktopPaneCtrl.add(apptCad);
+        }
+        apptCad.setVisible(true);
+    }
+    
+    public void showAppointmentCad(){
+        if(apptCad == null || apptCad.isClosed()) {   
+            apptCad = new AppointmentsCad();
+            desktopPaneCtrl.add(apptCad);
+        }
+        apptCad.setVisible(true);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,10 +133,10 @@ public class MainFrame extends javax.swing.JFrame {
         setBackground(new java.awt.Color(0, 0, 0));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setForeground(new java.awt.Color(242, 242, 242));
         jPanel1.setPreferredSize(new java.awt.Dimension(1231, 35));
 
-        desktopPaneCtrl.setBackground(new java.awt.Color(0, 0, 0));
+        desktopPaneCtrl.setBackground(new java.awt.Color(242, 242, 242));
         desktopPaneCtrl.setForeground(new java.awt.Color(0, 0, 0));
         desktopPaneCtrl.setToolTipText("");
 

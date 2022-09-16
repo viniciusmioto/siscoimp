@@ -7,16 +7,13 @@ package paradinhas.siscoimp.ctrl;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import paradinhas.siscoimp.json.Jsonfy;
-import paradinhas.siscoimp.models.Appointment;
 import paradinhas.siscoimp.models.Doctor;
-import paradinhas.siscoimp.models.EmergencyInfo;
 import paradinhas.siscoimp.models.Relative;
+import paradinhas.siscoimp.models.EmergencyInfo;
+import paradinhas.siscoimp.models.Appointment;
 import paradinhas.siscoimp.models.User;
 
 /**
@@ -27,23 +24,30 @@ public class Ctrlador implements PropertyChangeListener {
 
     private static Ctrlador ctrl;
 
-    private JSONObject jsonData;
+    private final JSONObject jsonData;
     private User user = new User();
-    private ArrayList<Appointment> apptList = new ArrayList<>();
+    private JSONArray apptList = new JSONArray();
     private JSONArray docList = new JSONArray();
-    private ArrayList<Relative> relList = new ArrayList<>();
-    private ArrayList<EmergencyInfo> emgList = new ArrayList<>();
+    private JSONArray relList = new JSONArray();
+    private JSONArray emgList = new JSONArray();
 
-    private PropertyChangeSupport changes = new PropertyChangeSupport(this);
+    private final PropertyChangeSupport changes = new PropertyChangeSupport(this);
 
     private Ctrlador() {
         jsonData = Jsonfy.readJsonFile();
         System.out.println(jsonData);
         user.fromJson(jsonData.optJSONObject("profile"));
-        docList = jsonData.optJSONArray("doctors");
-        if (docList == null) {
-            docList = new JSONArray();
+        docList = nullSafe(jsonData.optJSONArray("doctors"));
+        relList = nullSafe(jsonData.optJSONArray("relatives"));
+        emgList = nullSafe(jsonData.optJSONArray("emergencyInfos"));
+        apptList = nullSafe(jsonData.optJSONArray("appointments"));
+    }
+
+    private JSONArray nullSafe(JSONArray list) {
+        if (list == null) {
+            return new JSONArray();
         }
+        return list;
     }
 
     private void saveChanges() {
@@ -66,45 +70,125 @@ public class Ctrlador implements PropertyChangeListener {
         changes.removePropertyChangeListener(l);
     }
 
-    public void createDoctor(Doctor doc) {
+    public void create(Doctor doc) {
         if (doc != null) {
             docList.put(doc.toJson());
-            changes.firePropertyChange("doctorsList", null, doc);
             jsonData.put("doctors", docList);
+            changes.firePropertyChange("doctorsList", null, doc);
             saveChanges();
         }
     }
 
-    public void updateUser(String name, String address, String email, String phone, String imagePath) {
-        this.user.setName(name);
-        this.user.setAddress(address);
-        this.user.setEmail(email);
-        this.user.setPhone(phone);
-        this.user.setImagePath(imagePath);
+    public void create(Relative rel) {
+        if (rel != null) {
+            relList.put(rel.toJson());
+            jsonData.put("relatives", relList);
+            changes.firePropertyChange("relativesList", null, rel);
+            saveChanges();
+        }
+    }
+
+    public void create(EmergencyInfo emg) {
+        if (emg != null) {
+            emgList.put(emg.toJson());
+            jsonData.put("emergencyInfos", emgList);
+            changes.firePropertyChange("emergencyInfosList", null, emg);
+            saveChanges();
+        }
+    }
+
+    public void create(Appointment appt) {
+        if (appt != null) {
+            apptList.put(appt.toJson());
+            jsonData.put("appointments", apptList);
+            changes.firePropertyChange("appointmentsList", null, appt);
+            saveChanges();
+        }
+    }
+
+    public void update(User user) {
+        this.user = user;
         jsonData.put("profile", user.toJson());
         saveChanges();
     }
 
-    public void addAppointment(String title, Appointment.AppointmentType type, Appointment.AppointmentStatus status, GregorianCalendar date, Doctor doctor, String filePath) {
-        this.apptList.add(new Appointment(type, status, title, date, doctor, filePath));
+    public void update(Doctor doc, int i) {
+        if (doc != null && i != -1) {
+            docList.put(i, doc.toJson());
+            jsonData.put("doctors", docList);
+            changes.firePropertyChange("doctorsList", null, doc);
+            saveChanges();
+        }
     }
 
-//    public void addDoctor(String name, String address, String phone, String spec, String imagePath) {
-//        this.docList.add(new Doctor(name, address, phone, spec, imagePath));
-//    }
-    public void addRelative(String name, String address, String phone, String kinship) {
-        this.relList.add(new Relative(name, address, phone, kinship));
+    public void update(Relative rel, int i) {
+        if (rel != null && i != -1) {
+            relList.put(i, rel.toJson());
+            jsonData.put("relatives", relList);
+            changes.firePropertyChange("relativesList", null, rel);
+            saveChanges();
+        }
     }
 
-    public void addEmgInfo(String title, String desc, EmergencyInfo.Urgency urg) {
-        this.emgList.add(new EmergencyInfo(urg, title, desc));
+    public void update(EmergencyInfo emg, int i) {
+        if (emg != null && i != -1) {
+            emgList.put(i, emg.toJson());
+            jsonData.put("emergencyInfos", emgList);
+            changes.firePropertyChange("emergencyInfosList", null, emg);
+            saveChanges();
+        }
+    }
+
+    public void update(Appointment appt, int i) {
+        if (appt != null && i != -1) {
+            apptList.put(i, appt.toJson());
+            jsonData.put("appointments", apptList);
+            changes.firePropertyChange("appointmentsList", null, appt);
+            saveChanges();
+        }
+    }
+
+    public void removeDoctor(int index) {
+        if (index != -1) {
+            docList.remove(index);
+            jsonData.put("doctors", docList);
+            changes.firePropertyChange("doctorsList", true, false);
+            saveChanges();
+        }
+    }
+    
+    public void removeRelative(int index) {
+        if (index != -1) {
+            relList.remove(index);
+            jsonData.put("relatives", relList);
+            changes.firePropertyChange("relativesList", true, false);
+            saveChanges();
+        }
+    }
+
+    public void removeEmergencyInfo(int index) {
+        if (index != -1) {
+            emgList.remove(index);
+            jsonData.put("emergencyInfos", emgList);
+            changes.firePropertyChange("emergencyInfosList", true, false);
+            saveChanges();
+        }
+    }
+
+    public void removeAppointment(int index) {
+        if (index != -1) {
+            apptList.remove(index);
+            jsonData.put("appointments", apptList);
+            changes.firePropertyChange("appointmentsList", true, false);
+            saveChanges();
+        }
     }
 
     public User getUser() {
         return this.user;
     }
 
-    public ArrayList<Appointment> getApptList() {
+    public JSONArray getApptList() {
         return apptList;
     }
 
@@ -112,11 +196,11 @@ public class Ctrlador implements PropertyChangeListener {
         return docList;
     }
 
-    public ArrayList<Relative> getRelativesList() {
+    public JSONArray getRelativesList() {
         return relList;
     }
 
-    public ArrayList<EmergencyInfo> getEmgList() {
+    public JSONArray getEmgList() {
         return emgList;
     }
 

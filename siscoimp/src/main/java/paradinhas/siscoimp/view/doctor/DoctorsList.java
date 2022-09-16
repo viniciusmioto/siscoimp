@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package paradinhas.siscoimp.view;
+package paradinhas.siscoimp.view.doctor;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import paradinhas.siscoimp.ctrl.Ctrlador;
 import paradinhas.siscoimp.models.Doctor;
+import paradinhas.siscoimp.view.MainFrame;
 import paradinhas.siscoimp.view.templates.ScrollListTemplate;
 
 /**
@@ -28,11 +29,13 @@ public class DoctorsList extends javax.swing.JInternalFrame implements PropertyC
         docs = Ctrlador.getInstance().getDoctorsList();
         if ((docs != null) && !(docs.isEmpty())) {
             ScrollListTemplate scrollList = new ScrollListTemplate();
+            int i = 0;
             for (Object t : docs) {
                 JSONObject docJson = new JSONObject(t.toString());
                 Doctor doc = new Doctor();
                 doc.fromJson(docJson);
-                scrollList.addToList(new DoctorElement(doc));
+                scrollList.addToList(new DoctorElement(doc, i));
+                i++;
             }
             mainListFrame.add(scrollList);
         }
@@ -58,7 +61,6 @@ public class DoctorsList extends javax.swing.JInternalFrame implements PropertyC
         registerBtn = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -130,7 +132,7 @@ public class DoctorsList extends javax.swing.JInternalFrame implements PropertyC
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
-        MainFrame.getInstance().showDoctorCad(null);
+        MainFrame.getInstance().showDoctorCad(null, -1);
     }//GEN-LAST:event_registerBtnActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
@@ -146,7 +148,8 @@ public class DoctorsList extends javax.swing.JInternalFrame implements PropertyC
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if(evt.getPropertyName().equals("doctorsList"))
+        if (evt.getPropertyName().equals("doctorsList")) {
             populateList();
+        }
     }
 }

@@ -2,20 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package paradinhas.siscoimp.view;
+package paradinhas.siscoimp.view.doctor;
 
 import paradinhas.siscoimp.models.Doctor;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import paradinhas.siscoimp.common.ImageManipulation;
 import paradinhas.siscoimp.ctrl.Ctrlador;
+import paradinhas.siscoimp.view.Profile;
 
 /**
  *
@@ -25,31 +23,43 @@ public class DoctorCad extends javax.swing.JInternalFrame {
 
     Doctor doc;
     File doctorFile;
+    int index = -1;
+    boolean editingMode = false;
+
     /**
      * Creates new form DoctorsList
      */
-    public DoctorCad(Doctor doc) {
-        initComponents();
-        if (doc != null){
-            nameField.setText(doc.getName());
-            phoneField.setText(doc.getPhone());
-            addrField.setText(doc.getAddress());
-            specField.setText(doc.getSpec());
+    private void setCad(Doctor doc) {
+        nameField.setText(doc.getName());
+        phoneField.setText(doc.getPhone());
+        addrField.setText(doc.getAddress());
+        specField.setText(doc.getSpec());
+        try {
+            if (doc.getImagePath() != null) {
+                doctorFile = new File(doc.getImagePath());
+                if (!"".equals(doc.getImagePath())) {
+                    picLabel.setIcon(ImageManipulation.createIconFromPath(doctorFile, 150, 150));
+                }
+            }
+        } catch (IOException ex) {
+            System.out.println(ex);
         }
-        else {
+        editingMode = true;
+    }
+
+    public DoctorCad(Doctor doc, int index) {
+        initComponents();
+        if (doc != null) {
+            this.index = index;
+            setCad(doc);
+        } else {
             deleteBtn.setVisible(false);
         }
+    }
 
-//        try {
-//            if (doc.getImagePath() != null) {
-//                doctorFile = new File(doc.getImagePath());
-//                if (!"".equals(doc.getImagePath())) {
-//                    loadProfileImageFromPath(doctorFile);
-//                }
-//            }
-//        } catch (IOException ex) {
-//            System.out.println(ex);
-//        }
+    public DoctorCad() {
+        initComponents();
+        deleteBtn.setVisible(false);
     }
 
     /**
@@ -75,7 +85,6 @@ public class DoctorCad extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         deleteBtn = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -83,23 +92,14 @@ public class DoctorCad extends javax.swing.JInternalFrame {
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nome do Profissional");
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Telefone");
-
-        phoneField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                phoneFieldActionPerformed(evt);
-            }
-        });
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Endereço");
 
         addrField.setToolTipText("");
@@ -144,7 +144,6 @@ public class DoctorCad extends javax.swing.JInternalFrame {
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Especialidade");
 
         deleteBtn.setBackground(new java.awt.Color(255, 51, 51));
@@ -212,39 +211,18 @@ public class DoctorCad extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(specField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(deleteBtn)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(saveBtn)
-                                .addComponent(cancelBtn)))
-                        .addContainerGap(13, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(doctorPic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(cancelBtn))
+                            .addComponent(deleteBtn)))
+                    .addComponent(doctorPic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void phoneFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_phoneFieldActionPerformed
-
-    private BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) throws IOException {
-        BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
-        Graphics2D graphics2D = resizedImage.createGraphics();
-        graphics2D.drawImage(originalImage, 0, 0, targetWidth, targetHeight, null);
-        graphics2D.dispose();
-        return resizedImage;
-    }
-
-    private void loadProfileImageFromPath(File file) throws IOException {
-        BufferedImage img = ImageIO.read(file);
-        img = resizeImage(img, 150, 150);
-        ImageIcon icon = new ImageIcon(img);
-        picLabel.setIcon(icon);
-    }
-    
     private void doctorPicMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorPicMouseClicked
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setAcceptAllFileFilterUsed(false);
@@ -253,7 +231,7 @@ public class DoctorCad extends javax.swing.JInternalFrame {
         if (response == JFileChooser.APPROVE_OPTION) {
             doctorFile = fileChooser.getSelectedFile().getAbsoluteFile();
             try {
-                loadProfileImageFromPath(doctorFile);
+                picLabel.setIcon(ImageManipulation.createIconFromPath(doctorFile, 150, 150));
             } catch (IOException ex) {
                 Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -266,16 +244,21 @@ public class DoctorCad extends javax.swing.JInternalFrame {
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         String filePath = "";
-        if(doctorFile != null){
+        if (doctorFile != null) {
             filePath = doctorFile.getAbsolutePath();
         }
-        Doctor doc = new Doctor(nameField.getText(), addrField.getText(), phoneField.getText(), specField.getText(), filePath);
-        Ctrlador.getInstance().createDoctor(doc);
+        doc = new Doctor(nameField.getText(), addrField.getText(), phoneField.getText(), specField.getText(), filePath);
+        if (editingMode) {
+            Ctrlador.getInstance().update(doc, index);
+        } else {
+            Ctrlador.getInstance().create(doc);
+        }
         dispose();
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        // TODO add your handling code here:
+        Ctrlador.getInstance().removeAppointment(index);
+        dispose();
     }//GEN-LAST:event_deleteBtnActionPerformed
 
 

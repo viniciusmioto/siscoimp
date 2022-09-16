@@ -2,7 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package paradinhas.siscoimp.view;
+package paradinhas.siscoimp.view.emergencyInfo;
+
+import paradinhas.siscoimp.ctrl.Ctrlador;
+import paradinhas.siscoimp.models.EmergencyInfo;
+import paradinhas.siscoimp.models.EmergencyInfo.EmergencyInfoUrgency;
 
 /**
  *
@@ -13,8 +17,30 @@ public class EmergencyInfoCad extends javax.swing.JInternalFrame {
     /**
      * Creates new form DoctorsList
      */
+    EmergencyInfo emg;
+    int index;
+    boolean editingMode = false;
+    
+    private void setCad(EmergencyInfo emg) {
+        titleField.setText(emg.getTitle());
+        descField.setText(emg.getDesc());
+        setUrgency(emg.getUrg());
+        editingMode = true;
+    }
+
+    public EmergencyInfoCad(EmergencyInfo emg, int index) {
+        initComponents();
+        if (emg != null) {
+            this.index = index;
+            setCad(emg);
+        } else {
+            deleteBtn.setVisible(false);
+        }
+    }
+
     public EmergencyInfoCad() {
-        initComponents(); 
+        initComponents();
+        deleteBtn.setVisible(false);
     }
 
     /**
@@ -26,6 +52,7 @@ public class EmergencyInfoCad extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        deleteBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         titleField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -36,23 +63,28 @@ public class EmergencyInfoCad extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         urgencyField = new javax.swing.JComboBox<>();
 
-        setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Informação de Emergência");
 
+        deleteBtn.setBackground(new java.awt.Color(255, 51, 51));
+        deleteBtn.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
+        deleteBtn.setText("Excluir");
+        deleteBtn.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        deleteBtn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
+
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Título");
-
-        titleField.setBackground(new java.awt.Color(255, 255, 255));
-        titleField.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Descrição");
 
         cancelBtn.setBackground(new java.awt.Color(255, 51, 51));
@@ -67,20 +99,22 @@ public class EmergencyInfoCad extends javax.swing.JInternalFrame {
         saveBtn.setBackground(new java.awt.Color(204, 255, 204));
         saveBtn.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
         saveBtn.setText("Salvar");
+        saveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveBtnActionPerformed(evt);
+            }
+        });
 
-        descField.setBackground(new java.awt.Color(255, 255, 255));
         descField.setColumns(20);
         descField.setRows(5);
         jScrollPane1.setViewportView(descField);
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Urgência");
 
         urgencyField.setBackground(new java.awt.Color(51, 153, 255));
         urgencyField.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        urgencyField.setForeground(new java.awt.Color(0, 0, 0));
         urgencyField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Emergência", "Muito Urgente", "Urgente", "Pouco Urgente", "Não Urgente" }));
         urgencyField.setSelectedIndex(4);
         urgencyField.addActionListener(new java.awt.event.ActionListener() {
@@ -94,28 +128,28 @@ public class EmergencyInfoCad extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(urgencyField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(titleField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(saveBtn)
-                                .addGap(18, 18, 18)
-                                .addComponent(cancelBtn)))
-                        .addGap(29, 29, 29))))
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(urgencyField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(titleField, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(deleteBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addComponent(saveBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(cancelBtn)))
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,16 +160,18 @@ public class EmergencyInfoCad extends javax.swing.JInternalFrame {
                 .addComponent(titleField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(urgencyField, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
                 .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelBtn)
-                    .addComponent(saveBtn))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cancelBtn)
+                        .addComponent(saveBtn))
+                    .addComponent(deleteBtn))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -143,12 +179,11 @@ public class EmergencyInfoCad extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
-        // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void urgencyFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_urgencyFieldActionPerformed
-        switch (urgencyField.getSelectedItem().toString()){
+        switch (urgencyField.getSelectedItem().toString()) {
             case "Emergência":
                 urgencyField.setBackground(new java.awt.Color(255, 102, 102));
                 break;
@@ -165,15 +200,66 @@ public class EmergencyInfoCad extends javax.swing.JInternalFrame {
                 urgencyField.setBackground(new java.awt.Color(51, 153, 255));
                 break;
             default:
-                urgencyField.setBackground(new java.awt.Color(0,0,0));
+                urgencyField.setBackground(new java.awt.Color(0, 0, 0));
                 break;
         }
         repaint();
     }//GEN-LAST:event_urgencyFieldActionPerformed
 
+    private void setUrgency(EmergencyInfoUrgency urgency) {
+        switch (urgency) {
+            case EMERGENCY:
+                urgencyField.setSelectedIndex(0);
+                break;
+            case VERY_URGENT:
+                urgencyField.setSelectedIndex(1);
+                break;
+            case URGENT:
+                urgencyField.setSelectedIndex(2);
+                break;
+            case LESS_URGENT:
+                urgencyField.setSelectedIndex(3);
+                break;
+            default:
+                urgencyField.setSelectedIndex(4);
+                break;
+        }
+    }
+    
+    private EmergencyInfoUrgency getUrgency() {
+        switch (urgencyField.getSelectedItem().toString()) {
+            case "Emergência":
+                return EmergencyInfoUrgency.EMERGENCY;
+            case "Muito Urgente":
+                return EmergencyInfoUrgency.VERY_URGENT;
+            case "Urgente":
+                return EmergencyInfoUrgency.URGENT;
+            case "Pouco Urgente":
+                return EmergencyInfoUrgency.LESS_URGENT;
+            default:
+                return EmergencyInfoUrgency.NON_URGENT;
+        }
+    }
+
+    private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
+        emg = new EmergencyInfo(getUrgency(), titleField.getText(), descField.getText());
+        if (editingMode) {
+            Ctrlador.getInstance().update(emg, index);
+        } else {
+            Ctrlador.getInstance().create(emg);
+        }
+        dispose();
+    }//GEN-LAST:event_saveBtnActionPerformed
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        Ctrlador.getInstance().removeEmergencyInfo(index);
+        dispose();
+    }//GEN-LAST:event_deleteBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelBtn;
+    private javax.swing.JButton deleteBtn;
     private javax.swing.JTextArea descField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

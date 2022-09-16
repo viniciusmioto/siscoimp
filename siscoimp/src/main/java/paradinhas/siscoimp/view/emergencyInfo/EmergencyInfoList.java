@@ -2,34 +2,49 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package paradinhas.siscoimp.view;
+package paradinhas.siscoimp.view.emergencyInfo;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import paradinhas.siscoimp.view.templates.ScrollListTemplate;
-import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import paradinhas.siscoimp.ctrl.Ctrlador;
 import paradinhas.siscoimp.models.EmergencyInfo;
+import paradinhas.siscoimp.view.MainFrame;
 
 /**
  *
  * @author gab
  */
-public class EmergencyInfoList extends javax.swing.JInternalFrame {
-    
-    private final ArrayList<EmergencyInfo> emgInfos;
-    
+public class EmergencyInfoList extends javax.swing.JInternalFrame implements PropertyChangeListener {
+
+    private JSONArray emgInfos;
+
     /**
      * Creates new form AppointmentsList
      */
+    private void populateList() {
+        mainListFrame.removeAll();
+        emgInfos = Ctrlador.getInstance().getEmgList();
+        if ((emgInfos != null) && !(emgInfos.isEmpty())) {
+            ScrollListTemplate scrollList = new ScrollListTemplate();
+            int i = 0;
+            for (Object t : emgInfos) {
+                JSONObject docJson = new JSONObject(t.toString());
+                EmergencyInfo emg = new EmergencyInfo();
+                emg.fromJson(docJson);
+                scrollList.addToList(new EmergencyInfoElement(emg, i));
+                i++;
+            }
+            mainListFrame.add(scrollList);
+        }
+    }
+
     public EmergencyInfoList() {
         initComponents();
-        emgInfos = Ctrlador.getInstance().getEmgList();
-        if ((emgInfos != null) && !(emgInfos.isEmpty())){
-        ScrollListTemplate scrollList = new ScrollListTemplate();
-        for (EmergencyInfo emgInfo : emgInfos){
-            scrollList.addToList(new EmergencyInfoElement(emgInfo));
-        }         
-        mainListFrame.add(scrollList);
-        }
+        Ctrlador.getInstance().addPropertyChangeListener(this);
+        populateList();
     }
 
     /**
@@ -50,7 +65,6 @@ public class EmergencyInfoList extends javax.swing.JInternalFrame {
         jTextField7 = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -58,14 +72,12 @@ public class EmergencyInfoList extends javax.swing.JInternalFrame {
 
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jTextField1.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
         jTextField1.setText("Filtro");
         jTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jTextField4.setEditable(false);
         jTextField4.setBackground(new java.awt.Color(255, 102, 102));
         jTextField4.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(0, 0, 0));
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField4.setText("Emergência");
         jTextField4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -73,7 +85,6 @@ public class EmergencyInfoList extends javax.swing.JInternalFrame {
         jTextField5.setEditable(false);
         jTextField5.setBackground(new java.awt.Color(255, 153, 51));
         jTextField5.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        jTextField5.setForeground(new java.awt.Color(0, 0, 0));
         jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField5.setText("Muito Urgente");
         jTextField5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -81,7 +92,6 @@ public class EmergencyInfoList extends javax.swing.JInternalFrame {
         jTextField6.setEditable(false);
         jTextField6.setBackground(new java.awt.Color(255, 255, 51));
         jTextField6.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        jTextField6.setForeground(new java.awt.Color(0, 0, 0));
         jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField6.setText("Urgente");
         jTextField6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -100,7 +110,6 @@ public class EmergencyInfoList extends javax.swing.JInternalFrame {
         jTextField7.setEditable(false);
         jTextField7.setBackground(new java.awt.Color(102, 255, 102));
         jTextField7.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        jTextField7.setForeground(new java.awt.Color(0, 0, 0));
         jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField7.setText("Pouco Urgente");
         jTextField7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -108,7 +117,6 @@ public class EmergencyInfoList extends javax.swing.JInternalFrame {
         jTextField8.setEditable(false);
         jTextField8.setBackground(new java.awt.Color(51, 153, 255));
         jTextField8.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        jTextField8.setForeground(new java.awt.Color(0, 0, 0));
         jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField8.setText("Não Urgente");
         jTextField8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -176,4 +184,11 @@ public class EmergencyInfoList extends javax.swing.JInternalFrame {
     private javax.swing.JPanel mainListFrame;
     private javax.swing.JButton registerAppt;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals("emergencyInfosList")) {
+            populateList();
+        }
+    }
 }

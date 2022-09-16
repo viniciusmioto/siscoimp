@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package paradinhas.siscoimp.view;
+package paradinhas.siscoimp.view.appointment;
 
-import java.util.GregorianCalendar;
+import java.text.SimpleDateFormat;
 import paradinhas.siscoimp.models.Appointment;
+import paradinhas.siscoimp.view.MainFrame;
 import paradinhas.siscoimp.view.templates.ElementTemplate;
 
 /**
@@ -19,14 +20,19 @@ public class AppointmentElement extends ElementTemplate {
     /**
      * Creates new form AppointmentTemplateD
      */
-    public AppointmentElement(Appointment appt) {
+    
+    Appointment appt;
+    int index;
+    
+    public AppointmentElement(Appointment appt, int i) {
         initComponents();
+        this.appt = appt;
+        this.index = i;
         
-        GregorianCalendar date = appt.getDate();
-        dataField.setText(date.get(GregorianCalendar.DATE) + "/" + date.get(GregorianCalendar.MONTH) + "/" + date.get(GregorianCalendar.YEAR));
+        dataField.setText(new SimpleDateFormat("dd/MM/yyyy").format(appt.getDate()));
         titleField.setText(appt.getTitle());
         
-        switch(appt.getType()){
+        switch (appt.getType()) {
             case EXAM:
                 typeField.setText("Exame");
                 break;
@@ -36,7 +42,7 @@ public class AppointmentElement extends ElementTemplate {
             default:
                 typeField.setText("Nenhum");
                 break;
-        }   
+        }
         
         switch (appt.getStatus()){
             case CONCLUDED:
@@ -72,6 +78,12 @@ public class AppointmentElement extends ElementTemplate {
         typeField = new javax.swing.JLabel();
         statusField = new javax.swing.JLabel();
 
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
+
         titleField.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
         titleField.setText("titulo");
 
@@ -82,7 +94,6 @@ public class AppointmentElement extends ElementTemplate {
         typeField.setText("tipo");
 
         statusField.setBackground(new java.awt.Color(51, 255, 51));
-        statusField.setForeground(new java.awt.Color(0, 0, 0));
         statusField.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         statusField.setText("Concluído");
         statusField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -115,6 +126,10 @@ public class AppointmentElement extends ElementTemplate {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        MainFrame.getInstance().showAppointmentCad(appt, index);
+    }//GEN-LAST:event_formMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

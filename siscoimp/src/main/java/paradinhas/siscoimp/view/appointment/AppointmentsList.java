@@ -2,38 +2,50 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package paradinhas.siscoimp.view;
+package paradinhas.siscoimp.view.appointment;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import paradinhas.siscoimp.view.templates.ScrollListTemplate;
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.util.ArrayList;
-import javax.swing.JPanel;
-import javax.swing.border.MatteBorder;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import paradinhas.siscoimp.ctrl.Ctrlador;
 import paradinhas.siscoimp.models.Appointment;
+import paradinhas.siscoimp.view.MainFrame;
 
 /**
  *
  * @author gab
  */
-public class AppointmentsList extends javax.swing.JInternalFrame {
-    
-    private final ArrayList<Appointment> appts;
-    
+public class AppointmentsList extends javax.swing.JInternalFrame implements PropertyChangeListener {
+
+    private JSONArray appts;
+
     /**
      * Creates new form AppointmentsList
      */
+    private void populateList() {
+        mainListFrame.removeAll();
+        appts = Ctrlador.getInstance().getApptList();
+        if ((appts != null) && !(appts.isEmpty())) {
+            ScrollListTemplate scrollList = new ScrollListTemplate();
+            int i = 0;
+            for (Object t : appts) {
+                JSONObject docJson = new JSONObject(t.toString());
+                Appointment appt = new Appointment();
+                appt.fromJson(docJson);
+                scrollList.addToList(new AppointmentElement(appt, i));
+                i++;
+            }
+            mainListFrame.add(scrollList);
+        }
+        repaint();
+    }
+
     public AppointmentsList() {
         initComponents();
-        appts = Ctrlador.getInstance().getApptList();
-        if ((appts != null) && !(appts.isEmpty())){
-            ScrollListTemplate scrollList = new ScrollListTemplate();
-            for (Appointment appt : appts){
-                scrollList.addToList(new AppointmentElement(appt));
-            }  
-            mainListFrame.add(scrollList);
-        } 
+        Ctrlador.getInstance().addPropertyChangeListener(this);
+        populateList();
     }
 
     /**
@@ -52,22 +64,36 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
         mainListFrame = new javax.swing.JPanel();
         registerAppt = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Compromissos");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jTextField1.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
         jTextField1.setText("Filtro");
         jTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jTextField4.setEditable(false);
         jTextField4.setBackground(new java.awt.Color(255, 102, 102));
         jTextField4.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(0, 0, 0));
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField4.setText("Cancelado");
         jTextField4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -75,7 +101,6 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
         jTextField5.setEditable(false);
         jTextField5.setBackground(new java.awt.Color(255, 153, 51));
         jTextField5.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        jTextField5.setForeground(new java.awt.Color(0, 0, 0));
         jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField5.setText("Em andamento");
         jTextField5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -83,7 +108,6 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
         jTextField6.setEditable(false);
         jTextField6.setBackground(new java.awt.Color(102, 255, 102));
         jTextField6.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        jTextField6.setForeground(new java.awt.Color(0, 0, 0));
         jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField6.setText("Concluído");
         jTextField6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -145,6 +169,10 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
         MainFrame.getInstance().showAppointmentCad();
     }//GEN-LAST:event_registerApptActionPerformed
 
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
+        Ctrlador.getInstance().removePropertyChangeListener(this);
+    }//GEN-LAST:event_formInternalFrameClosing
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField jTextField1;
@@ -154,4 +182,11 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
     private javax.swing.JPanel mainListFrame;
     private javax.swing.JButton registerAppt;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals("appointmentsList")) {
+            populateList();
+        }
+    }
 }

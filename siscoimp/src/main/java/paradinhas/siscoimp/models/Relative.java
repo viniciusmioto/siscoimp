@@ -4,11 +4,13 @@
  */
 package paradinhas.siscoimp.models;
 
+import org.json.JSONObject;
+
 /**
  *
  * @author gab
  */
-public class Relative extends Person {
+public class Relative extends Person implements Jsonfison{
         
     private String kinship;
    
@@ -29,6 +31,28 @@ public class Relative extends Person {
 
     public void setKinship(String kinship) {
         this.kinship = kinship;
+    }
+
+    @Override
+    public JSONObject toJson(){
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("address", address);
+        json.put("phone", phone);
+        json.put("kinship", kinship);
+        
+        return json;
+    }
+    
+    @Override
+    public void fromJson(JSONObject json){
+        try {   
+        name = json.optString("name");
+        address = json.optString("address");
+        phone = json.optString("phone");
+        kinship = json.optString("kinship");
+        } catch (Exception e) {
+        }
     }
 
     

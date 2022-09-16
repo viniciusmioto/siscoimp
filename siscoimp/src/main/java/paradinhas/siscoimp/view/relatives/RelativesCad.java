@@ -2,7 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package paradinhas.siscoimp.view;
+package paradinhas.siscoimp.view.relatives;
+
+import paradinhas.siscoimp.ctrl.Ctrlador;
+import paradinhas.siscoimp.models.Relative;
 
 /**
  *
@@ -13,8 +16,31 @@ public class RelativesCad extends javax.swing.JInternalFrame {
     /**
      * Creates new form RelativesCad
      */
+    Relative rel;
+    int index = -1;
+    boolean editingMode = false;
+
+    private void setCad(Relative rel) {
+        nameField.setText(rel.getName());
+        phoneField.setText(rel.getPhone());
+        kinField.setText(rel.getKinship());
+        addrField.setText(rel.getAddress());
+        editingMode = true;
+    }
+
+    public RelativesCad(Relative rel, int index) {
+        initComponents();
+        if (rel != null) {
+            this.index = index;
+            setCad(rel);
+        } else {
+            deleteBtn.setVisible(false);
+        }
+    }
+
     public RelativesCad() {
         initComponents();
+        deleteBtn.setVisible(false);
     }
 
     /**
@@ -36,32 +62,20 @@ public class RelativesCad extends javax.swing.JInternalFrame {
         saveBtn = new javax.swing.JButton();
         kinField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        deleteBtn = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Familiar");
 
         jLabel1.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nome");
 
-        nameField.setBackground(new java.awt.Color(255, 255, 255));
-        nameField.setForeground(new java.awt.Color(0, 0, 0));
-
-        addrField.setBackground(new java.awt.Color(255, 255, 255));
-        addrField.setForeground(new java.awt.Color(0, 0, 0));
-
         jLabel2.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Endereço");
 
-        phoneField.setBackground(new java.awt.Color(255, 255, 255));
-        phoneField.setForeground(new java.awt.Color(0, 0, 0));
-
         jLabel3.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Telefone");
 
         cancelBtn.setBackground(new java.awt.Color(255, 51, 51));
@@ -82,32 +96,42 @@ public class RelativesCad extends javax.swing.JInternalFrame {
             }
         });
 
-        kinField.setBackground(new java.awt.Color(255, 255, 255));
-        kinField.setForeground(new java.awt.Color(0, 0, 0));
-
         jLabel4.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Parentesco");
+
+        deleteBtn.setBackground(new java.awt.Color(255, 51, 51));
+        deleteBtn.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
+        deleteBtn.setText("Excluir");
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(saveBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cancelBtn))
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addComponent(phoneField)
-                    .addComponent(addrField)
-                    .addComponent(nameField)
-                    .addComponent(kinField))
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(saveBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cancelBtn))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(phoneField)
+                            .addComponent(addrField)
+                            .addComponent(nameField)
+                            .addComponent(kinField)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(deleteBtn)))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -129,11 +153,13 @@ public class RelativesCad extends javax.swing.JInternalFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(kinField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelBtn)
                     .addComponent(saveBtn))
-                .addGap(35, 35, 35))
+                .addGap(18, 18, 18)
+                .addComponent(deleteBtn)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -145,13 +171,25 @@ public class RelativesCad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        // TODO add your handling code here:
+        rel = new Relative(nameField.getText(), addrField.getText(), phoneField.getText(), kinField.getText());
+        if (editingMode) {
+            Ctrlador.getInstance().update(rel, index);
+        } else {
+            Ctrlador.getInstance().create(rel);
+        }
+        dispose();
     }//GEN-LAST:event_saveBtnActionPerformed
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        Ctrlador.getInstance().removeRelative(index);
+        dispose();
+    }//GEN-LAST:event_deleteBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField addrField;
     private javax.swing.JButton cancelBtn;
+    private javax.swing.JButton deleteBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

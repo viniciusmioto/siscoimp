@@ -2,9 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package paradinhas.siscoimp.view;
+package paradinhas.siscoimp.view.relatives;
 
+import paradinhas.siscoimp.ctrl.Ctrlador;
 import paradinhas.siscoimp.models.Relative;
+import paradinhas.siscoimp.view.MainFrame;
 import paradinhas.siscoimp.view.templates.ElementTemplate;
 
 /**
@@ -13,16 +15,19 @@ import paradinhas.siscoimp.view.templates.ElementTemplate;
  */
 public class RelativeElement extends ElementTemplate {
 
-
+    private Relative rel;
+    int index;
     
     /**
      * Creates new form AppointmentTemplateD
      */
-    public RelativeElement(Relative doc) {
+    public RelativeElement(Relative rel, int i) {
         initComponents();
-        nameField.setText(doc.getName());
-        phoneField.setText(doc.getPhone());
-        kinField.setText(doc.getKinship());
+        this.rel = rel;
+        index = i;
+        nameField.setText(rel.getName());
+        phoneField.setText(rel.getPhone());
+        kinField.setText(rel.getKinship());
     }
 
     /**
@@ -37,6 +42,12 @@ public class RelativeElement extends ElementTemplate {
         nameField = new javax.swing.JLabel();
         kinField = new javax.swing.JLabel();
         phoneField = new javax.swing.JLabel();
+
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         nameField.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
         nameField.setText("nome");
@@ -73,6 +84,10 @@ public class RelativeElement extends ElementTemplate {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        MainFrame.getInstance().showRelativeCad(rel, index);
+    }//GEN-LAST:event_formMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

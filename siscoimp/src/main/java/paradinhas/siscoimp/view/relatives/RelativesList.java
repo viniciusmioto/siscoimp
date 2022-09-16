@@ -2,39 +2,50 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package paradinhas.siscoimp.view;
+package paradinhas.siscoimp.view.relatives;
 
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.util.ArrayList;
-import javax.swing.JPanel;
-import javax.swing.border.MatteBorder;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import paradinhas.siscoimp.ctrl.Ctrlador;
 import paradinhas.siscoimp.models.Relative;
+import paradinhas.siscoimp.view.MainFrame;
 import paradinhas.siscoimp.view.templates.ScrollListTemplate;
 
 /**
  *
  * @author gab
  */
-public class RelativesList extends javax.swing.JInternalFrame {
-    
-    private final ArrayList<Relative> relatives;
-    
+public class RelativesList extends javax.swing.JInternalFrame implements PropertyChangeListener {
+
+    private JSONArray relatives;
+
     /**
      * Creates new form DoctorsList
      */
-    public RelativesList() {
-        initComponents();
+    private void populateList() {
+        mainListFrame.removeAll();
         relatives = Ctrlador.getInstance().getRelativesList();
-        if ((relatives != null) && !(relatives.isEmpty())){
+        if ((relatives != null) && !(relatives.isEmpty())) {
             ScrollListTemplate scrollList = new ScrollListTemplate();
-            for (Relative rel : relatives){
-                scrollList.addToList(new RelativeElement(rel));
+            int i = 0;
+            for (Object t : relatives) {
+                JSONObject relJson = new JSONObject(t.toString());
+                Relative rel = new Relative();
+                rel.fromJson(relJson);
+                scrollList.addToList(new RelativeElement(rel, i));
+                i++;
             }
 
             mainListFrame.add(scrollList);
         }
+    }
+
+    public RelativesList() {
+        initComponents();
+        Ctrlador.getInstance().addPropertyChangeListener(this);
+        populateList();
     }
 
     /**
@@ -50,11 +61,27 @@ public class RelativesList extends javax.swing.JInternalFrame {
         registerBtn = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Familiares");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         mainListFrame.setLayout(new javax.swing.BoxLayout(mainListFrame, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -69,7 +96,6 @@ public class RelativesList extends javax.swing.JInternalFrame {
 
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jTextField1.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
         jTextField1.setText("Filtro");
         jTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -109,10 +135,21 @@ public class RelativesList extends javax.swing.JInternalFrame {
         MainFrame.getInstance().showRelativeCad();
     }//GEN-LAST:event_registerBtnActionPerformed
 
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
+        Ctrlador.getInstance().removePropertyChangeListener(this);
+    }//GEN-LAST:event_formInternalFrameClosing
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel mainListFrame;
     private javax.swing.JButton registerBtn;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals("relativesList")) {
+            populateList();
+        }
+    }
 }

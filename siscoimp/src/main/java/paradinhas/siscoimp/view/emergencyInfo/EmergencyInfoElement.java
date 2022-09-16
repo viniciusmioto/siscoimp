@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package paradinhas.siscoimp.view;
+package paradinhas.siscoimp.view.emergencyInfo;
 
 import paradinhas.siscoimp.models.EmergencyInfo;
+import paradinhas.siscoimp.view.MainFrame;
 import paradinhas.siscoimp.view.templates.ElementTemplate;
 
 /**
@@ -13,17 +14,19 @@ import paradinhas.siscoimp.view.templates.ElementTemplate;
  */
 public class EmergencyInfoElement extends ElementTemplate {
 
+    int index;
+    EmergencyInfo emg;
 
-    
     /**
      * Creates new form AppointmentTemplateD
      */
-    public EmergencyInfoElement(EmergencyInfo emg) {
+    public EmergencyInfoElement(EmergencyInfo emg, int i) {
         initComponents();
-        
+        this.emg = emg;
+        this.index = i;
         titleField.setText(emg.getTitle());
-        
-        switch (emg.getUrg()){
+
+        switch (emg.getUrg()) {
             case EMERGENCY:
                 urgencyField.setText("Emergência");
                 urgencyField.setBackground(new java.awt.Color(255, 102, 102));
@@ -63,12 +66,17 @@ public class EmergencyInfoElement extends ElementTemplate {
         titleField = new javax.swing.JLabel();
         urgencyField = new javax.swing.JLabel();
 
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
+
         titleField.setFont(new java.awt.Font("FreeSans", 1, 36)); // NOI18N
         titleField.setText("titulo");
 
         urgencyField.setBackground(new java.awt.Color(51, 153, 255));
         urgencyField.setFont(new java.awt.Font("FreeSans", 0, 18)); // NOI18N
-        urgencyField.setForeground(new java.awt.Color(0, 0, 0));
         urgencyField.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         urgencyField.setText("Não Urgente");
         urgencyField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -98,6 +106,10 @@ public class EmergencyInfoElement extends ElementTemplate {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        MainFrame.getInstance().showEmgInfoCad(emg, index);
+    }//GEN-LAST:event_formMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

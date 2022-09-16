@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package paradinhas.siscoimp.view;
+package paradinhas.siscoimp.view.doctor;
 
 import paradinhas.siscoimp.models.Doctor;
+import paradinhas.siscoimp.view.MainFrame;
 import paradinhas.siscoimp.view.templates.ElementTemplate;
 
 /**
@@ -14,12 +15,14 @@ import paradinhas.siscoimp.view.templates.ElementTemplate;
 public class DoctorElement extends ElementTemplate {
     
     private Doctor doc;
+    private int index = -1;
     
     /**
      * Creates new form AppointmentTemplateD
      */
-    public DoctorElement(Doctor doc) {
+    public DoctorElement(Doctor doc, int index) {
         initComponents();
+        this.index = index;
         this.doc = doc;
         nameField.setText(doc.getName());
         phoneField.setText(doc.getPhone());
@@ -83,7 +86,7 @@ public class DoctorElement extends ElementTemplate {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-        MainFrame.getInstance().showDoctorCad(doc);
+        MainFrame.getInstance().showDoctorCad(doc, index);
     }//GEN-LAST:event_formMouseClicked
 
 

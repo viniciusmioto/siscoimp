@@ -4,30 +4,37 @@
  */
 package paradinhas.siscoimp.models;
 
+import org.json.JSONObject;
+
 /**
  *
  * @author gab
  */
-public class EmergencyInfo {
+public class EmergencyInfo implements Jsonfison{
     
-    public enum Urgency {
+    public enum EmergencyInfoUrgency {
         EMERGENCY, VERY_URGENT, URGENT, LESS_URGENT, NON_URGENT
     }
-    private Urgency urg;
+    private EmergencyInfoUrgency urg;
     private String title;
     private String desc;
 
-    public EmergencyInfo(Urgency urg, String title, String desc) {
+    public EmergencyInfo(EmergencyInfoUrgency urg, String title, String desc) {
         this.urg = urg;
         this.title = title;
         this.desc = desc;
     }
 
-    public Urgency getUrg() {
+    public EmergencyInfo() {
+    }
+    
+    
+
+    public EmergencyInfoUrgency getUrg() {
         return urg;
     }
 
-    public void setUrg(Urgency urg) {
+    public void setUrg(EmergencyInfoUrgency urg) {
         this.urg = urg;
     }
 
@@ -47,5 +54,23 @@ public class EmergencyInfo {
         this.desc = desc;
     }
     
+    @Override
+    public JSONObject toJson(){
+        JSONObject json = new JSONObject();
+        json.put("urg", urg.name());
+        json.put("title", title);
+        json.put("desc", desc);
+        
+        return json;
+    }
     
+    @Override
+    public void fromJson(JSONObject json){
+        try {   
+        urg = EmergencyInfoUrgency.valueOf(json.optString("urg"));
+        title = json.optString("title");
+        desc = json.optString("desc");
+        } catch (Exception e) {
+        }
+    }
 }
