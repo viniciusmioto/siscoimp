@@ -23,7 +23,6 @@ import paradinhas.siscoimp.ctrl.Ctrlador;
  */
 public class DoctorCad extends javax.swing.JInternalFrame {
 
-    Doctor doc;
     File doctorFile;
     /**
      * Creates new form DoctorsList

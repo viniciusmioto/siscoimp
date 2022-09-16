@@ -4,17 +4,47 @@
  */
 package paradinhas.siscoimp.view;
 
+import paradinhas.siscoimp.models.EmergencyInfo;
+
 /**
  *
  * @author vinicius
  */
 public class EmergencyInfoCad extends javax.swing.JInternalFrame {
 
+    
     /**
      * Creates new form DoctorsList
      */
-    public EmergencyInfoCad() {
+    public EmergencyInfoCad(EmergencyInfo emgInfo) {
         initComponents(); 
+        if (emgInfo != null){
+            descField.setText(emgInfo.getDesc());
+            titleField.setText(emgInfo.getTitle());
+            switch (emgInfo.getUrg()){
+            case EMERGENCY:
+                urgencyField.setBackground(new java.awt.Color(255, 102, 102));
+                break;
+            case VERY_URGENT:
+                urgencyField.setBackground(new java.awt.Color(255, 153, 51));
+                break;
+            case URGENT:
+                urgencyField.setBackground(new java.awt.Color(255, 255, 51));
+                break;
+            case LESS_URGENT:
+                urgencyField.setBackground(new java.awt.Color(102, 255, 102));
+                break;
+            case NON_URGENT:
+                urgencyField.setBackground(new java.awt.Color(51, 153, 255));
+                break;
+            default:
+                urgencyField.setBackground(new java.awt.Color(0,0,0));
+                break;
+            }
+            urgencyField.setSelectedIndex(emgInfo.getUrg().ordinal());
+        } else {
+            deleteBtn.setVisible(false);
+        }
     }
 
     /**
@@ -35,6 +65,7 @@ public class EmergencyInfoCad extends javax.swing.JInternalFrame {
         descField = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
         urgencyField = new javax.swing.JComboBox<>();
+        deleteBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
@@ -89,6 +120,15 @@ public class EmergencyInfoCad extends javax.swing.JInternalFrame {
             }
         });
 
+        deleteBtn.setBackground(new java.awt.Color(255, 51, 51));
+        deleteBtn.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
+        deleteBtn.setText("Excluir");
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,25 +137,24 @@ public class EmergencyInfoCad extends javax.swing.JInternalFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
+                        .addComponent(deleteBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                        .addComponent(saveBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(cancelBtn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(urgencyField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(titleField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(saveBtn)
-                                .addGap(18, 18, 18)
-                                .addComponent(cancelBtn)))
-                        .addGap(29, 29, 29))))
+                                .addComponent(urgencyField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(titleField, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +174,8 @@ public class EmergencyInfoCad extends javax.swing.JInternalFrame {
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelBtn)
-                    .addComponent(saveBtn))
+                    .addComponent(saveBtn)
+                    .addComponent(deleteBtn))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -171,9 +211,14 @@ public class EmergencyInfoCad extends javax.swing.JInternalFrame {
         repaint();
     }//GEN-LAST:event_urgencyFieldActionPerformed
 
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelBtn;
+    private javax.swing.JButton deleteBtn;
     private javax.swing.JTextArea descField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

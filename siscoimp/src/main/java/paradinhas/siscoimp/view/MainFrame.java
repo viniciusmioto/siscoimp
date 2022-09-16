@@ -4,7 +4,9 @@
  */
 package paradinhas.siscoimp.view;
 
+import paradinhas.siscoimp.models.Appointment;
 import paradinhas.siscoimp.models.Doctor;
+import paradinhas.siscoimp.models.EmergencyInfo;
 
 /**
  *
@@ -36,9 +38,9 @@ public class MainFrame extends javax.swing.JFrame {
         return mainFrame;
     }
     
-    public void showAppointmentCad(){
+    public void showAppointmentCad(Appointment appt){
         if(apptCad == null || apptCad.isClosed()) {   
-            apptCad = new AppointmentsCad();
+            apptCad = new AppointmentsCad(appt);
             desktopPaneCtrl.add(apptCad);
         }
         apptCad.setVisible(true);
@@ -60,9 +62,9 @@ public class MainFrame extends javax.swing.JFrame {
         relCad.setVisible(true);
     }
     
-    public void showEmgInfoCad(){
+    public void showEmgInfoCad(EmergencyInfo emgInfo){
         if(emgInfoCad == null || emgInfoCad.isClosed()) {   
-            emgInfoCad = new EmergencyInfoCad();
+            emgInfoCad = new EmergencyInfoCad(emgInfo);
             desktopPaneCtrl.add(emgInfoCad);
         }
         emgInfoCad.setVisible(true);

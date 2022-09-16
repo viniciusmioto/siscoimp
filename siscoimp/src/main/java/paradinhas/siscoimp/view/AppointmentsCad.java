@@ -6,10 +6,12 @@ package paradinhas.siscoimp.view;
 
 import java.awt.Desktop;
 import java.io.File;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.text.MaskFormatter;
+import paradinhas.siscoimp.models.Appointment;
 
 /**
  *
@@ -22,13 +24,13 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
     /**
      * Creates new form AppointmentCad
      */
-    public AppointmentsCad() {
+    public AppointmentsCad(Appointment appt) {
         initComponents();
-        try{
-            MaskFormatter maskData = new MaskFormatter("##/##/####");
-            maskData.install(dateField);
-        } catch (Exception ex) {
-            System.out.println(ex);
+        
+        if (appt != null){
+            GregorianCalendar date = appt.getDate();
+            dateField.setText(date.get(GregorianCalendar.DATE) + "/" + date.get(GregorianCalendar.MONTH) + "/" + date.get(GregorianCalendar.YEAR));
+            titleField.setText(appt.getTitle());
         }
         
         deleteBtn.setVisible(false);
@@ -60,14 +62,14 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        dateField = new javax.swing.JFormattedTextField();
         saveBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
         descriptionField = new javax.swing.JTextField();
-        nameField1 = new javax.swing.JTextField();
+        titleField = new javax.swing.JTextField();
         uploadBtn = new javax.swing.JButton();
         fileLabel = new javax.swing.JLabel();
         deleteBtn = new javax.swing.JButton();
+        dateField = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
@@ -114,8 +116,6 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
-
-        dateField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("d/M/yy"))));
 
         saveBtn.setBackground(new java.awt.Color(204, 255, 204));
         saveBtn.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
@@ -171,6 +171,12 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
             }
         });
 
+        dateField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -197,7 +203,7 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel5)
                             .addComponent(descriptionField, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nameField1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(titleField, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(rdBtnAppt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -220,7 +226,7 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nameField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(titleField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -232,17 +238,13 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
                         .addComponent(rdBtnExam)
                         .addGap(18, 18, 18)
                         .addComponent(rdBtnAppt)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(uploadBtn)
-                            .addComponent(fileLabel)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(uploadBtn)
+                    .addComponent(fileLabel)
+                    .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -302,11 +304,15 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_descriptionFieldActionPerformed
 
+    private void dateFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dateFieldActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btnGroupType;
     private javax.swing.JButton cancelBtn;
-    private javax.swing.JFormattedTextField dateField;
+    private javax.swing.JTextField dateField;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JTextField descriptionField;
     private javax.swing.JLabel fileLabel;
@@ -316,10 +322,10 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField nameField1;
     private javax.swing.JRadioButton rdBtnAppt;
     private javax.swing.JRadioButton rdBtnExam;
     private javax.swing.JButton saveBtn;
+    private javax.swing.JTextField titleField;
     private javax.swing.JButton uploadBtn;
     // End of variables declaration//GEN-END:variables
 }

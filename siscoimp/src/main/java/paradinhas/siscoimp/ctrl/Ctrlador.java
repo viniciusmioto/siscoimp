@@ -7,7 +7,6 @@ package paradinhas.siscoimp.ctrl;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import org.json.JSONArray;

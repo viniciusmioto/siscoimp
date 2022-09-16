@@ -142,7 +142,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerApptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerApptActionPerformed
-        MainFrame.getInstance().showAppointmentCad();
+        MainFrame.getInstance().showAppointmentCad(null);
     }//GEN-LAST:event_registerApptActionPerformed
 
 

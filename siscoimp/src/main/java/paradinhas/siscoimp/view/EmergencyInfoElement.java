@@ -13,14 +13,14 @@ import paradinhas.siscoimp.view.templates.ElementTemplate;
  */
 public class EmergencyInfoElement extends ElementTemplate {
 
-
+    private EmergencyInfo emgInfo;
     
     /**
      * Creates new form AppointmentTemplateD
      */
     public EmergencyInfoElement(EmergencyInfo emg) {
         initComponents();
-        
+        this.emgInfo = emg;
         titleField.setText(emg.getTitle());
         
         switch (emg.getUrg()){
@@ -63,6 +63,12 @@ public class EmergencyInfoElement extends ElementTemplate {
         titleField = new javax.swing.JLabel();
         urgencyField = new javax.swing.JLabel();
 
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
+
         titleField.setFont(new java.awt.Font("FreeSans", 1, 36)); // NOI18N
         titleField.setText("titulo");
 
@@ -98,6 +104,11 @@ public class EmergencyInfoElement extends ElementTemplate {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+        MainFrame.getInstance().showEmgInfoCad(emgInfo);
+    }//GEN-LAST:event_formMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

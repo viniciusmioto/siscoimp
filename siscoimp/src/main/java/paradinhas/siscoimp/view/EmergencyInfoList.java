@@ -23,6 +23,7 @@ public class EmergencyInfoList extends javax.swing.JInternalFrame {
     public EmergencyInfoList() {
         initComponents();
         emgInfos = Ctrlador.getInstance().getEmgList();
+        emgInfos.add(new EmergencyInfo(EmergencyInfo.Urgency.LESS_URGENT, "teste", "teste desc"));
         if ((emgInfos != null) && !(emgInfos.isEmpty())){
         ScrollListTemplate scrollList = new ScrollListTemplate();
         for (EmergencyInfo emgInfo : emgInfos){
@@ -162,7 +163,7 @@ public class EmergencyInfoList extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerApptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerApptActionPerformed
-        MainFrame.getInstance().showEmgInfoCad();
+        MainFrame.getInstance().showEmgInfoCad(null);
     }//GEN-LAST:event_registerApptActionPerformed
 
 
