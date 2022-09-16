@@ -18,7 +18,7 @@ import org.json.JSONObject;
 public class Jsonfy {
 
     static public void saveJsonFile(JSONObject json) {
-        try ( FileWriter file = new FileWriter("teste")) {
+        try ( FileWriter file = new FileWriter("jsonData")) {
             json.write(file);
         } catch (IOException e) {
             System.out.println(e);
@@ -29,7 +29,7 @@ public class Jsonfy {
         JSONObject json = new JSONObject();
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("teste"));
+            BufferedReader reader = new BufferedReader(new FileReader("jsonData"));
             json = new JSONObject(reader.readLine());
             reader.close();
             System.out.println(json.toString());

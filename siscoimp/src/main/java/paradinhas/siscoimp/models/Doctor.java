@@ -46,6 +46,7 @@ public class Doctor extends Person implements Jsonfison {
         json.put("name", name);
         json.put("address", address);
         json.put("phone", phone);
+        json.put("spec", spec);
         json.put("imagePath", imagePath);
 
         return json;
@@ -56,6 +57,7 @@ public class Doctor extends Person implements Jsonfison {
             name = json.optString("name");
             address = json.optString("address");
             phone = json.optString("phone");
+            spec = json.optString("spec");
             imagePath = json.optString("imagePath");
         } catch (Exception e) {
         }
