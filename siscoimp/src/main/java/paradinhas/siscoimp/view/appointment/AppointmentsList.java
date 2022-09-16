@@ -95,7 +95,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame implements Prop
         jTextField4.setBackground(new java.awt.Color(255, 102, 102));
         jTextField4.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField4.setText("Cancelado");
+        jTextField4.setText("Expirado");
         jTextField4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jTextField5.setEditable(false);

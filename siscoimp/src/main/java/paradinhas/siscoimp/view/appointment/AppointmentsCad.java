@@ -43,16 +43,20 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
 
         titleField.setText(appt.getTitle());
         
-        int index = 0;
+        int docIndex = 0;
         String docName = appt.getDoctor().getName();
         for (int i = 0; i < doctorBox.getItemCount(); i++){
             if (docName.equals(doctorBox.getItemAt(i).getName())){
-                index = i;
-                doctorBox.setSelectedIndex(index);
+                docIndex = i;
+                doctorBox.setSelectedIndex(docIndex);
                 break;
             }
         }
         
+        if (!appt.getFilePath().equals("")){
+            this.selectedFilePath = appt.getFilePath();
+            fileLabel.setText(selectedFilePath); 
+        }
         
         descriptionField.setText(appt.getDesc());
         dateField.setText(new SimpleDateFormat("dd/MM/yyyy").format(appt.getDate()));
@@ -318,9 +322,10 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
             date = new SimpleDateFormat("dd/MM/yyyy").parse(dateField.getText());
         } catch (Exception e) {
             System.out.println("data errado");
-        }
+        }     
 
-        appt = new Appointment(getType(), Appointment.AppointmentStatus.IN_PROGRESS, titleField.getText(), descriptionField.getText(), date, (Doctor) doctorBox.getSelectedItem(), selectedFilePath);
+        appt = new Appointment(getType(),  titleField.getText(), descriptionField.getText(), date, (Doctor) doctorBox.getSelectedItem(), selectedFilePath);
+        appt.updateAppointmentStatus();
         if (editingMode) {
             Ctrlador.getInstance().update(appt, index);
         } else {

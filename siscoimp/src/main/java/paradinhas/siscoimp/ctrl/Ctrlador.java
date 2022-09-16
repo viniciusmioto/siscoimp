@@ -41,6 +41,7 @@ public class Ctrlador implements PropertyChangeListener {
         relList = nullSafe(jsonData.optJSONArray("relatives"));
         emgList = nullSafe(jsonData.optJSONArray("emergencyInfos"));
         apptList = nullSafe(jsonData.optJSONArray("appointments"));
+        updateAppts();
     }
 
     private JSONArray nullSafe(JSONArray list) {
@@ -58,7 +59,7 @@ public class Ctrlador implements PropertyChangeListener {
     static public synchronized Ctrlador getInstance() {
         if (ctrl == null) {
             ctrl = new Ctrlador();
-        }
+        }      
         return ctrl;
     }
 
@@ -68,6 +69,23 @@ public class Ctrlador implements PropertyChangeListener {
 
     public void removePropertyChangeListener(PropertyChangeListener l) {
         changes.removePropertyChangeListener(l);
+    }
+    
+    private void updateAppts(){
+        if (this.apptList == null){
+            return;
+        }
+        int i = 0;
+        for (Object t : this.apptList) {
+            JSONObject docJson = new JSONObject(t.toString());
+            Appointment appt = new Appointment();
+            appt.fromJson(docJson);
+            appt.updateAppointmentStatus();
+            apptList.put(i, appt.toJson());
+            jsonData.put("appointments", apptList);
+            saveChanges();
+            i++;
+        }
     }
 
     public void create(Doctor doc) {
