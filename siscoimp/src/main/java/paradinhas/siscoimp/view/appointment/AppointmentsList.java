@@ -50,6 +50,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame implements Prop
             }
             mainListFrame.add(scrollList);
         }
+        revalidate();
         repaint();
     }
 
@@ -69,7 +70,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame implements Prop
     private void initComponents() {
 
         jTextField1 = new javax.swing.JTextField();
-        canceladoButton = new javax.swing.JTextField();
+        expiredBtn = new javax.swing.JTextField();
         andamentoButton = new javax.swing.JTextField();
         concluidoButton = new javax.swing.JTextField();
         mainListFrame = new javax.swing.JPanel();
@@ -110,15 +111,14 @@ public class AppointmentsList extends javax.swing.JInternalFrame implements Prop
             }
         });
 
-        canceladoButton.setEditable(false);
-        canceladoButton.setBackground(new java.awt.Color(255, 102, 102));
-        canceladoButton.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        canceladoButton.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        canceladoButton.setText("Expirado");
-        canceladoButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        canceladoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        expiredBtn.setEditable(false);
+        expiredBtn.setBackground(new java.awt.Color(255, 102, 102));
+        expiredBtn.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
+        expiredBtn.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        expiredBtn.setText("Expirado");
+        expiredBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                canceladoButtonMouseClicked(evt);
+                expiredBtnMouseClicked(evt);
             }
         });
 
@@ -127,7 +127,6 @@ public class AppointmentsList extends javax.swing.JInternalFrame implements Prop
         andamentoButton.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         andamentoButton.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         andamentoButton.setText("Em andamento");
-        andamentoButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         andamentoButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 andamentoButtonMouseClicked(evt);
@@ -144,7 +143,6 @@ public class AppointmentsList extends javax.swing.JInternalFrame implements Prop
         concluidoButton.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         concluidoButton.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         concluidoButton.setText("Concluído");
-        concluidoButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         concluidoButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 concluidoButtonMouseClicked(evt);
@@ -155,7 +153,6 @@ public class AppointmentsList extends javax.swing.JInternalFrame implements Prop
 
         registerAppt.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
         registerAppt.setText("Cadastrar");
-        registerAppt.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         registerAppt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerApptActionPerformed(evt);
@@ -172,16 +169,16 @@ public class AppointmentsList extends javax.swing.JInternalFrame implements Prop
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(77, 77, 77)
-                        .addComponent(canceladoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(expiredBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
                         .addComponent(andamentoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(concluidoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 23, Short.MAX_VALUE))
                     .addComponent(mainListFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(337, 337, 337)
+                .addGap(356, 356, 356)
                 .addComponent(registerAppt)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -191,7 +188,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame implements Prop
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(canceladoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(expiredBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(andamentoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(concluidoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -216,18 +213,30 @@ public class AppointmentsList extends javax.swing.JInternalFrame implements Prop
 
     }//GEN-LAST:event_andamentoButtonActionPerformed
 
-    private void canceladoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_canceladoButtonMouseClicked
-        filter = AppointmentStatus.EXPIRED;
+    private void expiredBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expiredBtnMouseClicked
+        if (filter == AppointmentStatus.EXPIRED){
+            filter = null;
+        } else {
+            filter = AppointmentStatus.EXPIRED;
+        }
         populateList();
-    }//GEN-LAST:event_canceladoButtonMouseClicked
+    }//GEN-LAST:event_expiredBtnMouseClicked
 
     private void andamentoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_andamentoButtonMouseClicked
-        filter = AppointmentStatus.IN_PROGRESS;
+        if (filter == AppointmentStatus.IN_PROGRESS){
+            filter = null;
+        } else {
+            filter = AppointmentStatus.IN_PROGRESS;
+        }
         populateList();
     }//GEN-LAST:event_andamentoButtonMouseClicked
 
     private void concluidoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_concluidoButtonMouseClicked
-        filter = AppointmentStatus.CONCLUDED;
+        if (filter == AppointmentStatus.CONCLUDED){
+            filter = null;
+        } else {
+            filter = AppointmentStatus.CONCLUDED;
+        }
         populateList();
     }//GEN-LAST:event_concluidoButtonMouseClicked
 
@@ -244,8 +253,8 @@ public class AppointmentsList extends javax.swing.JInternalFrame implements Prop
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField andamentoButton;
-    private javax.swing.JTextField canceladoButton;
     private javax.swing.JTextField concluidoButton;
+    private javax.swing.JTextField expiredBtn;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel mainListFrame;
     private javax.swing.JButton registerAppt;

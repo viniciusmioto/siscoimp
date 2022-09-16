@@ -11,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import paradinhas.siscoimp.ctrl.Ctrlador;
 import paradinhas.siscoimp.models.EmergencyInfo;
+import paradinhas.siscoimp.models.EmergencyInfo.EmergencyInfoUrgency;
 import paradinhas.siscoimp.view.MainFrame;
 
 /**
@@ -19,6 +20,8 @@ import paradinhas.siscoimp.view.MainFrame;
  */
 public class EmergencyInfoList extends javax.swing.JInternalFrame implements PropertyChangeListener {
 
+    private String textFilter = "";
+    private EmergencyInfoUrgency filter = null;
     private JSONArray emgInfos;
 
     /**
@@ -34,11 +37,19 @@ public class EmergencyInfoList extends javax.swing.JInternalFrame implements Pro
                 JSONObject docJson = new JSONObject(t.toString());
                 EmergencyInfo emg = new EmergencyInfo();
                 emg.fromJson(docJson);
-                scrollList.addToList(new EmergencyInfoElement(emg, i));
+                
+                if (filter == null || filter.equals(emg.getUrg())) {
+                    if (textFilter.equals("") || emg.getTitle().toLowerCase().startsWith(textFilter.toLowerCase())) {
+                        scrollList.addToList(new EmergencyInfoElement(emg, i));
+                    }
+                }
+                
                 i++;
             }
             mainListFrame.add(scrollList);
         }
+        revalidate();
+        repaint();
     }
 
     public EmergencyInfoList() {
@@ -72,35 +83,70 @@ public class EmergencyInfoList extends javax.swing.JInternalFrame implements Pro
 
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jTextField1.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        jTextField1.setText("Filtro");
         jTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
 
         jTextField4.setEditable(false);
         jTextField4.setBackground(new java.awt.Color(255, 102, 102));
         jTextField4.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField4.setText("Emergência");
-        jTextField4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTextField4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField4MouseClicked(evt);
+            }
+        });
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
 
         jTextField5.setEditable(false);
         jTextField5.setBackground(new java.awt.Color(255, 153, 51));
         jTextField5.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField5.setText("Muito Urgente");
-        jTextField5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTextField5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField5MouseClicked(evt);
+            }
+        });
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
 
         jTextField6.setEditable(false);
         jTextField6.setBackground(new java.awt.Color(255, 255, 51));
         jTextField6.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField6.setText("Urgente");
-        jTextField6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTextField6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField6MouseClicked(evt);
+            }
+        });
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
 
         mainListFrame.setLayout(new javax.swing.BoxLayout(mainListFrame, javax.swing.BoxLayout.LINE_AXIS));
 
         registerAppt.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
         registerAppt.setText("Cadastrar");
-        registerAppt.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         registerAppt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerApptActionPerformed(evt);
@@ -112,14 +158,32 @@ public class EmergencyInfoList extends javax.swing.JInternalFrame implements Pro
         jTextField7.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField7.setText("Pouco Urgente");
-        jTextField7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTextField7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField7MouseClicked(evt);
+            }
+        });
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
 
         jTextField8.setEditable(false);
         jTextField8.setBackground(new java.awt.Color(51, 153, 255));
         jTextField8.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField8.setText("Não Urgente");
-        jTextField8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTextField8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField8MouseClicked(evt);
+            }
+        });
+        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -172,6 +236,87 @@ public class EmergencyInfoList extends javax.swing.JInternalFrame implements Pro
     private void registerApptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerApptActionPerformed
         MainFrame.getInstance().showEmgInfoCad();
     }//GEN-LAST:event_registerApptActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+        textFilter = jTextField1.getText();
+        System.out.println(textFilter);
+        populateList();
+    }//GEN-LAST:event_jTextField1KeyReleased
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        
+    }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        
+    }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        
+    }//GEN-LAST:event_jTextField8ActionPerformed
+
+    private void jTextField4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField4MouseClicked
+        // TODO add your handling code here:
+        if (filter == EmergencyInfoUrgency.EMERGENCY){
+            filter = null;
+        } else {
+            filter = EmergencyInfoUrgency.EMERGENCY;
+        }
+        populateList();
+    }//GEN-LAST:event_jTextField4MouseClicked
+
+    private void jTextField5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField5MouseClicked
+        // TODO add your handling code here:
+        if (filter == EmergencyInfoUrgency.VERY_URGENT){
+            filter = null;
+        } else {
+            filter = EmergencyInfoUrgency.VERY_URGENT;
+        }
+        populateList();
+    }//GEN-LAST:event_jTextField5MouseClicked
+
+    private void jTextField6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField6MouseClicked
+        // TODO add your handling code here:
+        if (filter == EmergencyInfoUrgency.URGENT){
+            filter = null;
+        } else {
+            filter = EmergencyInfoUrgency.URGENT;
+        }
+        populateList();
+    }//GEN-LAST:event_jTextField6MouseClicked
+
+    private void jTextField7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField7MouseClicked
+        // TODO add your handling code here:
+        if (filter == EmergencyInfoUrgency.LESS_URGENT){
+            filter = null;
+        } else {
+            filter = EmergencyInfoUrgency.LESS_URGENT;
+        }
+        populateList();
+    }//GEN-LAST:event_jTextField7MouseClicked
+
+    private void jTextField8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField8MouseClicked
+        // TODO add your handling code here:
+        if (filter == EmergencyInfoUrgency.NON_URGENT){
+            filter = null;
+        } else {
+            filter = EmergencyInfoUrgency.NON_URGENT;
+        }
+        populateList();
+    }//GEN-LAST:event_jTextField8MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
