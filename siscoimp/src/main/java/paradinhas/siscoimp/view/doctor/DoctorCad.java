@@ -22,6 +22,7 @@ import paradinhas.siscoimp.view.Profile;
 public class DoctorCad extends javax.swing.JInternalFrame {
 
     File doctorFile;
+    Doctor doc;
     int index = -1;
     boolean editingMode = false;
 

@@ -39,7 +39,6 @@ public class EmergencyInfoList extends javax.swing.JInternalFrame implements Pro
             }
             mainListFrame.add(scrollList);
         }
->>>>>>> 689f3f4b83ed85e0ba1b059d2bac57dba076ad2a:siscoimp/src/main/java/paradinhas/siscoimp/view/EmergencyInfoList.java
     }
 
     public EmergencyInfoList() {

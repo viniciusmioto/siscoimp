@@ -361,7 +361,6 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rdBtnExam;
     private javax.swing.JButton saveBtn;
     private javax.swing.JTextField titleField;
-    private javax.swing.JTextField titleField;
     private javax.swing.JButton uploadBtn;
     // End of variables declaration//GEN-END:variables
 }
