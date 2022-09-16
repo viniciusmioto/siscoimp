@@ -235,7 +235,11 @@ public class Profile extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_profilePictureMouseClicked
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        Ctrlador.getInstance().updateUser(nameField.getText(), addrField.getText(), emailField.getText(), phoneField.getText(), profileFile.getAbsolutePath());
+        String filePath = "";
+        if(profileFile != null){
+            filePath = profileFile.getAbsolutePath();
+        }
+        Ctrlador.getInstance().updateUser(nameField.getText(), addrField.getText(), emailField.getText(), phoneField.getText(), filePath);
         dispose();
     }//GEN-LAST:event_saveBtnActionPerformed
 

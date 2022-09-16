@@ -4,7 +4,10 @@
  */
 package paradinhas.siscoimp.view;
 
-import java.util.ArrayList;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import paradinhas.siscoimp.ctrl.Ctrlador;
 import paradinhas.siscoimp.models.Doctor;
 import paradinhas.siscoimp.view.templates.ScrollListTemplate;
@@ -13,23 +16,33 @@ import paradinhas.siscoimp.view.templates.ScrollListTemplate;
  *
  * @author gab
  */
-public class DoctorsList extends javax.swing.JInternalFrame {
-    
-    private final ArrayList<Doctor> docs;
-    
+public class DoctorsList extends javax.swing.JInternalFrame implements PropertyChangeListener {
+
+    private JSONArray docs;
+
     /**
      * Creates new form DoctorsList
      */
-    public DoctorsList() {
-        initComponents();
+    private void populateList() {
+        mainListFrame.removeAll();
         docs = Ctrlador.getInstance().getDoctorsList();
-        if ((docs != null) && !(docs.isEmpty())){
+        if ((docs != null) && !(docs.isEmpty())) {
             ScrollListTemplate scrollList = new ScrollListTemplate();
-            for (Doctor doc : docs){
+            for (Object t : docs) {
+                JSONObject docJson = new JSONObject(t.toString());
+                Doctor doc = new Doctor();
+                doc.fromJson(docJson);
                 scrollList.addToList(new DoctorElement(doc));
             }
             mainListFrame.add(scrollList);
         }
+        repaint();
+    }
+
+    public DoctorsList() {
+        initComponents();
+        Ctrlador.getInstance().addPropertyChangeListener(this);
+        populateList();
     }
 
     /**
@@ -50,6 +63,23 @@ public class DoctorsList extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Contatos Médicos");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         mainListFrame.setLayout(new javax.swing.BoxLayout(mainListFrame, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -64,7 +94,6 @@ public class DoctorsList extends javax.swing.JInternalFrame {
 
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jTextField1.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
         jTextField1.setText("Filtro");
         jTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -104,10 +133,20 @@ public class DoctorsList extends javax.swing.JInternalFrame {
         MainFrame.getInstance().showDoctorCad();
     }//GEN-LAST:event_registerBtnActionPerformed
 
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
+        Ctrlador.getInstance().removePropertyChangeListener(this);
+    }//GEN-LAST:event_formInternalFrameClosing
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel mainListFrame;
     private javax.swing.JButton registerBtn;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if(evt.getPropertyName().equals("doctorsList"))
+            populateList();
+    }
 }

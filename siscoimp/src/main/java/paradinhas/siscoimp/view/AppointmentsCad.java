@@ -28,13 +28,13 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
             System.out.println(ex);
         }
         
-        ArrayList<Doctor> docs = Ctrlador.getInstance().getDoctorsList();
-        Vector<String> docsNames = new Vector<>(docs.size());
-        for (Doctor doc : docs){
-            docsNames.add(doc.getName());
-        }
-        
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(docsNames));
+//        ArrayList<Doctor> docs = Ctrlador.getInstance().getDoctorsList();
+//        Vector<String> docsNames = new Vector<>(docs.size());
+//        for (Doctor doc : docs){
+//            docsNames.add(doc.getName());
+//        }
+//        
+//        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(docsNames));
     }
 
     /**
@@ -69,9 +69,6 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Descrição");
 
-        descField.setBackground(new java.awt.Color(255, 255, 255));
-        descField.setForeground(new java.awt.Color(0, 0, 0));
-
         jLabel2.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Data");
@@ -101,10 +98,6 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Título");
 
-        titleField.setBackground(new java.awt.Color(255, 255, 255));
-        titleField.setForeground(new java.awt.Color(0, 0, 0));
-
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +105,7 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
             }
         });
 
-        dateField.setBackground(new java.awt.Color(255, 255, 255));
+        dateField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("d/M/yy"))));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
