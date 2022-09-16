@@ -76,7 +76,7 @@ public class EmergencyInfoElement extends ElementTemplate {
         titleField.setText("titulo");
 
         urgencyField.setBackground(new java.awt.Color(51, 153, 255));
-        urgencyField.setFont(new java.awt.Font("FreeSans", 0, 18)); // NOI18N
+        urgencyField.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
         urgencyField.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         urgencyField.setText("Não Urgente");
         urgencyField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));

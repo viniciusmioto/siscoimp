@@ -61,7 +61,7 @@
           <Color blue="ff" green="99" red="33" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="FreeSans" size="18" style="0"/>
+          <Font name="FreeSans" size="18" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="N&#xe3;o Urgente"/>

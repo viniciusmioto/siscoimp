@@ -129,6 +129,14 @@ public class Profile extends javax.swing.JInternalFrame {
             }
         });
 
+        nameField.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
+
+        addrField.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
+
+        emailField.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
+
+        phoneField.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

@@ -72,8 +72,14 @@ public class RelativesCad extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
         jLabel1.setText("Nome");
 
+        nameField.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
+
+        addrField.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
+
         jLabel2.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
         jLabel2.setText("Endereço");
+
+        phoneField.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
         jLabel3.setText("Telefone");
@@ -95,6 +101,8 @@ public class RelativesCad extends javax.swing.JInternalFrame {
                 saveBtnActionPerformed(evt);
             }
         });
+
+        kinField.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
         jLabel4.setText("Parentesco");

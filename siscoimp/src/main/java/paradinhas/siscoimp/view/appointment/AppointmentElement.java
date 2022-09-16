@@ -94,6 +94,7 @@ public class AppointmentElement extends ElementTemplate {
         typeField.setText("tipo");
 
         statusField.setBackground(new java.awt.Color(51, 255, 51));
+        statusField.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         statusField.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         statusField.setText("Concluído");
         statusField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
