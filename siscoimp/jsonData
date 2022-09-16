@@ -1,1 +1,1 @@
-{"appointments":[],"doctors":[],"profile":{"address":"","phone":"","imagePath":"C:\\Users\\rodri\\Documents\\GitHub\\siscoimp\\siscoimp\\files\\user\\cat.png","name":"","email":""}}
+{"appointments":[],"emergencyInfos":[{"urg":"EMERGENCY","title":"asasas","desc":"asasasas"},{"urg":"VERY_URGENT","title":"asaaaaaaaaa","desc":"aaaaaaaaaaaaaa"},{"urg":"URGENT","title":"naos ei","desc":"nao sei"}],"doctors":[],"profile":{"address":"","phone":"","imagePath":"C:\\Users\\rodri\\Documents\\GitHub\\siscoimp\\siscoimp\\files\\user\\cat.png","name":"","email":""}}

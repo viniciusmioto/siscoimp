@@ -25,7 +25,10 @@ public class EmergencyInfo implements Jsonfison{
         this.desc = desc;
     }
 
-    
+    @Override
+    public String toString(){
+        return this.title + "; " + this.desc;
+    }
     
     public EmergencyInfo() {
     }
