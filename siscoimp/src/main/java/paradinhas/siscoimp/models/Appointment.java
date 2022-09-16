@@ -22,7 +22,7 @@ public class Appointment implements Jsonfison {
     private AppointmentType type;
 
     public enum AppointmentStatus {
-        CONCLUDED, IN_PROGRESS, CANCELED
+        CONCLUDED, IN_PROGRESS, EXPIRED
     }
     private AppointmentStatus status;
 
@@ -32,11 +32,11 @@ public class Appointment implements Jsonfison {
     private String filePath;
     private String desc;
 
-    public Appointment(AppointmentType type, AppointmentStatus status, String title, String desc, Date date, Doctor doctor, String filePath) {
+    public Appointment(AppointmentType type, String title, String desc, Date date, Doctor doctor, String filePath) {
         this.title = title;
         this.desc = desc;
         this.type = type;
-        this.status = status;
+        this.status = AppointmentStatus.IN_PROGRESS;
         this.date = date;
         this.doctor = doctor;
         this.filePath = filePath;
@@ -129,6 +129,21 @@ public class Appointment implements Jsonfison {
             type = AppointmentType.valueOf(json.optString("type"));
         } catch (Exception e) {
             System.out.println(e);
+        }
+    }
+    
+    public void updateAppointmentStatus(){
+        System.out.println("atualizando status");
+        System.out.println(this.date);
+        System.out.println(new Date());
+        if (this.date.before(new Date())){
+            System.out.println("atualizando");
+            if (!this.filePath.equals("")){
+                this.status = AppointmentStatus.CONCLUDED;
+            }
+            else {
+                this.status = AppointmentStatus.EXPIRED;
+            }
         }
     }
 }

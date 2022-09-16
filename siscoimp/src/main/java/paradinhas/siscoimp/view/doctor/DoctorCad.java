@@ -94,14 +94,19 @@ public class DoctorCad extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
         jLabel1.setText("Nome do Profissional");
 
+        nameField.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
+
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
         jLabel2.setText("Telefone");
+
+        phoneField.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
         jLabel3.setText("Endereço");
 
+        addrField.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
         addrField.setToolTipText("");
 
         doctorPic.setBackground(new java.awt.Color(204, 255, 204));
@@ -140,6 +145,7 @@ public class DoctorCad extends javax.swing.JInternalFrame {
             }
         });
 
+        specField.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
         specField.setToolTipText("");
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -247,7 +253,7 @@ public class DoctorCad extends javax.swing.JInternalFrame {
         if (doctorFile != null) {
             filePath = doctorFile.getAbsolutePath();
         }
-        doc = new Doctor(nameField.getText(), addrField.getText(), phoneField.getText(), specField.getText(), filePath);
+        Doctor doc = new Doctor(nameField.getText(), addrField.getText(), phoneField.getText(), specField.getText(), filePath);
         if (editingMode) {
             Ctrlador.getInstance().update(doc, index);
         } else {
@@ -257,7 +263,7 @@ public class DoctorCad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        Ctrlador.getInstance().removeAppointment(index);
+        Ctrlador.getInstance().removeDoctor(index);
         dispose();
     }//GEN-LAST:event_deleteBtnActionPerformed
 

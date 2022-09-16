@@ -19,7 +19,7 @@ public class User extends Person implements Jsonfison{
         super(null, null, null);
     }
 
-    public User(String email, String name, String adress, String phone, String imagePath) {
+    public User(String name, String adress, String email,  String phone, String imagePath) {
         super(name, adress, phone);
         this.email = email;
         this.imagePath = imagePath;
