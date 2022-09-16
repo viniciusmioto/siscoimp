@@ -32,8 +32,8 @@ public class Profile extends javax.swing.JInternalFrame {
     public Profile() {
         initComponents();
         user = Ctrlador.getInstance().getUser();
-        nameField1.setText(user.getName());
-        nameField1.setText(user.getAddress());
+        nameField.setText(user.getName());
+        addrField.setText(user.getAddress());
         emailField.setText(user.getEmail());
         phoneField.setText(user.getPhone());
         try {
@@ -62,6 +62,7 @@ public class Profile extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         profilePicture = new javax.swing.JPanel();
+        imgLabel = new javax.swing.JLabel();
         cancelBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
         nameField = new javax.swing.JTextField();
@@ -105,11 +106,11 @@ public class Profile extends javax.swing.JInternalFrame {
         profilePicture.setLayout(profilePictureLayout);
         profilePictureLayout.setHorizontalGroup(
             profilePictureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addComponent(imgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
         );
         profilePictureLayout.setVerticalGroup(
             profilePictureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addComponent(imgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
         );
 
         cancelBtn.setBackground(new java.awt.Color(255, 51, 51));
@@ -179,11 +180,11 @@ public class Profile extends javax.swing.JInternalFrame {
                         .addGap(19, 19, 19)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(cancelBtn)
-                                .addComponent(saveBtn))))
+                                .addComponent(saveBtn))
+                            .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(profilePicture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
@@ -230,7 +231,7 @@ public class Profile extends javax.swing.JInternalFrame {
         if(profileFile != null){
             filePath = profileFile.getAbsolutePath();
         }
-        Ctrlador.getInstance().updateUser(nameField1.getText(), nameField1.getText(), emailField.getText(), phoneField.getText(), filePath);
+        Ctrlador.getInstance().updateUser(nameField.getText(), addrField.getText(), emailField.getText(), phoneField.getText(), filePath);
         dispose();
     }//GEN-LAST:event_saveBtnActionPerformed
 
@@ -239,6 +240,7 @@ public class Profile extends javax.swing.JInternalFrame {
     private javax.swing.JTextField addrField;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JTextField emailField;
+    private javax.swing.JLabel imgLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

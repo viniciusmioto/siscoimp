@@ -31,6 +31,8 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
             System.out.println(ex);
         }
         
+        deleteBtn.setVisible(false);
+        
 //        ArrayList<Doctor> docs = Ctrlador.getInstance().getDoctorsList();
 //        Vector<String> docsNames = new Vector<>(docs.size());
 //        for (Doctor doc : docs){
@@ -65,6 +67,7 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
         nameField1 = new javax.swing.JTextField();
         uploadBtn = new javax.swing.JButton();
         fileLabel = new javax.swing.JLabel();
+        deleteBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
@@ -132,6 +135,12 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
             }
         });
 
+        descriptionField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descriptionFieldActionPerformed(evt);
+            }
+        });
+
         uploadBtn.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         uploadBtn.setForeground(new java.awt.Color(0, 0, 0));
         uploadBtn.setText("Selecionar");
@@ -153,6 +162,15 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
             }
         });
 
+        deleteBtn.setBackground(new java.awt.Color(255, 51, 51));
+        deleteBtn.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
+        deleteBtn.setText("Excluir");
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,6 +179,16 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(deleteBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(saveBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(cancelBtn)
+                        .addGap(28, 28, 28))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -168,7 +196,6 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel3)
                             .addComponent(descriptionField, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nameField1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
@@ -184,12 +211,6 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(uploadBtn)
                         .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(saveBtn)
-                .addGap(18, 18, 18)
-                .addComponent(cancelBtn)
-                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,35 +219,39 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nameField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(descriptionField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(descriptionField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rdBtnExam)
                         .addGap(18, 18, 18)
-                        .addComponent(rdBtnAppt)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(rdBtnAppt)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(uploadBtn)
-                    .addComponent(fileLabel))
-                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(uploadBtn)
+                            .addComponent(fileLabel)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelBtn)
-                    .addComponent(saveBtn))
+                    .addComponent(saveBtn)
+                    .addComponent(deleteBtn))
                 .addGap(19, 19, 19))
         );
 
@@ -265,16 +290,24 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
                 Desktop.getDesktop().open(selectedFile);
             } catch (Exception ex){
                 Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
+            }       
         }
     }//GEN-LAST:event_fileLabelMouseClicked
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteBtnActionPerformed
+
+    private void descriptionFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descriptionFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_descriptionFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btnGroupType;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JFormattedTextField dateField;
+    private javax.swing.JButton deleteBtn;
     private javax.swing.JTextField descriptionField;
     private javax.swing.JLabel fileLabel;
     private javax.swing.JComboBox<String> jComboBox1;
