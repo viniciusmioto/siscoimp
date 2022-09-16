@@ -4,7 +4,10 @@
  */
 package paradinhas.siscoimp.view;
 
+import java.awt.Desktop;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.text.MaskFormatter;
 
@@ -14,6 +17,8 @@ import javax.swing.text.MaskFormatter;
  */
 public class AppointmentsCad extends javax.swing.JInternalFrame {
 
+    private File selectedFile = null;
+    
     /**
      * Creates new form AppointmentCad
      */
@@ -142,6 +147,11 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
         fileLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         fileLabel.setText("Selecione um arquivo");
         fileLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        fileLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fileLabelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -241,12 +251,24 @@ public class AppointmentsCad extends javax.swing.JInternalFrame {
         JFileChooser chooser = new JFileChooser();
         int response = chooser.showOpenDialog(this);
         if (response == JFileChooser.APPROVE_OPTION) {
-            File f = chooser.getSelectedFile();
-            String filename = f.getAbsolutePath();
+            selectedFile = chooser.getSelectedFile();
+            String filename = selectedFile.getAbsolutePath();
             fileLabel.setText(filename);
         }
         
     }//GEN-LAST:event_uploadBtnActionPerformed
+
+    private void fileLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fileLabelMouseClicked
+        // TODO add your handling code here:
+        if (selectedFile != null){
+            try{
+                Desktop.getDesktop().open(selectedFile);
+            } catch (Exception ex){
+                Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+    }//GEN-LAST:event_fileLabelMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
