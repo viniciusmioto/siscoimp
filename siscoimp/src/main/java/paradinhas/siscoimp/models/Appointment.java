@@ -4,11 +4,13 @@
  */
 package paradinhas.siscoimp.models;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import org.json.JSONObject;
+import paradinhas.siscoimp.common.FileManipulation;
 
 /**
  *
@@ -109,9 +111,17 @@ public class Appointment implements Jsonfison {
         json.put("desc", desc);
         json.put("date", new SimpleDateFormat("dd/MM/yyyy").format(date));
         json.put("doctor", doctor.toJson());
-        json.put("filePath", filePath);
         json.put("status", status.name());
         json.put("type", type.name());
+        
+        try {
+            File file = new File(filePath);
+            filePath = FileManipulation.saveFile(file, "appointment");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        json.put("filePath", filePath);
 
         return json;
     }

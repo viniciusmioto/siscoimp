@@ -4,7 +4,9 @@
  */
 package paradinhas.siscoimp.models;
 
+import java.io.File;
 import org.json.JSONObject;
+import paradinhas.siscoimp.common.FileManipulation;
 
 /**
  *
@@ -47,6 +49,14 @@ public class Doctor extends Person implements Jsonfison {
         json.put("address", address);
         json.put("phone", phone);
         json.put("spec", spec);
+        
+        try {
+            File file = new File(imagePath);
+            imagePath = FileManipulation.saveFile(file, "doctors");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
         json.put("imagePath", imagePath);
 
         return json;
