@@ -24,6 +24,11 @@ public class Relative extends Person implements Jsonfison{
         this.kinship = kinship;
     }
     
+    @Override
+    public String toString(){
+        return this.name + "; " + this.address + "; " + this.phone + "; " + this.kinship;
+    }
+    
 
     public String getKinship() {
         return kinship;

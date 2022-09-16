@@ -43,6 +43,12 @@ public class Appointment implements Jsonfison {
         this.doctor = doctor;
         this.filePath = filePath;
     }
+    
+    @Override
+    public String toString(){
+        return this.title + "; " + this.desc + "; " + (new SimpleDateFormat("dd/MM/yyyy").format(this.getDate())) + "; " + this.doctor.getName();
+    }
+   
 
     public Appointment() {
 

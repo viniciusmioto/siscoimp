@@ -36,7 +36,7 @@ public class DoctorsList extends javax.swing.JInternalFrame implements PropertyC
                 Doctor doc = new Doctor();
                 doc.fromJson(docJson);
 
-                if (textFilter.equals("") || doc.getName().toLowerCase().startsWith(textFilter.toLowerCase())) {
+                if (textFilter.equals("") || doc.toString().toLowerCase().contains(textFilter.toLowerCase())) {
                     scrollList.addToList(new DoctorElement(doc, i));
                 }
                 

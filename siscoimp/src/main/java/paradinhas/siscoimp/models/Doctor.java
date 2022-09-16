@@ -27,6 +27,11 @@ public class Doctor extends Person implements Jsonfison {
         this.imagePath = imagePath;
     }
     
+    @Override
+    public String toString(){
+        return this.name + "; " + this.address + "; " + this.phone + "; " + this.spec;
+    }
+    
     public String getImagePath() {
         return imagePath;
     }
@@ -71,11 +76,6 @@ public class Doctor extends Person implements Jsonfison {
             imagePath = json.optString("imagePath");
         } catch (Exception e) {
         }
-    }
-
-    @Override
-    public String toString() {
-        return name;// Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
     
     

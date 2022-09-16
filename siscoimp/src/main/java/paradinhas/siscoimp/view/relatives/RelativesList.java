@@ -36,7 +36,7 @@ public class RelativesList extends javax.swing.JInternalFrame implements Propert
                 Relative rel = new Relative();
                 rel.fromJson(relJson);
                 
-                if (textFilter.equals("") || rel.getName().toLowerCase().startsWith(textFilter.toLowerCase())) {
+                if (textFilter.equals("") || rel.toString().toLowerCase().contains(textFilter.toLowerCase())) {
                     scrollList.addToList(new RelativeElement(rel, i));
                 }
                 

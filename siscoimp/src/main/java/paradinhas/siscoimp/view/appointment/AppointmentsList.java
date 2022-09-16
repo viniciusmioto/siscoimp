@@ -42,7 +42,7 @@ public class AppointmentsList extends javax.swing.JInternalFrame implements Prop
                 appt.fromJson(docJson);
                 System.out.println(appt.getStatus().name());
                 if (filter == null || filter.equals(appt.getStatus())) {
-                    if (textFilter.equals("") || appt.getTitle().toLowerCase().startsWith(textFilter.toLowerCase())) {
+                    if (textFilter.equals("") || appt.toString().toLowerCase().contains(textFilter.toLowerCase())) {
                         scrollList.addToList(new AppointmentElement(appt, i));
                     }
                 }

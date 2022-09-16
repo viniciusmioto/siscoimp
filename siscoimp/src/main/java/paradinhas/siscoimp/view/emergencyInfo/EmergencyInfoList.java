@@ -39,7 +39,7 @@ public class EmergencyInfoList extends javax.swing.JInternalFrame implements Pro
                 emg.fromJson(docJson);
                 
                 if (filter == null || filter.equals(emg.getUrg())) {
-                    if (textFilter.equals("") || emg.getTitle().toLowerCase().startsWith(textFilter.toLowerCase())) {
+                    if (textFilter.equals("") || emg.toString().toLowerCase().contains(textFilter.toLowerCase())) {
                         scrollList.addToList(new EmergencyInfoElement(emg, i));
                     }
                 }

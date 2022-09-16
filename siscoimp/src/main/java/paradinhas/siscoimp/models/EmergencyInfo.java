@@ -25,6 +25,8 @@ public class EmergencyInfo implements Jsonfison{
         this.desc = desc;
     }
 
+    
+    
     public EmergencyInfo() {
     }
     
